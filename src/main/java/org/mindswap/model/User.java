@@ -1,5 +1,4 @@
-package org.mindswap.models;
-
+package org.mindswap.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,23 +12,27 @@ import org.hibernate.annotations.Where;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "movies")
-@SQLDelete(sql = "UPDATE movies SET deleted = true WHERE id=?")
+@Table(name = "users")
+@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class Movie {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String title;
+    private String firstName;
 
     @Column(nullable = false)
-    private int price;
+    private String lastName;
+
+    @Column(nullable = false)
+    private String password;
 
     @Enumerated(EnumType.STRING)
-    private MovieGenre movieGenre;
+    private Role role;
+
 
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;

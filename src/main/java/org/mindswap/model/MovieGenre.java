@@ -1,4 +1,4 @@
-package org.mindswap.models;
+package org.mindswap.model;
 
 public enum MovieGenre {
     ACTION,
