@@ -34,4 +34,9 @@ public class Movie {
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
 
+
+    //avg rating
+
+    //total number of votes
+
 }
