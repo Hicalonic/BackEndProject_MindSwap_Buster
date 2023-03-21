@@ -33,10 +33,17 @@ public class Rental {
     @Column(nullable = false)
     private Boolean isDelivered;
 
+    @Column(nullable = false)
+    private Long rentalPrice;
+
     @ManyToMany(mappedBy = "rental")
     private List<Movie> movies;
 
     @ManyToOne(targetEntity = Client.class, fetch = FetchType.EAGER)
     private Client client;
+
+    @Column(nullable = false)
+    private boolean deleted = Boolean.FALSE;
+
 
 }
