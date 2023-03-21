@@ -6,7 +6,11 @@ import org.mindswap.dto.StoreUpdateDto;
 import java.util.List;
 
 public interface StoreService {
+
     StoreDto getStoreById(Long storeId);
+
+    public StoreDto createStore(StoreDto storeDto);
+    public StoreDto updateStore(Long storeID, StoreUpdateDto storeUpdateDto);
+    public void deleteStore(Long storeId);
     List<StoreDto> getAllStores();
-    StoreDto updateStore(Long clientId, StoreUpdateDto storeUpdateDto);
 }
