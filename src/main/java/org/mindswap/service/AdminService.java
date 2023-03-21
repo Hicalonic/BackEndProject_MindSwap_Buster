@@ -1,10 +1,16 @@
 package org.mindswap.service;
 
-import org.mindswap.dto.WorkerDto;
+import org.mindswap.dto.*;
+
 
 public interface AdminService {
-    public WorkerDto makeAdmin(Long userId);
-    public void deleteUser(Long userId);
-    public void deleteStore(Long storeId);
-    public void deleteMovie(Long movieId);
+
+    //Admin
+    public WorkerDto addAdmin(Long workerId);
+
+
+
+
+
+
 }
