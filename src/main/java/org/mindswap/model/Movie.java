@@ -26,7 +26,7 @@ public class Movie {
     private String title;
 
     @Column(nullable = false)
-    private int price;
+    private double price;
 
     @Enumerated(EnumType.STRING)
     private MovieGenre movieGenre;
