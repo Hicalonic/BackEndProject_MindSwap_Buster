@@ -1,22 +1,23 @@
 package org.mindswap.service;
 
 import org.mindswap.dto.*;
-import org.mindswap.mapper.UserMapper;
+
+import org.mindswap.mapper.WorkerMapper;
+import org.mindswap.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AdminServiceImpl implements AdminService {
 
-    private UserRepository userRepository;
-    private UserMapper userMapper;
+    private StaffRepository staffRepository;
+
+    private WorkerMapper workerMapper;
 
 
     @Autowired
-    public AdminServiceImpl(UserRepository userRepository, UserMapper userMapper
-                            ) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
+    public AdminServiceImpl(StaffRepository staffRepository, WorkerMapper workerMapper) {
+        this.staffRepository = staffRepository;
+        this.workerMapper = workerMapper;
     }
-
 
 
 

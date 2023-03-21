@@ -11,8 +11,8 @@ import java.util.List;
 public class RentalServiceImpl implements RentalService {
 
     private RentalRepository rentalRepository;
-
     private RentalMapper rentalMapper;
+
     @Autowired
     public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper) {
         this.rentalRepository = rentalRepository;

@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ClientService {
 
-    ClientDto createClient(ClientDto clientDto);
-    List<ClientDto> createClients(List<ClientDto> clientDtoList);
+    ClientDto createClient(ClientCreateDto clientCreateDto);
+    List<ClientDto> createClients(List<ClientCreateDto> clientCreateDtoList);
     ClientDto getClientInfo(Long clientId);
 
     ClientDto getClientById(Long clientId);

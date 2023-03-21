@@ -1,12 +1,13 @@
 package org.mindswap.service;
 
+import org.mindswap.dto.MovieCreateDto;
 import org.mindswap.dto.MovieDto;
 
 import java.util.List;
 
 public interface MovieService {
-    public MovieDto createMovie(MovieDto movieDto);
-    public List<MovieDto> createMovies(List<MovieDto> moviesListDto);
+    public MovieDto createMovie(MovieCreateDto movieCreateDto);
+    public List<MovieDto> createMovies(List<MovieCreateDto> movieCreateDtoList);
 
     public MovieDto getMovieById(Long movieId);
 
