@@ -27,14 +27,15 @@ public class Client {
     @Column(nullable = false)
     private String lastName;
 
+    @Column(nullable = false, unique = true)
+    private String email;
+
     @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
-
 }

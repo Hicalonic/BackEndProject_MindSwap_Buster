@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -25,10 +25,10 @@ public class Rental {
     private Long id;
 
     @Column(nullable = false)
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(nullable = false)
-    private Date deliveryDate;
+    private LocalDate deliveryDate;
 
     @Column(nullable = false)
     private Boolean isDelivered;
@@ -44,6 +44,5 @@ public class Rental {
 
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
-
 
 }

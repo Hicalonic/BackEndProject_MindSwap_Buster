@@ -1,7 +1,5 @@
 package org.mindswap.service;
 
-import org.mindswap.dto.ClientDto;
-import org.mindswap.dto.ClientUpdateDto;
 import org.mindswap.dto.StoreDto;
 import org.mindswap.dto.StoreUpdateDto;
 
