@@ -30,6 +30,9 @@ public class Rental {
     @Column(nullable = false)
     private Date deliveryDate;
 
+    @Column(nullable = false)
+    private Boolean isDelivered;
+
     @ManyToMany(mappedBy = "rental")
     private List<Movie> movies;
 
