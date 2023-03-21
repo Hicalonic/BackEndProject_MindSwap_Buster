@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -12,10 +14,10 @@ import org.hibernate.annotations.Where;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
-@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
+@Table(name = "workers")
+@SQLDelete(sql = "UPDATE workers SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class User {
+public class Worker {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +32,15 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private Long storeId;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(targetEntity = Invoice.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Invoice> invoices;
 
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
-
 }

@@ -12,3 +12,5 @@ public class MovieApplication {
         SpringApplication.run(MovieApplication.class, args);
     }
 }
+
+//todo @data nas anotacoes lombok
