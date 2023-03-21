@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class ClientDto {
     @NotBlank(message = "Must have first name")
     private String firstName;
 
