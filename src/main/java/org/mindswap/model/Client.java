@@ -36,6 +36,7 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
 }

@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -31,5 +33,9 @@ public class Store {
 
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
+
+    @Column(nullable = false)
+    @OneToMany(mappedBy = "Store")
+    private List<Worker> employeesList;
 
 }
