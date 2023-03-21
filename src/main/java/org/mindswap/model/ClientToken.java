@@ -28,6 +28,6 @@ public class ClientToken {
     public boolean expired;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    public Client client;
+    @JoinColumn(name = "user_email")
+    public String email;
 }

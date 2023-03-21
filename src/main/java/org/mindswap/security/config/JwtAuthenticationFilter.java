@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.mindswap.repository.TokenRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,16 +17,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-/*
+
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtService jwtService;
   private final UserDetailsService userDetailsService;
-
-}
-  private final Toke tokenRepository;
+  private final TokenRepository tokenRepository;
 
   @Override
   protected void doFilterInternal(
@@ -44,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     userEmail = jwtService.extractUsername(jwt);
     if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-      var isTokenValid = tokenRepository.findByToken(jwt)
+      Boolean isTokenValid = tokenRepository.findByToken(jwt)
           .map(t -> !t.isExpired() && !t.isRevoked())
           .orElse(false);
       if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
@@ -62,4 +61,3 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     filterChain.doFilter(request, response);
   }
 }
- */
