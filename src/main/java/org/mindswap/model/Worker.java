@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -35,6 +37,9 @@ public class Worker {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(targetEntity = Invoice.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Invoice> invoices;
 
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;

@@ -24,8 +24,10 @@ public class Invoice {
     private Long price;
 
     @OneToOne(mappedBy = "invoice")
-    private Long rentalId;
+    @JoinColumn(name = "rental_ID")
+    private Rental rental;
 
-    @OneToOne(mappedBy = "invoice")
-    private Long workerId;
+    @ManyToOne(targetEntity = Worker.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "worker_ID")
+    private Worker worker;
 }
