@@ -1,19 +1,26 @@
 package org.mindswap.mapper;
 
 import org.mapstruct.InheritInverseConfiguration;
+import org.mindswap.dto.RentalCreateDto;
 import org.mindswap.dto.RentalDto;
 import org.mindswap.dto.RentalUpdateDto;
 import org.mindswap.model.Rental;
 
 public interface RentalMapper {
 
-    RentalDto fromEntityToDto (Rental rental);
-    @InheritInverseConfiguration
     Rental fromDtoToEntity(RentalDto rentalDto);
-
-    RentalUpdateDto fromEntityToUpdateDto(Rental rental);
     @InheritInverseConfiguration
+    RentalDto fromEntityToDto (Rental rental);
+
+    Rental fromCreateDtoToEntity(RentalCreateDto rentalCreateDto);
+    @InheritInverseConfiguration
+    RentalCreateDto fromEntityToCreateDto(Rental rental);
+
     Rental fromUpdateDtoToEntity (RentalUpdateDto rentalUpdateDto);
+    @InheritInverseConfiguration
+    RentalUpdateDto fromEntityToUpdateDto(Rental rental);
+
+
 
 
 }

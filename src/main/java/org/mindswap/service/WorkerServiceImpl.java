@@ -2,24 +2,27 @@ package org.mindswap.service;
 
 import org.mindswap.dto.WorkerDto;
 import org.mindswap.dto.WorkerUpdateDto;
-import org.mindswap.mapper.UserMapper;
+import org.mindswap.mapper.WorkerMapper;
+import org.mindswap.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class WorkerServiceImpl implements WorkerService {
-
-    private UserRepository userRepository;
-    private UserMapper userMapper;
+    private StaffRepository staffRepository;
+    private WorkerMapper workerMapper;
 
     @Autowired
-    public WorkerServiceImpl(UserRepository userRepository, UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
+    public WorkerServiceImpl(StaffRepository staffRepository, WorkerMapper workerMapper) {
+        this.staffRepository = staffRepository;
+        this.workerMapper = workerMapper;
     }
 
+
+
+
     @Override
-    public WorkerDto createWorker(WorkerDto wortkerDto) {
+    public WorkerDto createWorker(WorkerDto workerDto) {
         return null;
     }
 
