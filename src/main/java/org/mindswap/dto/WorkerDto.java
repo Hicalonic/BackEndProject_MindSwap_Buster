@@ -8,5 +8,5 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class MovieDto {
+public class WorkerDto {
 }
