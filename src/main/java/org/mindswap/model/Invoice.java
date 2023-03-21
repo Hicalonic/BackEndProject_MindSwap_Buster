@@ -21,7 +21,7 @@ public class Invoice {
     private Long Id;
 
     @Column(nullable = false)
-    private Long price;
+    private double price;
 
     @OneToOne(mappedBy = "invoice")
     @JoinColumn(name = "rental_ID")
