@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user/client")
+@RequestMapping("/client")
 public class ClientController {
-    @Autowired
     private ClientService clientService;
 
-
+    @Autowired
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
     @GetMapping(path = "")
     public ResponseEntity<String> welcomeClient() {
