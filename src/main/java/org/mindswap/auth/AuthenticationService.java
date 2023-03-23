@@ -1,9 +1,7 @@
 package org.mindswap.auth;
 
 import lombok.RequiredArgsConstructor;
-import org.mindswap.model.Client;
-import org.mindswap.model.Role;
-import org.mindswap.model.TokenType;
+import org.mindswap.model.*;
 import org.mindswap.repository.ClientRepository;
 import org.mindswap.repository.TokenRepository;
 import org.mindswap.security.config.JwtService;
@@ -22,15 +20,15 @@ public class AuthenticationService {
   private final AuthenticationManager authenticationManager;
 
   public AuthenticationResponse register(RegisterRequest request) {
-    var client = Client.builder()
+    Client client = Client.builder()
         .firstName(request.getFirstname())
         .lastName(request.getLastname())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
         .role(Role.COSTUMER)
         .build();
-    var savedClient = repository.save(client);
-    var jwtToken = jwtService.generateToken(client);
+    Client savedClient = repository.save(client);
+    String jwtToken = jwtService.generateToken(client);
     saveClientToken(savedClient, jwtToken);
     return AuthenticationResponse.builder()
         .token(jwtToken)
@@ -44,9 +42,9 @@ public class AuthenticationService {
             request.getPassword()
         )
     );
-    var client = repository.findByEmail(request.getEmail())
+    Client client = repository.findByEmail(request.getEmail())
         .orElseThrow();
-    var jwtToken = jwtService.generateToken(client);
+    String jwtToken = jwtService.generateToken(client);
     revokeAllClientTokens(client);
     saveClientToken(client, jwtToken);
     return AuthenticationResponse.builder()
@@ -55,8 +53,8 @@ public class AuthenticationService {
   }
 
   private void saveClientToken(Client client, String jwtToken) {
-    var token = TokenRepository.builder()
-        .client(client)
+    Token token = Token.builder()
+        .email(client.getEmail())
         .token(jwtToken)
         .tokenType(TokenType.BEARER)
         .expired(false)
@@ -65,8 +63,18 @@ public class AuthenticationService {
     tokenRepository.save(token);
   }
 
+  private void saveWorkerToken(Worker worker, String jwtToken){
+    Token token = Token.builder()
+            .email(worker.getEmail())
+            .token(jwtToken)
+            .tokenType(TokenType.BEARER)
+            .expired(false)
+            .revoked(false)
+            .build();
+  }
+
   private void revokeAllClientTokens(Client client) {
-    var validUserTokens = tokenRepository.findAllValidTokenByUser(client.getId());
+    var validUserTokens = tokenRepository.findAllValidTokenById(client.getId());
     if (validUserTokens.isEmpty())
       return;
     validUserTokens.forEach(token -> {

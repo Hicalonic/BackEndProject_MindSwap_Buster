@@ -2,6 +2,7 @@ package org.mindswap.controller;
 
 
 import org.mindswap.dto.ClientDto;
+import org.mindswap.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

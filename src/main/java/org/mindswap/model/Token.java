@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class ClientToken {
+public class Token {
 
     @Id
     @GeneratedValue
