@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-03-23T17:25:46+0000",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
+    date = "2023-03-23T23:56:36+0000",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
 )
 @Component
 public class RentalMapperImpl implements RentalMapper {
@@ -26,7 +26,6 @@ public class RentalMapperImpl implements RentalMapper {
 
         Rental.RentalBuilder rental = Rental.builder();
 
-        rental.client( rentalDto.getClient() );
         if ( rentalDto.getStartDate() != null ) {
             rental.startDate( LocalDateTime.ofInstant( rentalDto.getStartDate().toInstant(), ZoneOffset.UTC ).toLocalDate() );
         }
@@ -51,7 +50,6 @@ public class RentalMapperImpl implements RentalMapper {
         if ( rental.getEndDate() != null ) {
             rentalDto.endDate( Date.from( rental.getEndDate().atStartOfDay( ZoneOffset.UTC ).toInstant() ) );
         }
-        rentalDto.client( rental.getClient() );
 
         return rentalDto.build();
     }
@@ -64,7 +62,6 @@ public class RentalMapperImpl implements RentalMapper {
 
         Rental.RentalBuilder rental = Rental.builder();
 
-        rental.client( rentalCreateDto.getClient() );
         if ( rentalCreateDto.getStartDate() != null ) {
             rental.startDate( LocalDateTime.ofInstant( rentalCreateDto.getStartDate().toInstant(), ZoneOffset.UTC ).toLocalDate() );
         }
@@ -89,7 +86,6 @@ public class RentalMapperImpl implements RentalMapper {
         if ( rental.getEndDate() != null ) {
             rentalCreateDto.endDate( Date.from( rental.getEndDate().atStartOfDay( ZoneOffset.UTC ).toInstant() ) );
         }
-        rentalCreateDto.client( rental.getClient() );
 
         return rentalCreateDto.build();
     }
@@ -102,7 +98,6 @@ public class RentalMapperImpl implements RentalMapper {
 
         Rental.RentalBuilder rental = Rental.builder();
 
-        rental.client( rentalUpdateDto.getClient() );
         rental.startDate( rentalUpdateDto.getStartDate() );
         rental.endDate( rentalUpdateDto.getEndDate() );
 
@@ -119,7 +114,6 @@ public class RentalMapperImpl implements RentalMapper {
 
         rentalUpdateDto.startDate( rental.getStartDate() );
         rentalUpdateDto.endDate( rental.getEndDate() );
-        rentalUpdateDto.client( rental.getClient() );
 
         return rentalUpdateDto.build();
     }

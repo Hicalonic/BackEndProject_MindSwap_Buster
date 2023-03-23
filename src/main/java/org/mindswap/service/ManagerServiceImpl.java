@@ -9,9 +9,11 @@ import org.mindswap.model.Role;
 import org.mindswap.model.User;
 import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ManagerServiceImpl implements ManagerService {
 
     private UserRepository userRepository;
