@@ -6,8 +6,10 @@ import org.mindswap.exceptions.InvoiceNotFoundException;
 import org.mindswap.mapper.InvoiceMapper;
 import org.mindswap.model.Client;
 import org.mindswap.model.Invoice;
+import org.mindswap.model.User;
 import org.mindswap.repository.ClientRepository;
 import org.mindswap.repository.InvoiceRepository;
+import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +22,13 @@ public class InvoiceServiceImpl implements InvoiceService{
     private InvoiceRepository invoiceRepository;
     private InvoiceMapper invoiceMapper;
 
-    private ClientRepository clientRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, InvoiceMapper invoiceMapper, ClientRepository clientRepository) {
+    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, InvoiceMapper invoiceMapper, UserRepository userRepository) {
         this.invoiceRepository = invoiceRepository;
         this.invoiceMapper = invoiceMapper;
-        this.clientRepository = clientRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -40,9 +42,9 @@ public class InvoiceServiceImpl implements InvoiceService{
 
     @Override
     public List<InvoiceDto> getSpecificClientInvoices(Long clientId) {
-            Client client = clientRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+            User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
             List<Invoice> invoiceList = new ArrayList<>();
-            client.getRentalList().forEach(r -> invoiceList.add(r.getInvoice()));
+            user.getRentalList().forEach(r -> invoiceList.add(r.getInvoice()));
             return invoiceList.stream().map(i-> invoiceMapper.fromEntityToDto(i)).toList();
     }
 }
