@@ -1,23 +1,26 @@
 package org.mindswap.service;
 
 import org.mindswap.dto.*;
+import org.mindswap.dtosUser.UserClientCreateDto;
+import org.mindswap.dtosUser.UserClientDto;
+import org.mindswap.dtosUser.UserClientUpdateDto;
 import org.mindswap.model.Movie;
 
 import java.util.List;
 
 public interface ClientService {
 
-    ClientDto createClient(ClientCreateDto clientCreateDto);
-    List<ClientDto> createClients(List<ClientCreateDto> clientCreateDtoList);
-    ClientDto getClientInfo(Long clientId);
+    UserClientDto createClient(UserClientCreateDto userClientCreateDto);
+    List<UserClientDto> createClients(List<UserClientCreateDto> clientCreateDtoList);
+    UserClientDto getClientInfo(Long clientId);
 
-    ClientDto getClientById(Long clientId);
+    UserClientDto getClientById(Long clientId);
 
-    List<ClientDto> getAllClients();
+    List<UserClientDto> getAllClients();
 
-    ClientDto updateClient(Long clientId, ClientUpdateDto clientUpdateDto);
+    UserClientDto updateClient(Long clientId, UserClientUpdateDto userClientUpdateDto);
 
-    ClientDto updatePassword(Long clientId, UpdatePasswordDto updatePasswordDto);
+    UserClientDto updatePassword(Long clientId, UpdatePasswordDto updatePasswordDto);
 
     public void deleteClient(Long clientId);
 

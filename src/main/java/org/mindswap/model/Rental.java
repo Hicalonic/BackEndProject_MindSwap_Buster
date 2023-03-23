@@ -24,9 +24,9 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @JoinColumn(name = "client_id")
-    @ManyToOne(targetEntity = Client.class)
-    private Client client ;
+    @JoinColumn(name = "user_id")
+    @ManyToOne(targetEntity = User.class)
+    private User user ;
     @Column(nullable = false)
     private LocalDate startDate;
     @Column(nullable = false)
