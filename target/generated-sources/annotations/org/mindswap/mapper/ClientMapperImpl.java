@@ -6,12 +6,14 @@ import org.mindswap.dto.ClientDto;
 import org.mindswap.dto.ClientUpdateDto;
 import org.mindswap.model.Client;
 import org.mindswap.model.Role;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-03-23T16:04:32+0000",
+    date = "2023-03-23T16:54:33+0000",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
 )
+@Component
 public class ClientMapperImpl implements ClientMapper {
 
     @Override

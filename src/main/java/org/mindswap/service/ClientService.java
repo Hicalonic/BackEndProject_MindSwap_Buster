@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ClientService {
 
-    ClientDto createClient(ClientDto clientDto);
-    List<ClientDto> createClients(List<ClientDto> clientDtoList);
+    ClientDto createClient(ClientCreateDto clientCreateDto);
+    List<ClientDto> createClients(List<ClientCreateDto> clientCreateDtoList);
     ClientDto getClientInfo(Long clientId);
 
     ClientDto getClientById(Long clientId);
@@ -16,6 +16,8 @@ public interface ClientService {
     List<ClientDto> getAllClients();
 
     ClientDto updateClient(Long clientId, ClientUpdateDto clientUpdateDto);
+
+    ClientDto updatePassword(Long clientId, UpdatePasswordDto updatePasswordDto);
 
     public void deleteClient(Long clientId);
 

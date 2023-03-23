@@ -3,12 +3,14 @@ package org.mindswap.mapper;
 import javax.annotation.processing.Generated;
 import org.mindswap.dto.WorkerDto;
 import org.mindswap.model.Worker;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-03-23T16:04:32+0000",
+    date = "2023-03-23T16:54:33+0000",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
 )
+@Component
 public class StaffMapperImpl implements StaffMapper {
 
     @Override

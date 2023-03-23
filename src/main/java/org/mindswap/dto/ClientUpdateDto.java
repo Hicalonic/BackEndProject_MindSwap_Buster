@@ -5,6 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientUpdateDto {
@@ -13,4 +14,6 @@ public class ClientUpdateDto {
     private String lastName;
 
     private String email;
+
+    private String password;
 }

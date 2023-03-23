@@ -1,0 +1,33 @@
+Index: src/main/java/org/mindswap/service/WorkerServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.mindswap.service;\n\nimport org.mindswap.dto.WorkerDto;\nimport org.mindswap.dto.WorkerUpdateDto;\nimport org.mindswap.mapper.UserMapper;\nimport org.springframework.beans.factory.annotation.Autowired;\n\nimport java.util.List;\n\npublic class WorkerServiceImpl implements WorkerService {\n\n    private UserRepository userRepository;\n    private UserMapper userMapper;\n\n    @Autowired\n    public WorkerServiceImpl(UserRepository userRepository, UserMapper userMapper) {\n        this.userRepository = userRepository;\n        this.userMapper = userMapper;\n    }\n\n    @Override\n    public WorkerDto createWorker(WorkerDto wortkerDto) {\n        return null;\n    }\n\n    @Override\n    public WorkerDto getWorkerById(Long workerId) {\n        return null;\n    }\n\n    @Override\n    public List<WorkerDto> getAllWorkers() {\n        return null;\n    }\n\n\n    @Override\n    public WorkerDto updateWorker(Long workerId, WorkerUpdateDto workerUpdateDto) {\n\n        return null;\n    }\n\n    @Override\n    public void deleteWorker(Long workerID) {\n\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/mindswap/service/WorkerServiceImpl.java b/src/main/java/org/mindswap/service/WorkerServiceImpl.java
+--- a/src/main/java/org/mindswap/service/WorkerServiceImpl.java	(revision ce30993da83243cf59c75e3cf02d1176cf6134c1)
++++ b/src/main/java/org/mindswap/service/WorkerServiceImpl.java	(date 1679504929568)
+@@ -2,18 +2,19 @@
+ 
+ import org.mindswap.dto.WorkerDto;
+ import org.mindswap.dto.WorkerUpdateDto;
+-import org.mindswap.mapper.UserMapper;
++import org.mindswap.mapper.ClientMapper;
++import org.mindswap.repository.ClientRepository;
+ import org.springframework.beans.factory.annotation.Autowired;
+ 
+ import java.util.List;
+ 
+ public class WorkerServiceImpl implements WorkerService {
+ 
+-    private UserRepository userRepository;
++    private ClientRepository userRepository;
+     private UserMapper userMapper;
+ 
+     @Autowired
+-    public WorkerServiceImpl(UserRepository userRepository, UserMapper userMapper) {
++    public WorkerServiceImpl(ClientRepository clientRepository, UserMapper userMapper) {
+         this.userRepository = userRepository;
+         this.userMapper = userMapper;
+     }

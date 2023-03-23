@@ -35,7 +35,7 @@ public class Store {
     private boolean deleted = Boolean.FALSE;
 
     @Column(nullable = false)
-    @OneToMany(mappedBy = "Store")
+    @OneToMany(mappedBy = "store")
     private List<Worker> employeesList;
 
 }

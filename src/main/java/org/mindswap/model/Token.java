@@ -1,17 +1,16 @@
 package org.mindswap.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
+import lombok.*;
+@Getter
+@Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class WorkerToken {
+public class Token {
+
     @Id
     @GeneratedValue
     public Integer id;
@@ -23,10 +22,8 @@ public class WorkerToken {
     public TokenType tokenType = TokenType.BEARER;
 
     public boolean revoked;
-
     public boolean expired;
 
-    @ManyToOne
-    @JoinColumn(name = "worker_id")
-    public Worker worker;
+    @Column(name = "user_email")
+    public String email;
 }

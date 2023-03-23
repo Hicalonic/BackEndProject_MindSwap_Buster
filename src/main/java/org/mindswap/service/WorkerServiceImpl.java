@@ -1,48 +1,73 @@
 package org.mindswap.service;
 
+import org.mindswap.dto.WorkerCreateDto;
 import org.mindswap.dto.WorkerDto;
 import org.mindswap.dto.WorkerUpdateDto;
-import org.mindswap.mapper.UserMapper;
+import org.mindswap.exceptions.WorkerNotFoundException;
+import org.mindswap.mapper.WorkerMapper;
+import org.mindswap.model.Worker;
+import org.mindswap.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class WorkerServiceImpl implements WorkerService {
+import static java.lang.Double.NaN;
 
-    private UserRepository userRepository;
-    private UserMapper userMapper;
+@Service
+public class WorkerServiceImpl implements WorkerService {
+    private WorkerMapper workerMapper;
+    private WorkerRepository workerRepository;
 
     @Autowired
-    public WorkerServiceImpl(UserRepository userRepository, UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
+    public WorkerServiceImpl(WorkerMapper workerMapper, WorkerRepository workerRepository) {
+        this.workerMapper = workerMapper;
+        this.workerRepository = workerRepository;
     }
 
     @Override
-    public WorkerDto createWorker(WorkerDto wortkerDto) {
-        return null;
+    public WorkerDto createWorker(WorkerCreateDto workercreateDto) {
+        Worker worker = workerMapper.fromCreateDtoToEntity(workercreateDto);
+        workerRepository.save(worker);
+        return workerMapper.fromEntityToDto(worker);
     }
 
     @Override
     public WorkerDto getWorkerById(Long workerId) {
-        return null;
+        Worker worker = workerRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
+        return workerMapper.fromEntityToDto(worker);
     }
 
     @Override
     public List<WorkerDto> getAllWorkers() {
-        return null;
+        return workerRepository.findAll().stream().map(w -> workerMapper.fromEntityToDto(w)).toList();
+
     }
 
 
     @Override
     public WorkerDto updateWorker(Long workerId, WorkerUpdateDto workerUpdateDto) {
-
-        return null;
+        Worker worker = workerRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
+        if (workerUpdateDto.getFirstName() != null) {
+            worker.setFirstName(workerUpdateDto.getFirstName());
+        }
+        if (workerUpdateDto.getLastName() != null) {
+            worker.setLastName(workerUpdateDto.getLastName());
+        }
+        if (workerUpdateDto.getEmail() != null) {
+            worker.setEmail(workerUpdateDto.getEmail());
+        }
+//        if(!Double.isNaN(workerUpdateDto.getStoreId())) {
+//            worker.setStoreId(workerUpdateDto.getStoreId());
+//        }
+        workerRepository.save(worker);
+        return workerMapper.fromEntityToDto(worker);
     }
 
     @Override
     public void deleteWorker(Long workerID) {
-
+        //Worker worker = workerMapper.(workerID).orElseThrow(WorkerNotFoundException::new);
+        //workerRepository.delete(worker);
     }
 
 

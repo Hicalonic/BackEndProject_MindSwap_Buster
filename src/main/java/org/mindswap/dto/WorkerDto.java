@@ -1,5 +1,6 @@
 package org.mindswap.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -20,4 +21,7 @@ public class WorkerDto {
 
     @NotNull(message = "Must have a store")
     private Long storeId;
+
+    @NotNull(message = "Must have an email")
+    private String email;
 }

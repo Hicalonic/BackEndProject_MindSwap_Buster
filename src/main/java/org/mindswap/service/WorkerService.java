@@ -1,17 +1,12 @@
 package org.mindswap.service;
 
-import org.mindswap.dto.ClientDto;
-import org.mindswap.dto.StoreDto;
-import org.mindswap.dto.WorkerDto;
-import org.mindswap.dto.WorkerUpdateDto;
+import org.mindswap.dto.*;
 
 import java.util.List;
 
 public interface WorkerService {
 
-
-
-    public WorkerDto createWorker(WorkerDto wortkerDto);
+    public WorkerDto createWorker(WorkerCreateDto wortkerCreateDto);
     WorkerDto getWorkerById(Long workerId);
     List<WorkerDto> getAllWorkers();
     WorkerDto updateWorker(Long workerId, WorkerUpdateDto workerUpdateDto);
