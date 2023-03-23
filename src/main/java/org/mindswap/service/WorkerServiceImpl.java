@@ -1,74 +1,79 @@
 package org.mindswap.service;
 
-import org.mindswap.dto.WorkerCreateDto;
-import org.mindswap.dto.WorkerDto;
-import org.mindswap.dto.WorkerUpdateDto;
+import org.mindswap.dtosUser.UserWorkerCreateDto;
+import org.mindswap.dtosUser.UserWorkerDto;
+import org.mindswap.dtosUser.UserWorkerUpdateDto;
+import org.mindswap.dtosUser.RoleUpdateDto;
 import org.mindswap.exceptions.WorkerNotFoundException;
-import org.mindswap.mapper.WorkerMapper;
-import org.mindswap.model.Worker;
-import org.mindswap.repository.WorkerRepository;
+import org.mindswap.mappersUser.UserWorkerMapper;
+import org.mindswap.model.User;
+import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static java.lang.Double.NaN;
-
 @Service
 public class WorkerServiceImpl implements WorkerService {
-    private WorkerMapper workerMapper;
-    private WorkerRepository workerRepository;
+    private UserWorkerMapper userWorkerMapper;
+    private UserRepository userRepository;
 
     @Autowired
-    public WorkerServiceImpl(WorkerMapper workerMapper, WorkerRepository workerRepository) {
-        this.workerMapper = workerMapper;
-        this.workerRepository = workerRepository;
+    public WorkerServiceImpl(UserWorkerMapper userWorkerMapper,UserRepository userRepository) {
+        this.userWorkerMapper = userWorkerMapper;
+        this.userRepository = userRepository;
     }
 
     @Override
-    public WorkerDto createWorker(WorkerCreateDto workercreateDto) {
-        Worker worker = workerMapper.fromCreateDtoToEntity(workercreateDto);
-        workerRepository.save(worker);
-        return workerMapper.fromEntityToDto(worker);
+    public UserWorkerDto createWorker(UserWorkerCreateDto userWorkercreateDto) {
+        User user = userWorkerMapper.fromCreateDtoToEntity(userWorkercreateDto);
+        userRepository.save(user);
+        return userWorkerMapper.fromEntityToDto(user);
     }
 
     @Override
-    public WorkerDto getWorkerById(Long workerId) {
-        Worker worker = workerRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
-        return workerMapper.fromEntityToDto(worker);
+    public UserWorkerDto getWorkerById(Long workerId) {
+        User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
+        return userWorkerMapper.fromEntityToDto(user);
     }
 
     @Override
-    public List<WorkerDto> getAllWorkers() {
-        return workerRepository.findAll().stream().map(w -> workerMapper.fromEntityToDto(w)).toList();
+    public List<UserWorkerDto> getAllWorkers() {
+        return userRepository.findAll().stream().map(w -> userWorkerMapper.fromEntityToDto(w)).toList();
 
     }
 
 
     @Override
-    public WorkerDto updateWorker(Long workerId, WorkerUpdateDto workerUpdateDto) {
-        Worker worker = workerRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
-        if (workerUpdateDto.getFirstName() != null) {
-            worker.setFirstName(workerUpdateDto.getFirstName());
+    public UserWorkerDto updateWorker(Long workerId, UserWorkerUpdateDto userWorkerUpdateDto) {
+        User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
+        if (userWorkerUpdateDto.getFirstName() != null) {
+            user.setFirstName(userWorkerUpdateDto.getFirstName());
         }
-        if (workerUpdateDto.getLastName() != null) {
-            worker.setLastName(workerUpdateDto.getLastName());
+        if (userWorkerUpdateDto.getLastName() != null) {
+            user.setLastName(userWorkerUpdateDto.getLastName());
         }
-        if (workerUpdateDto.getEmail() != null) {
-            worker.setEmail(workerUpdateDto.getEmail());
+        if (userWorkerUpdateDto.getEmail() != null) {
+            user.setEmail(userWorkerUpdateDto.getEmail());
         }
-//        if(!Double.isNaN(workerUpdateDto.getStoreId())) {
-//            worker.setStoreId(workerUpdateDto.getStoreId());
-//        }
-        workerRepository.save(worker);
-        return workerMapper.fromEntityToDto(worker);
+
+        userRepository.save(user);
+        return userWorkerMapper.fromEntityToDto(user);
     }
+
+    @Override
+    public void updateWorkerRole(Long workerId, RoleUpdateDto roleUpdateDto) {
+        User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
+        if(roleUpdateDto.getRole() != null) {
+            user.setRole(roleUpdateDto.getRole());
+        }
+        userRepository.save(user);
+    }
+
 
     @Override
     public void deleteWorker(Long workerID) {
-        //Worker worker = workerMapper.(workerID).orElseThrow(WorkerNotFoundException::new);
-        //workerRepository.delete(worker);
+        User user = userRepository.findById(workerID).orElseThrow(WorkerNotFoundException::new);
+        userRepository.delete(user);
     }
-
-
 }

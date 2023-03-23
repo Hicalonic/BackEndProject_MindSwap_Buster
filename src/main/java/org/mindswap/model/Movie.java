@@ -41,6 +41,8 @@ public class Movie {
     private boolean available = Boolean.TRUE;
 
 
+
+
     //avg rating
 
     //total number of votes

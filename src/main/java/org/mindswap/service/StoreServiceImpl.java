@@ -7,8 +7,10 @@ import org.mindswap.dto.StoreCreateDto;
 import org.mindswap.dto.StoreDto;
 import org.mindswap.dto.StoreUpdateDto;
 import org.mindswap.mapper.StoreMapper;
+import org.mindswap.model.User;
 import org.mindswap.model.Worker;
 import org.mindswap.repository.StoreRepository;
+import org.mindswap.repository.UserRepository;
 import org.mindswap.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,13 +23,13 @@ public class StoreServiceImpl implements StoreService {
     private StoreRepository storeRepository;
     private StoreMapper storeMapper;
 
-    private WorkerRepository workerRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public StoreServiceImpl(StoreRepository storeRepository, StoreMapper storeMapper, WorkerRepository workerRepository) {
+    public StoreServiceImpl(StoreRepository storeRepository, StoreMapper storeMapper, UserRepository userRepository) {
         this.storeRepository = storeRepository;
         this.storeMapper = storeMapper;
-        this.workerRepository = workerRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -51,7 +53,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreDto updateStore(Long storeID, StoreUpdateDto storeUpdateDto) {
         Store store = storeRepository.findById(storeID).orElseThrow(StoreNotFoundException::new);
-        Worker worker = workerRepository.getReferenceById(storeUpdateDto.getManagerId());
+        User user = userRepository.getReferenceById(storeUpdateDto.getManagerId());
         if (storeUpdateDto.getAddress() != null) {
             store.setAddress(storeUpdateDto.getAddress());
         }
@@ -59,7 +61,7 @@ public class StoreServiceImpl implements StoreService {
             store.setCity(storeUpdateDto.getCity());
         }
         if (storeUpdateDto.getManagerId() != null && storeRepository.existsById(storeUpdateDto.getManagerId())
-                && worker.getRole().equals(Role.MANAGER)){
+                && user.getRole().equals(Role.MANAGER)){
             store.setManagerId(storeUpdateDto.getManagerId());
         }
         storeRepository.save(store);

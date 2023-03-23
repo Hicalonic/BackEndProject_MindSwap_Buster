@@ -8,8 +8,10 @@ import org.mindswap.exceptions.RentalNotFoundException;
 import org.mindswap.mapper.RentalMapper;
 import org.mindswap.model.Client;
 import org.mindswap.model.Rental;
+import org.mindswap.model.User;
 import org.mindswap.repository.ClientRepository;
 import org.mindswap.repository.RentalRepository;
+import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +22,13 @@ public class RentalServiceImpl implements RentalService {
 
     private RentalRepository rentalRepository;
     private RentalMapper rentalMapper;
-    private ClientRepository clientRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, ClientRepository clientRepository) {
+    public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository) {
         this.rentalRepository = rentalRepository;
         this.rentalMapper = rentalMapper;
-        this.clientRepository = clientRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -41,8 +43,8 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public List<RentalDto> getClientCurrentRentals(Long clientID) {
-       Client client = clientRepository.findById(clientID).orElseThrow(ClientNotFoundException::new);
-        List<Rental> currentRentalList = client.getRentalList().stream()
+       User user = userRepository.findById(clientID).orElseThrow(ClientNotFoundException::new);
+        List<Rental> currentRentalList = user.getRentalList().stream()
                 .filter(rental -> rental.getEndDate().isAfter(LocalDate.now())).toList();
         return currentRentalList.stream().map(r-> rentalMapper.fromEntityToDto(r)).toList();
     }

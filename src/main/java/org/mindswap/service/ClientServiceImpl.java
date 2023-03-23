@@ -1,10 +1,16 @@
 package org.mindswap.service;
 
 import org.mindswap.dto.*;
+import org.mindswap.dtosUser.RoleUpdateDto;
+import org.mindswap.dtosUser.UserClientCreateDto;
+import org.mindswap.dtosUser.UserClientDto;
+import org.mindswap.dtosUser.UserClientUpdateDto;
 import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.mapper.ClientMapper;
+import org.mindswap.mappersUser.UserClientMapper;
 import org.mindswap.model.Client;
-import org.mindswap.repository.ClientRepository;
+import org.mindswap.model.User;
+import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,82 +19,91 @@ import java.util.List;
 @Service
 public class ClientServiceImpl implements ClientService {
 
-    private ClientRepository clientRepository;
-    private ClientMapper clientMapper;
+    private UserRepository userRepository;
+    private UserClientMapper userClientMapper;
 
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository, ClientMapper clientMapper) {
-        this.clientRepository = clientRepository;
-        this.clientMapper = clientMapper;
+    public ClientServiceImpl(UserRepository userRepository, UserClientMapper userClientMapper) {
+        this.userRepository = userRepository;
+        this.userClientMapper = userClientMapper;
     }
 
 
     @Override
-    public ClientDto createClient(ClientCreateDto clientCreateDto) {
-        Client client = clientMapper.fromCreateDtoToEntity(clientCreateDto);
-        clientRepository.save(client);
-        return clientMapper.fromEntityToDto(client);
+    public UserClientDto createClient(UserClientCreateDto userClientCreateDto) {
+        User user = userClientMapper.fromCreateDtoToEntity(userClientCreateDto);
+        userRepository.save(user);
+        return userClientMapper.fromEntityToDto(user);
     }
 
     @Override
-    public List<ClientDto> createClients(List<ClientCreateDto> clientCreateDtoList) {
-        List<Client> clientList = clientCreateDtoList.stream().map(c->clientMapper.fromCreateDtoToEntity(c)).toList();
-        clientList.forEach(c -> clientRepository.save(c));
-        return clientList.stream().map(c->clientMapper.fromEntityToDto(c)).toList();
+    public List<UserClientDto> createClients(List<UserClientCreateDto> clientCreateDtoList) {
+        List<User> clientList = clientCreateDtoList.stream().map(c->userClientMapper.fromCreateDtoToEntity(c)).toList();
+        clientList.forEach(c -> userRepository.save(c));
+        return clientList.stream().map(c->userClientMapper.fromEntityToDto(c)).toList();
 
     }
 
     @Override
-    public ClientDto getClientInfo(Long clientId) {
-        Client client = clientRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
-        return clientMapper.fromEntityToDto(client);
+    public UserClientDto getClientInfo(Long clientId) {
+        User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+        return userClientMapper.fromEntityToDto(user);
     }
 
     @Override
-    public ClientDto getClientById(Long clientId) {
-       Client client = clientRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
-        return clientMapper.fromEntityToDto(client);
+    public UserClientDto getClientById(Long clientId) {
+       User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+        return userClientMapper.fromEntityToDto(user);
     }
 
     @Override
-    public List<ClientDto> getAllClients() {
-        return clientRepository.findAll().stream().map(c->clientMapper.fromEntityToDto(c)).toList();
+    public List<UserClientDto> getAllClients() {
+        return userRepository.findAll().stream().map(c->userClientMapper.fromEntityToDto(c)).toList();
     }
 
 
     @Override
-    public ClientDto updateClient(Long clientId, ClientUpdateDto clientUpdateDto) {
-        Client client = clientRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+    public UserClientDto updateClient(Long clientId, UserClientUpdateDto userClientUpdateDto) {
+        User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
 
-       if(clientUpdateDto.getFirstName() != null) {
-           client.setFirstName(clientUpdateDto.getFirstName());
+       if(userClientUpdateDto.getFirstName() != null) {
+           user.setFirstName(userClientUpdateDto.getFirstName());
        }
-       if(clientUpdateDto.getLastName() != null) {
-           client.setLastName(clientUpdateDto.getLastName());
+       if(userClientUpdateDto.getLastName() != null) {
+           user.setLastName(userClientUpdateDto.getLastName());
        }
-       if(clientUpdateDto.getEmail() != null) {
-           client.setEmail(clientUpdateDto.getEmail());
+       if(userClientUpdateDto.getEmail() != null) {
+           user.setEmail(userClientUpdateDto.getEmail());
        }
-       clientRepository.save(client);
-       return clientMapper.fromEntityToDto(client);
+
+       userRepository.save(user);
+       return userClientMapper.fromEntityToDto(user);
     }
 
     @Override
-    public ClientDto updatePassword(Long clientId, UpdatePasswordDto updatePasswordDto) {
-        Client client = clientRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
-
-        if(updatePasswordDto.getPassword().equals(client.getPassword())) {
-            client.setPassword(updatePasswordDto.getNewPassword());
+    public UserClientDto updatePassword(Long clientId, UpdatePasswordDto updatePasswordDto) {
+        User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+        if(updatePasswordDto.getPassword().equals(user.getPassword())) {
+            user.setPassword(updatePasswordDto.getNewPassword());
         }
-        clientRepository.save(client);
-        return clientMapper.fromEntityToDto(client);
+        userRepository.save(user);
+        return userClientMapper.fromEntityToDto(user);
+    }
+
+    @Override
+    public void updateClientRole(Long clientId, RoleUpdateDto roleUpdateDto) {
+        User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+        if(roleUpdateDto.getRole() != null) {
+            user.setRole(roleUpdateDto.getRole());
+        }
+        userRepository.save(user);
     }
 
 
     @Override
     public void deleteClient(Long clientId) {
-        Client client = clientRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
-        clientRepository.delete(client);
+        User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+        userRepository.delete(user);
     }
 
 
