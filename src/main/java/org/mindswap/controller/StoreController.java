@@ -20,13 +20,13 @@ public class StoreController {
         this.storeService = storeService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping(path = "{id}")
     public ResponseEntity<StoreDto> getStoreById(@PathVariable("{id}")Long id) {
      StoreDto storeDto = storeService.getStoreById(id);
      return new ResponseEntity<>(storeDto, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping(path = "/all")
     public ResponseEntity<List<StoreDto>> getAllStores(){
     List<StoreDto> storeDtoList = storeService.getAllStores();
     return new ResponseEntity<>(storeDtoList, HttpStatus.OK);
@@ -45,8 +45,8 @@ public class StoreController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<StoreDto> deleteStore(@PathVariable("{id}") Long id, @RequestBody StoreUpdateDto storeUpdateDto){
+    public ResponseEntity<String> deleteStore(@PathVariable("{id}") Long id, @RequestBody StoreUpdateDto storeUpdateDto){
     storeService.deleteStore(id);
-    return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    return new ResponseEntity<>("Store has been deleted",HttpStatus.OK);
     }
 }

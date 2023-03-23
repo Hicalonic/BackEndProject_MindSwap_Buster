@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="- Semi working">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/StoreController.java" afterDir="false" />
+    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="MovieApplication, StoreController. &#10;&#10;procedure of store created:&#10;create, update, delete, all, id">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/MovieApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/MovieApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/StoreController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679590746754</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="MovieApplication, StoreController. &#10;&#10;procedure of store created:&#10;create, update, delete, all, id">
+      <created>1679606127597</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679606127597</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -153,6 +159,7 @@
     <MESSAGE value="- Worker Controller&#10;- ManagerController" />
     <MESSAGE value="- Rollback" />
     <MESSAGE value="- Semi working" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Semi working" />
+    <MESSAGE value="MovieApplication, StoreController. &#10;&#10;procedure of store created:&#10;create, update, delete, all, id" />
+    <option name="LAST_COMMIT_MESSAGE" value="MovieApplication, StoreController. &#10;&#10;procedure of store created:&#10;create, update, delete, all, id" />
   </component>
 </project>
