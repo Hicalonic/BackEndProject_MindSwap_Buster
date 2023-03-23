@@ -18,8 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
-@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
+@Table(name = "clients")
+@SQLDelete(sql = "UPDATE clients SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class Client implements UserDetails {
 
@@ -41,6 +41,9 @@ public class Client implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany
+    private List<Rental> rentalList;
 
 
     @Column(nullable = false)

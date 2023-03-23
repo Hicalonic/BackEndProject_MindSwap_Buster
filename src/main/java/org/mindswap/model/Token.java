@@ -1,17 +1,16 @@
 package org.mindswap.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
+import lombok.*;
+@Getter
+@Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class ClientToken {
+@Table(name = "tokens")
+public class Token {
 
     @Id
     @GeneratedValue

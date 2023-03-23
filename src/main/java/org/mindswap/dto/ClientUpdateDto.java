@@ -13,4 +13,6 @@ public class ClientUpdateDto {
     private String lastName;
 
     private String email;
+
+    private String password;
 }

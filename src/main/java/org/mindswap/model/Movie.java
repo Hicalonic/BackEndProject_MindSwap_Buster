@@ -34,6 +34,9 @@ public class Movie {
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
 
+    @Column(nullable = false)
+    private boolean available = Boolean.TRUE;
+
 
     //avg rating
 
