@@ -1,6 +1,7 @@
 package org.mindswap.service;
 
 import org.mindswap.dto.*;
+import org.mindswap.dtosUser.RoleUpdateDto;
 import org.mindswap.dtosUser.UserClientCreateDto;
 import org.mindswap.dtosUser.UserClientDto;
 import org.mindswap.dtosUser.UserClientUpdateDto;
@@ -87,6 +88,15 @@ public class ClientServiceImpl implements ClientService {
         }
         userRepository.save(user);
         return userClientMapper.fromEntityToDto(user);
+    }
+
+    @Override
+    public void updateClientRole(Long clientId, RoleUpdateDto roleUpdateDto) {
+        User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+        if(roleUpdateDto.getRole() != null) {
+            user.setRole(roleUpdateDto.getRole());
+        }
+        userRepository.save(user);
     }
 
 

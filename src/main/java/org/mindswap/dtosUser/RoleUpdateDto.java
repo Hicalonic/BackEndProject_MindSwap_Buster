@@ -11,7 +11,7 @@ import org.mindswap.model.Role;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkerRoleUpdateDto {
+public class RoleUpdateDto {
 
     @Enumerated(EnumType.STRING)
     private Role role;

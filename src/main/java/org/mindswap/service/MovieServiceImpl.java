@@ -52,6 +52,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public List<MovieDto> getAllMovies() {
+        return movieRepository.findAll().stream().map(movie -> movieMapper.fromEntityToDto(movie)).toList();
+    }
+
+    @Override
     public MovieDto updateMovie(Long movieId, MovieUpdateDto movieUpdateDto) {
             Movie movie = movieRepository.findById(movieId).orElseThrow(MovieNotFoundException::new);
             if(movieUpdateDto.getTitle() != null) {
