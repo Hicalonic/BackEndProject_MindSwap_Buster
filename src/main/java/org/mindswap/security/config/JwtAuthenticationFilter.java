@@ -61,7 +61,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     filterChain.doFilter(request, response);
   }
 
-  public static String getAuthenticatedClientId() {
+  public static String getAuthenticatedUserId() {
     return (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
   }
 }

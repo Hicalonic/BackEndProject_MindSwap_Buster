@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.mindswap.security.config.JwtAuthenticationFilter.getAuthenticatedClientId;
+import static org.mindswap.security.config.JwtAuthenticationFilter.getAuthenticatedUserId;
 
 @RestController
 @RequestMapping("/client")
@@ -33,7 +33,7 @@ public class ClientController {
     ------EMAIL------
     String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
     -------ID-------
-    Long authenticatedClientId = Long.valueOf(getAuthenticatedClientId());
+    Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
     -----ROLE-----
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String role = auth.getAuthorities().iterator().next().getAuthority();
@@ -46,10 +46,10 @@ public class ClientController {
     }
 
     @GetMapping(path = "/info")
-    @PreAuthorize("hasRole('CLIENT)")
+    @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<ClientDto> myInfo() {
 
-        Long authenticatedClientId = Long.valueOf(getAuthenticatedClientId());
+        Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
         ClientDto myInfoDto = clientService.getClientById(authenticatedClientId);
 
         //TODO: VERIFY THIS METHOD
@@ -69,7 +69,7 @@ public class ClientController {
     public ResponseEntity<Object> updateClientInfo(@PathVariable("id") Long clientId, @Valid @RequestBody ClientUpdateDto clientUpdateDto) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().iterator().next().getAuthority();
-        Long authenticatedClientId = Long.valueOf(getAuthenticatedClientId());
+        Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
 
         //If A client tries to access other clients:
         if (role.equals(Role.CLIENT) && !authenticatedClientId.equals(clientId)) {
@@ -85,7 +85,7 @@ public class ClientController {
     public ResponseEntity<Object> deleteClient(@PathVariable("id") Long clientId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().iterator().next().getAuthority();
-        Long authenticatedClientId = Long.valueOf(getAuthenticatedClientId());
+        Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
 
         //If A client tries to access other clients:
         if (role.equals(Role.CLIENT) && !authenticatedClientId.equals(clientId)) {
