@@ -32,7 +32,7 @@ public class Rental {
     @Column(nullable = false)
     private LocalDate endDate;
     @OneToMany(targetEntity = Movie.class)
-    @JoinColumn(name = "moviesRented")
+    @JoinColumn(name = "movies_rented")
     private List<Movie> moviesRented;
     @OneToOne
     @JoinColumn(name = "invoice_id")

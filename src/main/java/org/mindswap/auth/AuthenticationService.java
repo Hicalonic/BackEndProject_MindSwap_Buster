@@ -74,7 +74,7 @@ public class AuthenticationService {
   }
 
   private void revokeAllClientTokens(Client client) {
-    var validUserTokens = tokenRepository.findAllValidTokenById(client.getId());
+    var validUserTokens = tokenRepository.findAllValidTokenByEmail(client.getEmail());
     if (validUserTokens.isEmpty())
       return;
     validUserTokens.forEach(token -> {
