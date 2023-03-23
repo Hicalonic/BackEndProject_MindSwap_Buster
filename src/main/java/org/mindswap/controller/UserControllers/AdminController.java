@@ -1,6 +1,6 @@
 package org.mindswap.controller.UserControllers;
 
-
+/*
 import jakarta.validation.Valid;
 import org.mindswap.dto.*;
 import org.mindswap.model.Role;
@@ -87,4 +87,6 @@ public class AdminController {
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(adminsList, HttpStatus.OK);
     }
+
 }
+ */

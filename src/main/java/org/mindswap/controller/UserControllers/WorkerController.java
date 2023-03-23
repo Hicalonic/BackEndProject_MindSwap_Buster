@@ -3,6 +3,9 @@ package org.mindswap.controller.UserControllers;
 
 import jakarta.validation.Valid;
 import org.mindswap.dto.*;
+import org.mindswap.dtosUser.UserWorkerDto;
+import org.mindswap.dtosUser.UserWorkerUpdateDto;
+import org.mindswap.dtosUser.RoleUpdateDto;
 import org.mindswap.model.Role;
 import org.mindswap.service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +38,9 @@ public class WorkerController {
 
     @GetMapping(path = "/info")
     @PreAuthorize("hasRole('WORKER')")
-    public ResponseEntity<WorkerDto> myInfo() {
+    public ResponseEntity<UserWorkerDto> myInfo() {
         Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
-        WorkerDto myInfoDto = workerService.getWorkerById(authenticatedWorkerId);
+        UserWorkerDto myInfoDto = workerService.getWorkerById(authenticatedWorkerId);
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
@@ -45,8 +48,8 @@ public class WorkerController {
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
-    public ResponseEntity<Object> getWorkerInfo(@PathVariable("id") Long workerId) {
-        WorkerDto worker = workerService.getWorkerById(workerId);
+    public ResponseEntity<UserWorkerDto> getWorkerInfo(@PathVariable("id") Long workerId) {
+        UserWorkerDto worker = workerService.getWorkerById(workerId);
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(worker, HttpStatus.OK);
@@ -54,7 +57,7 @@ public class WorkerController {
 
     @PutMapping(path = "/{id}")
     @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
-    public ResponseEntity<String> updateWorkerInfo(@PathVariable("id") Long workerId, @Valid @RequestBody WorkerUpdateDto workerUpdateDto) {
+    public ResponseEntity<String> updateWorkerInfo(@PathVariable("id") Long workerId, @Valid @RequestBody UserWorkerUpdateDto userWorkerUpdateDto) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().iterator().next().getAuthority();
         Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
@@ -63,7 +66,7 @@ public class WorkerController {
         if (role.equals(Role.WORKER) && !authenticatedWorkerId.equals(workerId)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        workerService.updateWorker(workerId, workerUpdateDto);
+        workerService.updateWorker(workerId, userWorkerUpdateDto);
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>("Updated successfully.", HttpStatus.OK);
@@ -88,8 +91,8 @@ public class WorkerController {
 
     @GetMapping(path = "/all")
     @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
-    public ResponseEntity<List<WorkerDto>> getAllWorkers() {
-        List<WorkerDto> workersList = workerService.getAllWorkers();
+    public ResponseEntity<List<UserWorkerDto>> getAllWorkers() {
+        List<UserWorkerDto> workersList = workerService.getAllWorkers();
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(workersList, HttpStatus.OK);

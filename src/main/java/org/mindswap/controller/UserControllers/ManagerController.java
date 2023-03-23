@@ -3,6 +3,8 @@ package org.mindswap.controller.UserControllers;
 
 import jakarta.validation.Valid;
 import org.mindswap.dto.*;
+import org.mindswap.dtosUser.UserManagerDto;
+import org.mindswap.dtosUser.UserManagerUpdateDto;
 import org.mindswap.model.Role;
 import org.mindswap.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +37,9 @@ public class ManagerController {
 
     @GetMapping(path = "/info")
     @PreAuthorize("hasRole('MANAGER')")
-    public ResponseEntity<ManagerDto> myInfo() {
+    public ResponseEntity<UserManagerDto> myInfo() {
         Long authenticatedManagerId = Long.valueOf(getAuthenticatedUserId());
-        ManagerDto myInfoDto = managerService.getManagerById(authenticatedManagerId);
+        UserManagerDto myInfoDto = managerService.getInfoById(authenticatedManagerId);
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
@@ -45,15 +47,15 @@ public class ManagerController {
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ManagerDto> getManagerInfo(@PathVariable("id") Long managerId) {
-        ManagerDto manager = managerService.getManagerById(managerId);
+    public ResponseEntity<UserManagerDto> getManagerInfo(@PathVariable("id") Long managerId) {
+        UserManagerDto manager = managerService.getInfoById(managerId);
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(manager, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<String> updateManagerInfo(@PathVariable("id") Long managerId, @Valid @RequestBody ManagerUpdateDto managerUpdateDto) {
+    public ResponseEntity<String> updateManagerInfo(@PathVariable("id") Long managerId, @Valid @RequestBody UserManagerUpdateDto managerUpdateDto) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().iterator().next().getAuthority();
         Long authenticatedManagerId = Long.valueOf(getAuthenticatedUserId());
@@ -86,8 +88,8 @@ public class ManagerController {
 
     @GetMapping(path = "/all")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<ManagerDto>> getAllManagers() {
-        List<ManagerDto> managersList = managerService.getAllManagers();
+    public ResponseEntity<List<UserManagerDto>> getAllManagers() {
+        List<UserManagerDto> managersList = managerService.getAllManagers();
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(managersList, HttpStatus.OK);
