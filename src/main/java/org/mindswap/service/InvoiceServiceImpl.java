@@ -9,11 +9,12 @@ import org.mindswap.model.Invoice;
 import org.mindswap.repository.ClientRepository;
 import org.mindswap.repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class InvoiceServiceImpl implements InvoiceService{
 
     private InvoiceRepository invoiceRepository;

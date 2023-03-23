@@ -6,11 +6,11 @@ import org.mindswap.mapper.ClientMapper;
 import org.mindswap.model.Client;
 import org.mindswap.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ClientServiceImpl implements ClientService {
 
     private ClientRepository clientRepository;

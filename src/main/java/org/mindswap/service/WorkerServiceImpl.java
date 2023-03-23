@@ -8,11 +8,13 @@ import org.mindswap.mapper.WorkerMapper;
 import org.mindswap.model.Worker;
 import org.mindswap.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static java.lang.Double.NaN;
 
+@Service
 public class WorkerServiceImpl implements WorkerService {
     private StaffRepository staffRepository;
     private WorkerMapper workerMapper;

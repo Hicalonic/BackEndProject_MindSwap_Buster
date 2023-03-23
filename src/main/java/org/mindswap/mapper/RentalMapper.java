@@ -1,10 +1,12 @@
 package org.mindswap.mapper;
 
 import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
 import org.mindswap.dto.RentalCreateDto;
 import org.mindswap.dto.RentalDto;
 import org.mindswap.dto.RentalUpdateDto;
 import org.mindswap.model.Rental;
+@Mapper
 
 public interface RentalMapper {
 

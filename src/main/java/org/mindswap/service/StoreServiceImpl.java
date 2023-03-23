@@ -11,9 +11,11 @@ import org.mindswap.model.Worker;
 import org.mindswap.repository.StoreRepository;
 import org.mindswap.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StoreServiceImpl implements StoreService {
 
     private StoreRepository storeRepository;
@@ -21,6 +23,7 @@ public class StoreServiceImpl implements StoreService {
 
     private WorkerRepository workerRepository;
 
+    @Autowired
     public StoreServiceImpl(StoreRepository storeRepository, StoreMapper storeMapper, WorkerRepository workerRepository) {
         this.storeRepository = storeRepository;
         this.storeMapper = storeMapper;

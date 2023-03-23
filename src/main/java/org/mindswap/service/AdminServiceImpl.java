@@ -5,6 +5,9 @@ import org.mindswap.dto.*;
 import org.mindswap.mapper.WorkerMapper;
 import org.mindswap.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 
 public class AdminServiceImpl implements AdminService {
 

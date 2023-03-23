@@ -3,17 +3,15 @@ package org.mindswap.service;
 import org.mindswap.dto.MovieCreateDto;
 import org.mindswap.dto.MovieDto;
 import org.mindswap.dto.MovieUpdateDto;
-import org.mindswap.exceptions.InvoiceNotFoundException;
 import org.mindswap.exceptions.MovieNotFoundException;
 import org.mindswap.mapper.MovieMapper;
 import org.mindswap.model.Movie;
 import org.mindswap.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-
-import static java.lang.Double.NaN;
+@Service
 
 public class MovieServiceImpl implements MovieService {
     private MovieRepository movieRepository;

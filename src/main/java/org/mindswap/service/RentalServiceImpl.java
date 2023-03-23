@@ -11,10 +11,11 @@ import org.mindswap.model.Rental;
 import org.mindswap.repository.ClientRepository;
 import org.mindswap.repository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@Service
 public class RentalServiceImpl implements RentalService {
 
     private RentalRepository rentalRepository;
