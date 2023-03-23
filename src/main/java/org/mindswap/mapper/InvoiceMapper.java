@@ -7,7 +7,7 @@ import org.mindswap.dto.InvoiceDto;
 import org.mindswap.dto.InvoiceUpdateDto;
 import org.mindswap.model.Invoice;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface InvoiceMapper {
 
     Invoice fromDtoToEntity(InvoiceDto invoiceDto);

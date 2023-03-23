@@ -8,7 +8,7 @@ import org.mindswap.dto.StoreDto;
 import org.mindswap.dto.StoreUpdateDto;
 import org.mindswap.model.Store;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface StoreMapper {
 
     Store fromDtoToEntity(StoreDto storeDto);

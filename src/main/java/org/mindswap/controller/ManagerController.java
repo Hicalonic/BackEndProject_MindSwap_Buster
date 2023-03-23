@@ -5,7 +5,7 @@ import org.mindswap.auth.AuthenticationResponse;
 import org.mindswap.auth.AuthenticationService;
 import org.mindswap.auth.RegisterRequest;
 import org.mindswap.dto.ClientDto;
-import org.mindswap.service.ManagerService;
+import org.mindswap.service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +16,15 @@ import org.springframework.web.bind.annotation.*;
 public class ManagerController {
 
     private final AuthenticationService authenticationService;
-    private ManagerService managerService;
+    private WorkerService workerService;
 
     @Autowired
-    public ManagerController(AuthenticationService authenticationService, ManagerService managerService) {
+    public ManagerController(AuthenticationService authenticationService, WorkerService workerService) {
         this.authenticationService = authenticationService;
-        this.managerService = managerService;
+        this.workerService = workerService;
     }
+
+
 
     @GetMapping("")
     public ResponseEntity<String> WelcomeWorker() {

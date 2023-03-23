@@ -22,12 +22,8 @@ public class Token {
     public TokenType tokenType = TokenType.BEARER;
 
     public boolean revoked;
-
     public boolean expired;
 
-//    @ManyToOne
-//    @JoinColumn(name = "client_id")
-//    public Client client;
     @Column(name = "user_email")
     public String email;
 }

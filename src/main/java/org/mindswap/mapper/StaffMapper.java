@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mindswap.dto.WorkerDto;
 import org.mindswap.model.Worker;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface StaffMapper {
 
     Worker fromDtoToEntity(WorkerDto workerDto);

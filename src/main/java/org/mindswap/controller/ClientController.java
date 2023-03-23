@@ -67,13 +67,13 @@ public class ClientController {
         return null;
     }
 
-    @GetMapping(path = "/invoice/{invoice_id}/details")
-    public ResponseEntity<Object> getMyInvoiceDetails(@PathVariable("rental_id") Long rentalId) {
-        //ClientDto userDto = clientService.getClientByEmail(JwtAuthenticationFilter.getUserEmail());
-        //Check if the client has this invoice on his list
-        //TODO Body
-        return null;
-    }
+//    @GetMapping(path = "/invoice/{invoice_id}/details")
+//    public ResponseEntity<Object> getMyInvoiceDetails(@PathVariable("invoice_id") Long invoiceId) {
+//        //ClientDto userDto = clientService.getClientByEmail(JwtAuthenticationFilter.getUserEmail());
+//        //Check if the client has this invoice on his list
+//        //TODO Body
+//        return null;
+//    }
 
     @GetMapping(path = "/invoice/{invoice_id}/qrcode")
     public ResponseEntity<Object> getMyInvoiceToQrcode(@PathVariable("invoice_id") Long invoiceId) {
@@ -84,7 +84,7 @@ public class ClientController {
         return null;
     }
 
-    @GetMapping(path = "invoice/{invoice_id/email")
+    @GetMapping(path = "invoice/{invoice_id}/email")
     public ResponseEntity<String> getMyInvoiceToEmail(@PathVariable("invoice_id") Long invoiceId) {
         //ClientDto userDto = clientService.getClientByEmail(JwtAuthenticationFilter.getUserEmail());
         //Check if the client has this invoice on his list

@@ -7,7 +7,7 @@ import org.mindswap.dto.WorkerDto;
 import org.mindswap.dto.WorkerUpdateDto;
 import org.mindswap.model.Worker;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface WorkerMapper {
     Worker fromDtoToEntity(WorkerDto workerDto);
     @InheritInverseConfiguration

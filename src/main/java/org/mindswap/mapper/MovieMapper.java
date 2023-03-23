@@ -7,7 +7,7 @@ import org.mindswap.dto.MovieDto;
 import org.mindswap.dto.MovieUpdateDto;
 import org.mindswap.model.Movie;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface MovieMapper {
 
     Movie fromCreateDtoToEntity(MovieCreateDto movieCreateDto);

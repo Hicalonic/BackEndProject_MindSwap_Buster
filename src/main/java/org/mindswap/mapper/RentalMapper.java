@@ -6,8 +6,7 @@ import org.mindswap.dto.RentalCreateDto;
 import org.mindswap.dto.RentalDto;
 import org.mindswap.dto.RentalUpdateDto;
 import org.mindswap.model.Rental;
-@Mapper
-
+@Mapper(componentModel = "spring")
 public interface RentalMapper {
 
     Rental fromDtoToEntity(RentalDto rentalDto);

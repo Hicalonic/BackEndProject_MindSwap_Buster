@@ -1,6 +1,6 @@
 package org.mindswap.controller;
 
-import org.mindswap.service.AdminService;
+import org.mindswap.service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    private AdminService adminService;
+
+    private WorkerService workerService;
 
     @Autowired
-    public AdminController(AdminController adminController){
-        this.adminService = (AdminService) adminController;
+    public AdminController(WorkerService workerService) {
+        this.workerService = workerService;
     }
 
     @GetMapping(path = "/create-shop")

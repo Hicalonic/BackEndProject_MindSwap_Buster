@@ -45,7 +45,7 @@ public class AuthenticationService {
     Client client = repository.findByEmail(request.getEmail())
         .orElseThrow();
     String jwtToken = jwtService.generateToken(client);
-    revokeAllClientTokens(client);
+    //revokeAllClientTokens(client);
     saveClientToken(client, jwtToken);
     return AuthenticationResponse.builder()
         .token(jwtToken)
@@ -73,14 +73,14 @@ public class AuthenticationService {
             .build();
   }
 
-  private void revokeAllClientTokens(Client client) {
-    var validUserTokens = tokenRepository.findAllValidTokenByEmail(client.getEmail());
-    if (validUserTokens.isEmpty())
-      return;
-    validUserTokens.forEach(token -> {
-      token.setExpired(true);
-      token.setRevoked(true);
-    });
-    tokenRepository.saveAll(validUserTokens);
-  }
+//  private void revokeAllClientTokens(Client client) {
+//    var validUserTokens = tokenRepository.findAllValidTokenByEmail(client.getEmail());
+//    if (validUserTokens.isEmpty())
+//      return;
+//    validUserTokens.forEach(token -> {
+//      token.setExpired(true);
+//      token.setRevoked(true);
+//    });
+//    tokenRepository.saveAll(validUserTokens);
+//  }
 }

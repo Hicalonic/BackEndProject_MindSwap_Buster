@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface WorkerService {
 
-
-
     public WorkerDto createWorker(WorkerCreateDto wortkerCreateDto);
     WorkerDto getWorkerById(Long workerId);
     List<WorkerDto> getAllWorkers();

@@ -45,7 +45,6 @@ public class Client implements UserDetails {
     @OneToMany
     private List<Rental> rentalList;
 
-
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
 

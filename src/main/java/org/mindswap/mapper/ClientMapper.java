@@ -7,7 +7,7 @@ import org.mindswap.dto.ClientDto;
 import org.mindswap.dto.ClientUpdateDto;
 import org.mindswap.model.Client;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ClientMapper {
     Client fromDtoToEntity(ClientDto clientDto);
     @InheritInverseConfiguration
