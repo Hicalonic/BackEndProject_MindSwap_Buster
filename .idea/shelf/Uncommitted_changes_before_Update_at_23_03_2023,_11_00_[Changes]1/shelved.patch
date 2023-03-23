@@ -1,0 +1,101 @@
+Index: src/main/java/org/mindswap/security/config/JwtService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.mindswap.security.config;\n\nimport io.jsonwebtoken.Claims;\nimport io.jsonwebtoken.Jwts;\nimport io.jsonwebtoken.SignatureAlgorithm;\nimport io.jsonwebtoken.io.Decoders;\nimport io.jsonwebtoken.security.Keys;\nimport org.springframework.security.core.userdetails.UserDetails;\nimport org.springframework.stereotype.Service;\nimport java.security.Key;\nimport java.util.Date;\nimport java.util.HashMap;\nimport java.util.Map;\nimport java.util.function.Function;\n\n@Service\npublic class JwtService {\n\n  private static final String SECRET_KEY = \"404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970\";\n\n  public String extractUsername(String token) {\n    return extractClaim(token, Claims::getSubject);\n  }\n\n  public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {\n    final Claims claims = extractAllClaims(token);\n    return claimsResolver.apply(claims);\n  }\n\n  public String generateToken(UserDetails userDetails) {\n    return generateToken(new HashMap<>(), userDetails);\n  }\n\n  public String generateToken(\n      Map<String, Object> extraClaims,\n      UserDetails userDetails\n  ) {\n    return Jwts\n        .builder()\n        .setClaims(extraClaims)\n        .setSubject(userDetails.getUsername())\n        .setIssuedAt(new Date(System.currentTimeMillis()))\n        .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))\n        .signWith(getSignInKey(), SignatureAlgorithm.HS256)\n        .compact();\n  }\n\n  public boolean isTokenValid(String token, UserDetails userDetails) {\n    final String username = extractUsername(token);\n    return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);\n  }\n\n  private boolean isTokenExpired(String token) {\n    return extractExpiration(token).before(new Date());\n  }\n\n  private Date extractExpiration(String token) {\n    return extractClaim(token, Claims::getExpiration);\n  }\n\n  private Claims extractAllClaims(String token) {\n    return Jwts\n        .parserBuilder()\n        .setSigningKey(getSignInKey())\n        .build()\n        .parseClaimsJws(token)\n        .getBody();\n  }\n\n  private Key getSignInKey() {\n    byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);\n    return Keys.hmacShaKeyFor(keyBytes);\n  }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/mindswap/security/config/JwtService.java b/src/main/java/org/mindswap/security/config/JwtService.java
+--- a/src/main/java/org/mindswap/security/config/JwtService.java	
++++ b/src/main/java/org/mindswap/security/config/JwtService.java	
+@@ -32,17 +32,19 @@
+   }
+ 
+   public String generateToken(
+-      Map<String, Object> extraClaims,
+-      UserDetails userDetails
++          Map<String, Object> extraClaims,
++          UserDetails userDetails
+   ) {
++    System.out.println(userDetails.getAuthorities());
+     return Jwts
+-        .builder()
+-        .setClaims(extraClaims)
+-        .setSubject(userDetails.getUsername())
+-        .setIssuedAt(new Date(System.currentTimeMillis()))
+-        .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+-        .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+-        .compact();
++            .builder()
++            .setClaims(extraClaims)
++            .claim("role", userDetails.getAuthorities())
++            .setSubject(userDetails.getUsername())
++            .setIssuedAt(new Date(System.currentTimeMillis()))
++            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
++            .signWith(getSignInKey(), SignatureAlgorithm.HS256)
++            .compact();
+   }
+ 
+   public boolean isTokenValid(String token, UserDetails userDetails) {
+Index: src/main/java/org/mindswap/model/Rental.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.mindswap.model;\n\nimport jakarta.persistence.*;\n\nimport java.time.LocalDate;\nimport java.util.List;\n\npublic class Rental {\n\n    @Id\n    @GeneratedValue(strategy = GenerationType.AUTO)\n    private int id;\n\n    @Column(nullable = false)\n    @ManyToOne(targetEntity = Rental.class)\n    private Client client ;\n    @Column(nullable = false)\n    private LocalDate startDate;\n    @Column(nullable = false)\n    private LocalDate enDDate;\n    @Column(nullable = false)\n    private List<Movie> moviesRented;\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/mindswap/model/Rental.java b/src/main/java/org/mindswap/model/Rental.java
+--- a/src/main/java/org/mindswap/model/Rental.java	
++++ b/src/main/java/org/mindswap/model/Rental.java	
+@@ -21,5 +21,10 @@
+     @Column(nullable = false)
+     private List<Movie> moviesRented;
+ 
++    @OneToOne
++    @JoinColumn(name = "invoice_ID")
++    private Invoice invoice;
++
++
+ 
+ }
+Index: src/main/java/org/mindswap/controller/ManagerController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.mindswap.controller;\n\n\nimport org.mindswap.dto.ClientDto;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.*;\n\n@RestController\n@RequestMapping(path = \"/manager\")\npublic class ManagerController {\n\n    private final AuthenticationService authenticationService;\n    private ManagerService managerService;\n\n    @Autowired\n    public ManagerController(AuthenticationService authenticationService, ManagerService managerService) {\n        Authenticationservice = authenticationService;\n        this.managerService = managerService;\n    }\n\n    @GetMapping(\"\")\n    public ResponseEntity<String> WelcomeWorker() {\n        return new ResponseEntity<>(\"Welcome back, Manager\", HttpStatus.OK);\n    }\n\n    @GetMapping(path = \"/info\")\n    public ResponseEntity<ClientDto> myInfo() {\n        //TODO\n        return null;\n    }\n\n    @PostMapping(path = \"/insert-movie\")\n    public ResponseEntity<String> insertMovie() {\n        //TODO\n        return null;\n    }\n\n    @PatchMapping(path = \"/update-movie\")\n    public ResponseEntity<String> updateMovie() {\n        //TODO\n        return null;\n    }\n\n    @DeleteMapping(path = \"delete/{movie_id}\")\n    public ResponseEntity<String> deleteMovie(@PathVariable(\"movie_id\") Long movieId) {\n        //TODO\n        return null;\n    }\n\n    @PostMapping(\"/register-worker\")\n    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {\n        return ResponseEntity.ok(authenticationService.register(request));\n    }\n\n    @DeleteMapping(path = \"/remove-worker/{worker_id}\")\n    public ResponseEntity<String> removeWorker(@PathVariable(\"worker_id\") Long workerId) {\n        //TODO\n        return null;\n    }\n\n\n\n\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/mindswap/controller/ManagerController.java b/src/main/java/org/mindswap/controller/ManagerController.java
+--- a/src/main/java/org/mindswap/controller/ManagerController.java	
++++ b/src/main/java/org/mindswap/controller/ManagerController.java	
+@@ -10,7 +10,7 @@
+ @RestController
+ @RequestMapping(path = "/manager")
+ public class ManagerController {
+-
++/*
+     private final AuthenticationService authenticationService;
+     private ManagerService managerService;
+ 
+@@ -49,17 +49,21 @@
+         return null;
+     }
+ 
++
+     @PostMapping("/register-worker")
+     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
+         return ResponseEntity.ok(authenticationService.register(request));
+     }
+ 
++
++
+     @DeleteMapping(path = "/remove-worker/{worker_id}")
+     public ResponseEntity<String> removeWorker(@PathVariable("worker_id") Long workerId) {
+         //TODO
+         return null;
+     }
+ 
++    */
+ 
+ 
+ 
