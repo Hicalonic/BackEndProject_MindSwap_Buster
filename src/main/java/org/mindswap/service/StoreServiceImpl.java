@@ -1,6 +1,7 @@
 package org.mindswap.service;
 
 import org.mindswap.exceptions.StoreNotFoundException;
+import org.mindswap.model.Role;
 import org.mindswap.model.Store;
 import org.mindswap.dto.StoreCreateDto;
 import org.mindswap.dto.StoreDto;
@@ -54,7 +55,8 @@ public class StoreServiceImpl implements StoreService {
         if (storeUpdateDto.getCity() != null) {
             store.setCity(storeUpdateDto.getCity());
         }
-        if (storeUpdateDto.getManagerId() != null && workerRepository.existsById(storeUpdateDto.getManagerId()) && ){
+        if (storeUpdateDto.getManagerId() != null && storeRepository.existsById(storeUpdateDto.getManagerId())
+                && worker.getRole().equals(Role.MANAGER)){
             store.setManagerId(storeUpdateDto.getManagerId());
         }
         storeRepository.save(store);
