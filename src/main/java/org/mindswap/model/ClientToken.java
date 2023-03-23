@@ -9,8 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tokens")
-public class Token {
+public class ClientToken {
 
     @Id
     @GeneratedValue

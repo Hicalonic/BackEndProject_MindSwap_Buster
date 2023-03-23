@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import static java.lang.Double.NaN;
+
 public class WorkerServiceImpl implements WorkerService {
     private StaffRepository staffRepository;
     private WorkerMapper workerMapper;
@@ -20,9 +22,6 @@ public class WorkerServiceImpl implements WorkerService {
         this.staffRepository = staffRepository;
         this.workerMapper = workerMapper;
     }
-
-
-
 
     @Override
     public WorkerDto createWorker(WorkerCreateDto workercreateDto) {
@@ -46,7 +45,21 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public WorkerDto updateWorker(Long workerId, WorkerUpdateDto workerUpdateDto) {
-
+        Worker worker = staffRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
+        if(workerUpdateDto.getFirstName() != null) {
+            worker.setFirstName(workerUpdateDto.getFirstName());
+        }
+        if(workerUpdateDto.getLastName() != null) {
+            worker.setLastName(workerUpdateDto.getLastName());
+        }
+        if(workerUpdateDto.getEmail() != null) {
+            worker.setEmail(workerUpdateDto.getEmail());
+        }
+        if(!Double.isNaN(workerUpdateDto.getStoreId())) {
+            worker.setStoreId(workerUpdateDto.getStoreId());
+        }
+        staffRepository.save(worker);
+        return workerMapper.fromEntityToDto(worker);
     }
     @Override
     public void deleteWorker(Long workerID) {
