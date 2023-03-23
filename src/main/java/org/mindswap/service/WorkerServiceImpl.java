@@ -1,25 +1,17 @@
 package org.mindswap.service;
 
-import org.mindswap.dto.WorkerCreateDto;
-import org.mindswap.dto.WorkerDto;
-import org.mindswap.dto.WorkerUpdateDto;
 import org.mindswap.dtosUser.UserWorkerCreateDto;
 import org.mindswap.dtosUser.UserWorkerDto;
 import org.mindswap.dtosUser.UserWorkerUpdateDto;
-import org.mindswap.dtosUser.WorkerRoleUpdateDto;
+import org.mindswap.dtosUser.RoleUpdateDto;
 import org.mindswap.exceptions.WorkerNotFoundException;
-import org.mindswap.mapper.WorkerMapper;
 import org.mindswap.mappersUser.UserWorkerMapper;
 import org.mindswap.model.User;
-import org.mindswap.model.Worker;
 import org.mindswap.repository.UserRepository;
-import org.mindswap.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static java.lang.Double.NaN;
 
 @Service
 public class WorkerServiceImpl implements WorkerService {
@@ -70,13 +62,12 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public UserWorkerDto updateWorkerRole(Long workerId, WorkerRoleUpdateDto workerRoleUpdateDto) {
+    public void updateWorkerRole(Long workerId, RoleUpdateDto roleUpdateDto) {
         User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
-        if(workerRoleUpdateDto.getRole() != null) {
-            user.setRole(workerRoleUpdateDto.getRole());
+        if(roleUpdateDto.getRole() != null) {
+            user.setRole(roleUpdateDto.getRole());
         }
         userRepository.save(user);
-        return userWorkerMapper.fromEntityToDto(user);
     }
 
 
@@ -85,6 +76,4 @@ public class WorkerServiceImpl implements WorkerService {
         User user = userRepository.findById(workerID).orElseThrow(WorkerNotFoundException::new);
         userRepository.delete(user);
     }
-
-
 }

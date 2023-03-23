@@ -1,6 +1,7 @@
 package org.mindswap.service;
 
 import org.mindswap.dto.*;
+import org.mindswap.dtosUser.RoleUpdateDto;
 import org.mindswap.dtosUser.UserClientCreateDto;
 import org.mindswap.dtosUser.UserClientDto;
 import org.mindswap.dtosUser.UserClientUpdateDto;
@@ -22,7 +23,9 @@ public interface ClientService {
 
     UserClientDto updatePassword(Long clientId, UpdatePasswordDto updatePasswordDto);
 
-    public void deleteClient(Long clientId);
+    void updateClientRole(Long clientId, RoleUpdateDto roleUpdateDto);
+
+    void deleteClient(Long clientId);
 
 
 

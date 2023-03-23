@@ -4,42 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="- Semi working">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserClientCreateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserClientDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserClientUpdateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserManagerCreateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserManagerDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserManagerUpdateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserWorkerCreateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserWorkerDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserWorkerUpdateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/WorkerRoleUpdateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/mappersUser/UserClientMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/mappersUser/UserManagerMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/mappersUser/UserWorkerMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/UserRepository.java" afterDir="false" />
+    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ManagerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ManagerServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Rental.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Rental.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/MovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/WorkerRoleUpdateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/RoleUpdateDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ClientService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ClientServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/InvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/InvoiceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/RentalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/RentalServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/StoreServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/StoreServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/MovieService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/MovieService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/MovieServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/MovieServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/WorkerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/WorkerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/WorkerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/WorkerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/repository/TokenRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/repository/TokenRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/ClientMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/ClientMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/InvoiceMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/InvoiceMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/MovieMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/MovieMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/RentalMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/RentalMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/StaffMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/StaffMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/StoreMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/StoreMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/WorkerMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/WorkerMapperImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679590746754</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Model user /new dtos and mappers / services impl with new mappers dtos and repository">
+      <created>1679602485045</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679602485045</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,6 +168,7 @@
     <MESSAGE value="- Worker Controller&#10;- ManagerController" />
     <MESSAGE value="- Rollback" />
     <MESSAGE value="- Semi working" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Semi working" />
+    <MESSAGE value="Model user /new dtos and mappers / services impl with new mappers dtos and repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="Model user /new dtos and mappers / services impl with new mappers dtos and repository" />
   </component>
 </project>
