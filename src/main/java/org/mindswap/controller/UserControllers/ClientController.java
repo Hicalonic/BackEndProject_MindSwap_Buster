@@ -105,4 +105,14 @@ public class ClientController {
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(clientList, HttpStatus.OK);
     }
+
+    @GetMapping(path = "/{id}/update-role")
+    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    public ResponseEntity<String> updateClientToWorkerRole(@PathVariable("id") Long clientId, @Valid @RequestBody RoleUpdateDto roleUpdateDto) {
+        clientService.updateClientRole(clientId,roleUpdateDto);
+
+        //TODO: VERIFY THIS METHOD
+        return new ResponseEntity<>("Role updated to worker.", HttpStatus.OK);
+    }
+
 }
