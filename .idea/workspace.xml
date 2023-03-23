@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="- Semi working">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/ManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/auth/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/auth/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/TokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/TokenRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/WorkerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/WorkerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/security/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/security/config/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/security/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/security/config/SecurityConfiguration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,15 +23,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Dev_ReinaldoNew" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -133,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679590746754</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="- Semi working">
+      <created>1679591542605</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679591542605</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

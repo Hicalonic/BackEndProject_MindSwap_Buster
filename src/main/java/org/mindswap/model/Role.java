@@ -1,7 +1,7 @@
 package org.mindswap.model;
 
 public enum Role {
-    COSTUMER,
+    CLIENT,
     WORKER,
     MANAGER,
     ADMIN

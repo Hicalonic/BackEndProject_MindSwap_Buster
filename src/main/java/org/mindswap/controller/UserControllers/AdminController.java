@@ -1,4 +1,4 @@
-package org.mindswap.controller;
+package org.mindswap.controller.UserControllers;
 
 import org.mindswap.service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;

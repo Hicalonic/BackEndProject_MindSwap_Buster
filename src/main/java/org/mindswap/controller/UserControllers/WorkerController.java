@@ -1,14 +1,10 @@
-package org.mindswap.controller;
+package org.mindswap.controller.UserControllers;
 
 
-import lombok.Getter;
 import org.mindswap.dto.ClientDto;
 import org.mindswap.dto.InvoiceDto;
 import org.mindswap.dto.MovieDto;
 import org.mindswap.dto.RentalDto;
-import org.mindswap.model.Client;
-import org.mindswap.model.Movie;
-import org.mindswap.model.Rental;
 import org.mindswap.service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
