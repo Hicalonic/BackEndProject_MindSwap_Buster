@@ -42,7 +42,7 @@ public class RentalServiceImpl implements RentalService {
     public List<RentalDto> getClientCurrentRentals(Long clientID) {
        Client client = clientRepository.findById(clientID).orElseThrow(ClientNotFoundException::new);
         List<Rental> currentRentalList = client.getRentalList().stream()
-                .filter(rental -> rental.getEnDDate().isAfter(LocalDate.now())).toList();
+                .filter(rental -> rental.getEndDate().isAfter(LocalDate.now())).toList();
         return currentRentalList.stream().map(r-> rentalMapper.fromEntityToDto(r)).toList();
     }
 
@@ -55,16 +55,29 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public List<RentalDto> getAllRentals() {
-        return null;
+        return rentalRepository.findAll().stream().map(r->rentalMapper.fromEntityToDto(r)).toList();
     }
 
     @Override
     public RentalDto updateRental(Long rentalId, RentalUpdateDto rentalUpdateDto) {
-        return null;
+        Rental rental = rentalRepository.findById(rentalId).orElseThrow(RentalNotFoundException::new);
+        if(rentalUpdateDto.getStartDate() != null) {
+            rental.setStartDate(rentalUpdateDto.getStartDate());
+        }
+        if(rentalUpdateDto.getEndDate() != null) {
+            rental.setEndDate(rentalUpdateDto.getEndDate());
+        }
+        if(rentalUpdateDto.getMovieList() != null) {
+            rental.setMoviesRented(rentalUpdateDto.getMovieList());
+        }
+        rentalRepository.save(rental);
+        return rentalMapper.fromEntityToDto(rental);
+
     }
 
     @Override
     public void deleteRental(Long rentalId) {
-
+        Rental rental = rentalRepository.findById(rentalId).orElseThrow(RentalNotFoundException::new);
+        rentalRepository.delete(rental);
     }
 }

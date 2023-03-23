@@ -30,7 +30,7 @@ public class Rental {
     @Column(nullable = false)
     private LocalDate startDate;
     @Column(nullable = false)
-    private LocalDate enDDate;
+    private LocalDate endDate;
     @Column(nullable = false)
     private List<Movie> moviesRented;
     @OneToOne
