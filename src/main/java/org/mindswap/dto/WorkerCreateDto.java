@@ -20,6 +20,9 @@ public class WorkerCreateDto {
     @NotNull(message = "Must have a store")
     private Long storeId;
 
+    @NotNull(message = "Must have an email")
+    private String email;
+
     @Size(min = 6, message = "Password must be at least 6 characters long")
     @NotBlank(message = "Must have a password")
     private String password;

@@ -18,7 +18,7 @@ public class RentalCreateDto {
     private Date startDate;
 
     @NotBlank(message = "Needs a delivery date")
-    private Date deliveryDate;
+    private Date endDate;
 
     @NotBlank(message = "Needs a costumer")
     private Client client;

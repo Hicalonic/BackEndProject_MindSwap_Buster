@@ -17,6 +17,8 @@ public interface ClientService {
 
     ClientDto updateClient(Long clientId, ClientUpdateDto clientUpdateDto);
 
+    ClientDto updatePassword(Long clientId, UpdatePasswordDto updatePasswordDto);
+
     public void deleteClient(Long clientId);
 
 

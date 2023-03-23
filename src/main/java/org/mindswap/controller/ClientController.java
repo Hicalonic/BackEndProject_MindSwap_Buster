@@ -30,6 +30,7 @@ public class ClientController {
     }
 
 
+
     @GetMapping(path = "/info")
     public ResponseEntity<ClientDto> myInfo() {
         //TODO

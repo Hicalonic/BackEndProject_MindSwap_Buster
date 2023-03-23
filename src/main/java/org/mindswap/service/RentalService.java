@@ -1,5 +1,6 @@
 package org.mindswap.service;
 
+import org.mindswap.dto.RentalCreateDto;
 import org.mindswap.dto.RentalDto;
 import org.mindswap.dto.RentalUpdateDto;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface RentalService {
 
-    RentalDto createRental (RentalDto rentalDto);
+    RentalDto createRental (RentalCreateDto rentalCreateDto);
 
     List<RentalDto> getClientCurrentRentals(Long clientID);
     RentalDto getRentalById(Long rentalId);
