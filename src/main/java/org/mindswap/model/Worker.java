@@ -39,8 +39,9 @@ public class Worker implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private Long storeId;
+    @ManyToOne(targetEntity = Store.class)
+    @JoinColumn(name = "store_id")
+    private Store store;
 
     @Enumerated(EnumType.STRING)
     private Role role;

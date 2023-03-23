@@ -31,6 +31,9 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private MovieGenre movieGenre;
 
+    @ManyToOne
+    @JoinColumn(name = "rental")
+    private Rental rental;
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
 

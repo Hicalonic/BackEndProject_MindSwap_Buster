@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TokenRepository extends JpaRepository<Token, Integer> {
+public interface TokenRepository extends JpaRepository<String, Integer> {
 
     @Query(value = """
-      select t from Token t inner join Client c\s
-      on t.client.id = c.id\s
-      where w.id = :id and (c.expired = false or c.revoked = false)\s
-      """)
-    List<Token> findAllValidTokenById(Long id);
+    select t from Token t inner join Client c\s
+    on t.client.id = c.id\s 
+    where c.id = :id and (t.expired = false or t.revoked = false)\s
+""")
+    List<Token> findAllValidTokenByEmail(String email);
 
     Optional<Token> findByToken(String token);
 }

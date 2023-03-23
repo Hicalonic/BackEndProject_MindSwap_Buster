@@ -57,9 +57,9 @@ public class WorkerServiceImpl implements WorkerService {
         if(workerUpdateDto.getEmail() != null) {
             worker.setEmail(workerUpdateDto.getEmail());
         }
-        if(!Double.isNaN(workerUpdateDto.getStoreId())) {
-            worker.setStoreId(workerUpdateDto.getStoreId());
-        }
+//        if(!Double.isNaN(workerUpdateDto.getStoreId())) {
+//            worker.setStoreId(workerUpdateDto.getStoreId());
+//        }
         staffRepository.save(worker);
         return workerMapper.fromEntityToDto(worker);
     }

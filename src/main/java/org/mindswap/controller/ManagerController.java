@@ -1,6 +1,9 @@
 package org.mindswap.controller;
 
 
+import org.mindswap.auth.AuthenticationResponse;
+import org.mindswap.auth.AuthenticationService;
+import org.mindswap.auth.RegisterRequest;
 import org.mindswap.dto.ClientDto;
 import org.mindswap.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,7 @@ public class ManagerController {
 
     @Autowired
     public ManagerController(AuthenticationService authenticationService, ManagerService managerService) {
-        Authenticationservice = authenticationService;
+        this.authenticationService = authenticationService;
         this.managerService = managerService;
     }
 
