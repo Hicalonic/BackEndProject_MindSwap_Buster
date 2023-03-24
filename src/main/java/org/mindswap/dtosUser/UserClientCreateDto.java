@@ -26,7 +26,7 @@ public class UserClientCreateDto {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    private Role role = Role.COSTUMER;
+    private Role role = Role.CLIENT;
 
     @NotBlank(message = "Must have password")
     private String password;
