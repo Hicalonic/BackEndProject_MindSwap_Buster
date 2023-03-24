@@ -5,33 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="- WorkerController updated">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/UserCreateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/UserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/UserUpdateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/AdminService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/AdminServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserClientCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserClientCreateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ManagerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ManagerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/ClientCreateDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/ClientDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/ClientUpdateDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/UpdatePasswordDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/UpdatePasswordDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/WorkerCreateDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/WorkerDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dto/WorkerUpdateDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/mapper/ClientMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/mapper/StaffMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/mapper/StaffMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/mapper/WorkerMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/mappersUser/UserClientMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/mappersUser/UserManagerMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/mappersUser/UserWorkerMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/security/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/security/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/ClientServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/WorkerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/WorkerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/WorkerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/WorkerServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/MovieApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/MovieApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/auth/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/auth/AuthenticationService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/controller/AdminController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/controller/ClientController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/controller/ManagerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/controller/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/controller/MovieController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/controller/WorkerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/mapper/RentalMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/mapper/RentalMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental$RentalBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental$RentalBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/JwtAuthenticationFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/SecurityConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/SecurityConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/InvoiceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/InvoiceServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/RentalServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/RentalServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/StoreServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/StoreServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/ClientMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/ClientMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/InvoiceMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/InvoiceMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/MovieMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/org/mindswap/mapper/MovieMapperImpl.java" afterDir="false" />

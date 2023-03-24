@@ -1,7 +1,7 @@
 package org.mindswap.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 @Getter
@@ -10,14 +10,16 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkerUpdateDto {
+public class UserDto {
+
     @NotBlank(message = "Must have a  first name")
     private String firstName;
+
     @NotBlank(message = "Must have a last name")
     private String lastName;
 
-    @NotNull(message = "Must have a store")
-    private Long storeId;
-    @NotNull(message = "Must have an email")
+    @NotBlank(message = "Must have email")
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Invalid email")
     private String email;
+
 }

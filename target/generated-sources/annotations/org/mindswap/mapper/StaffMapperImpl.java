@@ -1,13 +1,13 @@
 package org.mindswap.mapper;
 
 import javax.annotation.processing.Generated;
-import org.mindswap.dto.WorkerDto;
+
 import org.mindswap.model.Worker;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-03-23T23:56:36+0000",
+    date = "2023-03-24T10:36:59+0000",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
 )
 @Component

@@ -2,8 +2,8 @@ package org.mindswap.controller.UserControllers;
 
 
 import jakarta.validation.Valid;
-import org.mindswap.dto.ClientDto;
-import org.mindswap.dto.ClientUpdateDto;
+import org.mindswap.dto.UserDto;
+import org.mindswap.dto.UserUpdateDto;
 import org.mindswap.dtosUser.RoleUpdateDto;
 import org.mindswap.dtosUser.UserClientDto;
 import org.mindswap.dtosUser.UserClientUpdateDto;
@@ -50,10 +50,10 @@ public class ClientController {
 
     @GetMapping(path = "/info")
     @PreAuthorize("hasRole('CLIENT')")
-    public ResponseEntity<UserClientDto> myInfo() {
+    public ResponseEntity<UserDto> myInfo() {
 
         Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
-        UserClientDto myInfoDto = clientService.getClientById(authenticatedClientId);
+        UserDto myInfoDto = clientService.getClientById(authenticatedClientId);
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
@@ -61,15 +61,15 @@ public class ClientController {
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
-    public ResponseEntity<UserClientDto> getClientInfo(@PathVariable("id") Long clientId) {
-        UserClientDto client = clientService.getClientById(clientId);
+    public ResponseEntity<UserDto> getClientInfo(@PathVariable("id") Long clientId) {
+        UserDto client = clientService.getClientById(clientId);
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<String> updateClientInfo(@PathVariable("id") Long clientId, @Valid @RequestBody UserClientUpdateDto userClientUpdateDto) {
+    public ResponseEntity<String> updateClientInfo(@PathVariable("id") Long clientId, @Valid @RequestBody UserUpdateDto userUpdateDto) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().iterator().next().getAuthority();
         Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
@@ -78,7 +78,7 @@ public class ClientController {
         if (role.equals(Role.CLIENT) && !authenticatedClientId.equals(clientId)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        clientService.updateClient(clientId, userClientUpdateDto);
+        clientService.updateClient(clientId, userUpdateDto);
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>("Updated successfully.", HttpStatus.OK);
@@ -102,20 +102,20 @@ public class ClientController {
 
     @GetMapping(path = "/all")
     @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
-    public ResponseEntity<List<UserClientDto>> getAllClients() {
-        List<UserClientDto> clientList = clientService.getAllClients();
+    public ResponseEntity<List<UserDto>> getAllClients() {
+        List<UserDto> clientList = clientService.getAllClients();
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(clientList, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/{id}/update-role")
+/*    @GetMapping(path = "/{id}/update-role")
     @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
     public ResponseEntity<String> updateClientToWorkerRole(@PathVariable("id") Long clientId, @Valid @RequestBody RoleUpdateDto roleUpdateDto) {
         clientService.updateClientRole(clientId,roleUpdateDto);
 
         //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>("Role updated to worker.", HttpStatus.OK);
-    }
+    }*/
 
 }

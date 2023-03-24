@@ -1,6 +1,7 @@
 package org.mindswap.security.config;
 
 import lombok.RequiredArgsConstructor;
+import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.model.Client;
 import org.mindswap.model.Worker;
 import org.mindswap.repository.ClientRepository;
@@ -26,15 +27,15 @@ public class ApplicationConfig {
     private final ClientRepository clientRepository;
     private final WorkerRepository workerRepository;
 
-/*
+
   @Bean
   public UserDetailsService userDetailsService() {
     return username -> clientRepository.findByEmail(username)
-        .orElseThrow(() -> new ClientNotFoundException());
+        .orElseThrow(ClientNotFoundException::new);
   }
-*/
 
-    @Bean
+
+   /* @Bean
     public UserDetailsService userDetailsService() {
         return email -> {
             Optional<Client> client = clientRepository.findByEmail(email);
@@ -49,7 +50,7 @@ public class ApplicationConfig {
                 }
             }
         };
-    }
+    }*/
 
     @Bean
     public AuthenticationProvider authenticationProvider() {

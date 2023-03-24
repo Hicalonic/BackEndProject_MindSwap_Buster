@@ -10,24 +10,26 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkerCreateDto {
-    @NotBlank(message = "Must have a  first name")
+public class UserCreateDto {
+
+
+    @NotBlank(message = "Must have a first name")
     private String firstName;
 
     @NotBlank(message = "Must have a last name")
     private String lastName;
 
-    @NotNull(message = "Must have a store")
-    private Long storeId;
-
-    @NotNull(message = "Must have an email")
+    @NotBlank(message = "Must have email")
     private String email;
 
     @Size(min = 6, message = "Password must be at least 6 characters long")
-    @NotBlank(message = "Must have a password")
+    @NotNull(message = "Must have a password")
     private String password;
 
     @Size(min = 6, message = "Password must be at least 6 characters long")
-    @NotBlank(message = "Must retype your password")
+    @NotNull(message = "Must retype your password")
     private String retypedPassword;
+
+    @NotBlank(message = "Must have a role")
+    private String role;
 }
