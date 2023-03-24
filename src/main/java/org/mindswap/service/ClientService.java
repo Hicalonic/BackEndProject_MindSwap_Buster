@@ -1,10 +1,6 @@
 package org.mindswap.service;
 
 import org.mindswap.dto.*;
-import org.mindswap.dtosUser.RoleUpdateDto;
-import org.mindswap.dtosUser.UserClientCreateDto;
-import org.mindswap.dtosUser.UserClientDto;
-import org.mindswap.dtosUser.UserClientUpdateDto;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package org.mindswap.dto;
 
 import lombok.*;
-import org.mindswap.model.Client;
 import org.mindswap.model.Movie;
 
 import java.time.LocalDate;

@@ -2,7 +2,6 @@ package org.mindswap.mapper;
 
 import javax.annotation.processing.Generated;
 
-import org.mindswap.model.Client;
 import org.mindswap.model.Role;
 import org.springframework.stereotype.Component;
 

@@ -2,7 +2,6 @@ package org.mindswap.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.mindswap.model.Client;
 import org.mindswap.model.Movie;
 
 import java.util.Date;

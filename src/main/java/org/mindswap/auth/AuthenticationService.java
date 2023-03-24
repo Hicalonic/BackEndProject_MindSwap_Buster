@@ -2,7 +2,6 @@ package org.mindswap.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.mindswap.model.*;
-import org.mindswap.repository.ClientRepository;
 import org.mindswap.repository.TokenRepository;
 import org.mindswap.security.config.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;

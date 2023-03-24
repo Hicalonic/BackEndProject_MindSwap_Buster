@@ -8,10 +8,8 @@ import org.mindswap.dto.StoreDto;
 import org.mindswap.dto.StoreUpdateDto;
 import org.mindswap.mapper.StoreMapper;
 import org.mindswap.model.User;
-import org.mindswap.model.Worker;
 import org.mindswap.repository.StoreRepository;
 import org.mindswap.repository.UserRepository;
-import org.mindswap.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
