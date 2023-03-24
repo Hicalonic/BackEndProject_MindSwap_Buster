@@ -23,9 +23,6 @@ public class ManagerServiceImpl implements ManagerService {
         this.userMapper = userMapper;
     }
 
-
-
-
     @Override
     public UserDto getInfoById(Long id) {
         User manager = userRepository.findById(id).orElseThrow(WorkerNotFoundException::new);

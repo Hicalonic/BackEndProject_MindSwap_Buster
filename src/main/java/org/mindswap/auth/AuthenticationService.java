@@ -29,7 +29,7 @@ public class AuthenticationService {
         .build();
     User savedUser = repository.save(user);
     String jwtToken = jwtService.generateToken(user);
-    saveClientToken(savedUser, jwtToken);
+    saveUserToken(savedUser, jwtToken);
     return AuthenticationResponse.builder()
         .token(jwtToken)
         .build();
@@ -42,45 +42,36 @@ public class AuthenticationService {
             request.getPassword()
         )
     );
-    Client client = repository.findByEmail(request.getEmail())
+    User user = repository.findByEmail(request.getEmail())
         .orElseThrow();
-    String jwtToken = jwtService.generateToken(client);
+    String jwtToken = jwtService.generateToken(user);
     //revokeAllClientTokens(client);
-    saveClientToken(client, jwtToken);
+    saveUserToken(user, jwtToken);
     return AuthenticationResponse.builder()
         .token(jwtToken)
         .build();
   }
 
-  private void saveClientToken(Client client, String jwtToken) {
+  private void saveUserToken(User user, String jwtToken) {
     Token token = Token.builder()
-        .email(client.getEmail())
+        .email(user.getEmail())
         .token(jwtToken)
         .tokenType(TokenType.BEARER)
         .expired(false)
+
         .revoked(false)
         .build();
     tokenRepository.save(token);
   }
 
-  private void saveWorkerToken(Worker worker, String jwtToken){
-    Token token = Token.builder()
-            .email(worker.getEmail())
-            .token(jwtToken)
-            .tokenType(TokenType.BEARER)
-            .expired(false)
-            .revoked(false)
-            .build();
+  private void revokeAllClientTokens(User user) {
+    var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
+    if (validUserTokens.isEmpty())
+      return;
+    validUserTokens.forEach(token -> {
+      token.setExpired(true);
+      token.setRevoked(true);
+    });
+    tokenRepository.saveAll(validUserTokens);
   }
-
-//  private void revokeAllClientTokens(Client client) {
-//    var validUserTokens = tokenRepository.findAllValidTokenByEmail(client.getEmail());
-//    if (validUserTokens.isEmpty())
-//      return;
-//    validUserTokens.forEach(token -> {
-//      token.setExpired(true);
-//      token.setRevoked(true);
-//    });
-//    tokenRepository.saveAll(validUserTokens);
-//  }
 }

@@ -1,5 +1,6 @@
 package org.mindswap.service;
 
+import org.mindswap.dto.UserDto;
 import org.mindswap.exceptions.WorkerNotFoundException;
 import org.mindswap.mapper.UserMapper;
 import org.mindswap.model.Role;
@@ -20,20 +21,23 @@ public class AdminServiceImpl implements AdminService{
         this.userMapper = userMapper;
     }
     @Override
-    public void makeManager(Long workerId) {
+    public UserDto makeManager(Long workerId) {
         User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
         user.setRole(Role.MANAGER);
+        return userMapper.fromEntityToDto(user);
     }
 
     @Override
-    public void makeClient(Long workerId) {
+    public UserDto makeClient(Long workerId) {
         User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
         user.setRole(Role.CLIENT);
+        return userMapper.fromEntityToDto(user);
     }
 
     @Override
-    public void makeAdmin(Long workerId) {
+    public UserDto makeAdmin(Long workerId) {
         User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
         user.setRole(Role.ADMIN);
+        return userMapper.fromEntityToDto(user);
     }
 }

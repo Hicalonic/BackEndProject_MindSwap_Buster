@@ -1,11 +1,13 @@
 package org.mindswap.service;
 
+import org.mindswap.dto.UserDto;
+
 public interface AdminService {
 
-    void makeManager(Long workerId);
+    UserDto makeManager(Long workerId);
 
-    void makeClient(Long workerId);
+    UserDto makeClient(Long workerId);
 
-    void makeAdmin(Long workerId);
+    UserDto makeAdmin(Long workerId);
 
 }

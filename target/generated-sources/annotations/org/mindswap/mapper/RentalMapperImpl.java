@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-03-24T10:36:59+0000",
+    date = "2023-03-24T12:17:10+0000",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
 )
 @Component
@@ -26,6 +26,7 @@ public class RentalMapperImpl implements RentalMapper {
 
         Rental.RentalBuilder rental = Rental.builder();
 
+        rental.user( rentalDto.getUser() );
         if ( rentalDto.getStartDate() != null ) {
             rental.startDate( LocalDateTime.ofInstant( rentalDto.getStartDate().toInstant(), ZoneOffset.UTC ).toLocalDate() );
         }
@@ -50,6 +51,7 @@ public class RentalMapperImpl implements RentalMapper {
         if ( rental.getEndDate() != null ) {
             rentalDto.endDate( Date.from( rental.getEndDate().atStartOfDay( ZoneOffset.UTC ).toInstant() ) );
         }
+        rentalDto.user( rental.getUser() );
 
         return rentalDto.build();
     }

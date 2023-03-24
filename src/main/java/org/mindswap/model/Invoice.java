@@ -27,7 +27,7 @@ public class Invoice {
     @JoinColumn(name = "rental_ID")
     private Rental rental;
 
-    @ManyToOne(targetEntity = Worker.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = User.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "worker_ID")
-    private Worker worker;
+    private User worker;
 }
