@@ -3,6 +3,7 @@ package org.mindswap.auth;
 import lombok.RequiredArgsConstructor;
 import org.mindswap.model.*;
 import org.mindswap.repository.TokenRepository;
+import org.mindswap.repository.UserRepository;
 import org.mindswap.security.config.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,23 +13,23 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-  private final ClientRepository repository;
+  private final UserRepository repository;
   private final TokenRepository tokenRepository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
 
   public AuthenticationResponse register(RegisterRequest request) {
-    Client client = Client.builder()
+    User user = User.builder()
         .firstName(request.getFirstname())
         .lastName(request.getLastname())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
         .role(Role.CLIENT)
         .build();
-    Client savedClient = repository.save(client);
-    String jwtToken = jwtService.generateToken(client);
-    saveClientToken(savedClient, jwtToken);
+    User savedUser = repository.save(user);
+    String jwtToken = jwtService.generateToken(user);
+    saveClientToken(savedUser, jwtToken);
     return AuthenticationResponse.builder()
         .token(jwtToken)
         .build();
