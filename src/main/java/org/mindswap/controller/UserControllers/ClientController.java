@@ -37,63 +37,65 @@ public class ClientController {
     -----ROLE-----
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String role = auth.getAuthorities().iterator().next().getAuthority();
+
+
+    -------
+    if (role.equals(Role.CLIENT) && !authenticatedClientId.equals(clientId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
      */
 
 
     @GetMapping(path = "")
+    @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<String> welcomeClient() {
         return new ResponseEntity<>("Welcome to Blockbuster, dear client.", HttpStatus.OK);
     }
 
     @GetMapping(path = "/info")
     @PreAuthorize("hasRole('CLIENT')")
-    public ResponseEntity<UserDto> myInfo() {
-
+    public ResponseEntity<UserDto> getMyInfo() {
         Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
         UserDto myInfoDto = clientService.getClientById(authenticatedClientId);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
     }
+
+    @PutMapping(path = "/info")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<String> updateMyInfo(@Valid @RequestBody UserUpdateDto userUpdateDto) {
+        Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
+        clientService.updateClient(authenticatedClientId,userUpdateDto);
+        return new ResponseEntity<>("Your information has been updated.", HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/info")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<String> deleteMyInfo() {
+        Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
+        clientService.deleteClient(authenticatedClientId);
+        return new ResponseEntity<>("Your account have been deleted.", HttpStatus.OK);
+    }
+
+
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<UserDto> getClientInfo(@PathVariable("id") Long clientId) {
         UserDto client = clientService.getClientById(clientId);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
+    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<String> updateClientInfo(@PathVariable("id") Long clientId, @Valid @RequestBody UserUpdateDto userUpdateDto) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String role = auth.getAuthorities().iterator().next().getAuthority();
-        Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
-
-        //If A client tries to access other clients:
-        if (role.equals(Role.CLIENT) && !authenticatedClientId.equals(clientId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
         clientService.updateClient(clientId, userUpdateDto);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>("Updated successfully.", HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<String> deleteClient(@PathVariable("id") Long clientId) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String role = auth.getAuthorities().iterator().next().getAuthority();
-        Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
-
-        //If A client tries to access other clients:
-        if (role.equals(Role.CLIENT) && !authenticatedClientId.equals(clientId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
         clientService.deleteClient(clientId);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
     }
 
@@ -101,18 +103,6 @@ public class ClientController {
     @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<List<UserDto>> getAllClients() {
         List<UserDto> clientList = clientService.getAllClients();
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(clientList, HttpStatus.OK);
     }
-
-/*    @GetMapping(path = "/{id}/update-role")
-    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
-    public ResponseEntity<String> updateClientToWorkerRole(@PathVariable("id") Long clientId, @Valid @RequestBody RoleUpdateDto roleUpdateDto) {
-        clientService.updateClientRole(clientId,roleUpdateDto);
-
-        //TODO: VERIFY THIS METHOD
-        return new ResponseEntity<>("Role updated to worker.", HttpStatus.OK);
-    }*/
-
 }

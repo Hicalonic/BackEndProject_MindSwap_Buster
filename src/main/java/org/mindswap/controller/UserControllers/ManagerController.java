@@ -29,7 +29,7 @@ public class ManagerController {
     }
 
     @GetMapping(path = "")
-    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @PreAuthorize("hasRole('MANAGER')")
     public ResponseEntity<String> welcomeManager() {
         return new ResponseEntity<>("Welcome to Blockbuster, dear manager.", HttpStatus.OK);
     }
@@ -39,49 +39,43 @@ public class ManagerController {
     public ResponseEntity<UserDto> myInfo() {
         Long authenticatedManagerId = Long.valueOf(getAuthenticatedUserId());
         UserDto myInfoDto = managerService.getInfoById(authenticatedManagerId);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/info")
+    @PreAuthorize("hasRole('MANAGER')")
+    public ResponseEntity<String> updateMyInfo(@Valid @RequestBody UserUpdateDto userUpdateDto) {
+        Long authenticatedWManagerId = Long.valueOf(getAuthenticatedUserId());
+        managerService.updateManager(authenticatedWManagerId,userUpdateDto);
+        return new ResponseEntity<>("Your information has been updated.", HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/info")
+    @PreAuthorize("hasRole('MANAGER')")
+    public ResponseEntity<String> deleteMyInfo() {
+        Long authenticatedManagerId = Long.valueOf(getAuthenticatedUserId());
+        managerService.deleteManager(authenticatedManagerId);
+        return new ResponseEntity<>("Your account has been deleted.", HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserDto> getManagerInfo(@PathVariable("id") Long managerId) {
         UserDto manager = managerService.getInfoById(managerId);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(manager, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> updateManagerInfo(@PathVariable("id") Long managerId, @Valid @RequestBody UserUpdateDto userUpdateDto) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String role = auth.getAuthorities().iterator().next().getAuthority();
-        Long authenticatedManagerId = Long.valueOf(getAuthenticatedUserId());
-
-        //If A client tries to access other clients:
-        if (role.equals(Role.MANAGER) && !authenticatedManagerId.equals(managerId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
         managerService.updateManager(managerId, userUpdateDto);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>("Updated successfully.", HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteManager(@PathVariable("id") Long managerId) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String role = auth.getAuthorities().iterator().next().getAuthority();
-        Long authenticatedManagerId = Long.valueOf(getAuthenticatedUserId());
-
-        //If A manager tries to access other clients:
-        if (role.equals(Role.MANAGER) && !authenticatedManagerId.equals(managerId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
         managerService.deleteManager(managerId);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
     }
 
@@ -89,8 +83,6 @@ public class ManagerController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserDto>> getAllManagers() {
         List<UserDto> managersList = managerService.getAllManagers();
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(managersList, HttpStatus.OK);
     }
 }

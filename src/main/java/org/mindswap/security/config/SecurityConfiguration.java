@@ -124,7 +124,6 @@ public class SecurityConfiguration {
                       /worker
                       /manager
                       /admin
-
   */
 
 /*  ---------------- FOURTH IMPLEMENTATION ----------------
