@@ -29,7 +29,7 @@ public class WorkerController {
     }
 
     @GetMapping(path = "")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<String> welcomeWorker() {
         return new ResponseEntity<>("Welcome to Blockbuster, dear worker.", HttpStatus.OK);
     }
@@ -39,51 +39,52 @@ public class WorkerController {
     public ResponseEntity<UserDto> myInfo() {
         Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
         UserDto myInfoDto = workerService.getWorkerById(authenticatedWorkerId);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
     }
+
+    @GetMapping(path = "/info")
+    @PreAuthorize("hasRole('WORKER')")
+    public ResponseEntity<UserDto> getMyInfo() {
+        Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
+        UserDto myInfoDto = workerService.getWorkerById(authenticatedWorkerId);
+        return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/info")
+    @PreAuthorize("hasRole('WORKER')")
+    public ResponseEntity<String> updateMyInfo(@Valid @RequestBody UserUpdateDto userUpdateDto) {
+        Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
+        workerService.updateWorker(authenticatedWorkerId,userUpdateDto);
+        return new ResponseEntity<>("Your information has been updated.", HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/info")
+    @PreAuthorize("hasRole('WORKER')")
+    public ResponseEntity<String> deleteMyInfo() {
+        Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
+        workerService.deleteWorker(authenticatedWorkerId);
+        return new ResponseEntity<>("Your account has been deleted.", HttpStatus.OK);
+    }
+
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
     public ResponseEntity<UserDto> getWorkerInfo(@PathVariable("id") Long workerId) {
         UserDto worker = workerService.getWorkerById(workerId);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(worker, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
     public ResponseEntity<String> updateWorkerInfo(@PathVariable("id") Long workerId, @Valid @RequestBody UserUpdateDto userUpdateDto) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String role = auth.getAuthorities().iterator().next().getAuthority();
-        Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
-
-        //If A client tries to access other clients:
-        if (role.equals(Role.WORKER) && !authenticatedWorkerId.equals(workerId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
         workerService.updateWorker(workerId, userUpdateDto);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>("Updated successfully.", HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
     public ResponseEntity<String> deleteWorker(@PathVariable("id") Long workerId) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String role = auth.getAuthorities().iterator().next().getAuthority();
-        Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
-
-        //If A worker tries to access other clients:
-        if (role.equals(Role.WORKER) && !authenticatedWorkerId.equals(workerId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
         workerService.deleteWorker(workerId);
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
     }
 
@@ -91,18 +92,6 @@ public class WorkerController {
     @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
     public ResponseEntity<List<UserDto>> getAllWorkers() {
         List<UserDto> workersList = workerService.getAllWorkers();
-
-        //TODO: VERIFY THIS METHOD
         return new ResponseEntity<>(workersList, HttpStatus.OK);
     }
-
-    @GetMapping(path = "/{id}/update-role")
-    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
-    public ResponseEntity<String> updateWorkerToManagerRole(@PathVariable("id") Long workerId, @Valid @RequestBody UserUpdateDto userUpdateDto) {
-        workerService.updateWorkerRole(workerId,userUpdateDto);
-
-        //TODO: VERIFY THIS METHOD
-        return new ResponseEntity<>("Role updated to manager.", HttpStatus.OK);
-    }
-
 }
