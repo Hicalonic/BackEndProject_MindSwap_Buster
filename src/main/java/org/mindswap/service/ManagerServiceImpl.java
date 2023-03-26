@@ -1,10 +1,9 @@
 package org.mindswap.service;
 
-import org.mindswap.dtosUser.RoleUpdateDto;
-import org.mindswap.dtosUser.UserManagerDto;
-import org.mindswap.dtosUser.UserManagerUpdateDto;
+import org.mindswap.dto.UserDto;
+import org.mindswap.dto.UserUpdateDto;
 import org.mindswap.exceptions.WorkerNotFoundException;
-import org.mindswap.mappersUser.UserManagerMapper;
+import org.mindswap.mapper.UserMapper;
 import org.mindswap.model.Role;
 import org.mindswap.model.User;
 import org.mindswap.repository.UserRepository;
@@ -17,59 +16,52 @@ import java.util.List;
 public class ManagerServiceImpl implements ManagerService {
 
     private UserRepository userRepository;
-    private UserManagerMapper userManagerMapper;
+    private UserMapper userMapper;
     @Autowired
-    public ManagerServiceImpl(UserRepository userRepository, UserManagerMapper userManagerMapper) {
+    public ManagerServiceImpl(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
-        this.userManagerMapper = userManagerMapper;
-    }
-
-
-    @Override
-    public UserManagerDto getInfo() {
-
-        return null;
+        this.userMapper = userMapper;
     }
 
     @Override
-    public UserManagerDto getInfoById(Long id) {
+    public UserDto getInfoById(Long id) {
         User manager = userRepository.findById(id).orElseThrow(WorkerNotFoundException::new);
-        return userManagerMapper.fromEntityToDto(manager);
+        return userMapper.fromEntityToDto(manager);
     }
 
     @Override
-    public List<UserManagerDto> getAllManagers() {
+    public List<UserDto> getAllManagers() {
         List<User> managers = userRepository.findAll().stream().filter(u -> u.getRole().equals(Role.MANAGER)).toList();
-        return managers.stream().map(m-> userManagerMapper.fromEntityToDto(m)).toList();
+        return managers.stream().map(m-> userMapper.fromEntityToDto(m)).toList();
     }
 
     @Override
-    public UserManagerDto updateManager(Long id, UserManagerUpdateDto userManagerUpdateDto) {
+    public UserDto updateManager(Long id, UserUpdateDto userUpdateDto) {
         User manager = userRepository.findById(id).orElseThrow(WorkerNotFoundException::new);
-        if(userManagerUpdateDto.getFirstName() != null) {
-            manager.setFirstName(userManagerUpdateDto.getFirstName());
+        if(userUpdateDto.getFirstName() != null) {
+            manager.setFirstName(userUpdateDto.getFirstName());
         }
-        if(userManagerUpdateDto.getLastName() != null) {
-            manager.setLastName(userManagerUpdateDto.getLastName());
+        if(userUpdateDto.getLastName() != null) {
+            manager.setLastName(userUpdateDto.getLastName());
         }
-        if(userManagerUpdateDto.getEmail() != null) {
-            manager.setEmail(userManagerUpdateDto.getEmail());
+        if(userUpdateDto.getEmail() != null) {
+            manager.setEmail(userUpdateDto.getEmail());
         }
-        if(userManagerUpdateDto.getRentalList() != null) {
-            manager.setRentalList(userManagerUpdateDto.getRentalList());
-        }
+        /*if(userUpdateDto.getRentalList() != null) {
+            manager.setRentalList(userUpdateDto.getRentalList());
+        }*/
         userRepository.save(manager);
-        return userManagerMapper.fromEntityToDto(manager);
+        return userMapper.fromEntityToDto(manager);
     }
 
-    @Override
-    public void updateManagerRole(Long id, RoleUpdateDto roleUpdateDto) {
+/*    @Override
+    public void updateManagerRole(Long id, UserUpdateDto userUpdateDto) {
         User manager = userRepository.findById(id).orElseThrow(WorkerNotFoundException::new);
-        if(roleUpdateDto.getRole() != null) {
-            manager.setRole(roleUpdateDto.getRole());
+        if(userUpdateDto.getRole() != null) {
+            manager.setRole(userUpdateDto.getRole());
         }
         userRepository.save(manager);
-    }
+    }*/
     @Override
     public void deleteManager(Long id) {
         User manager = userRepository.findById(id).orElseThrow(WorkerNotFoundException::new);

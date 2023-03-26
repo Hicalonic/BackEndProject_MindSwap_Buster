@@ -2,8 +2,8 @@ package org.mindswap.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.mindswap.model.Client;
 import org.mindswap.model.Movie;
+import org.mindswap.model.User;
 
 import java.util.Date;
 import java.util.List;
@@ -21,7 +21,7 @@ public class RentalCreateDto {
     private Date endDate;
 
     @NotBlank(message = "Needs a costumer")
-    private Client client;
+    private User client;
 
     @NotBlank(message = "Needs movies")
     private List<Movie> movieList;

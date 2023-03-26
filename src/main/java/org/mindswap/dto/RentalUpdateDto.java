@@ -1,8 +1,8 @@
 package org.mindswap.dto;
 
 import lombok.*;
-import org.mindswap.model.Client;
 import org.mindswap.model.Movie;
+import org.mindswap.model.User;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +18,7 @@ public class RentalUpdateDto {
 
     private LocalDate endDate;
 
-    private Client client;
+    private User client;
 
     private List<Movie> movieList;
 }

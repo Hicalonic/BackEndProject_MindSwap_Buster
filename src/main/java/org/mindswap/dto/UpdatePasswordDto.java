@@ -12,6 +12,7 @@ import org.junit.experimental.theories.DataPoints;
 @AllArgsConstructor
 public class UpdatePasswordDto {
 
+    private String email;
     private String password;
     private String newPassword;
 }

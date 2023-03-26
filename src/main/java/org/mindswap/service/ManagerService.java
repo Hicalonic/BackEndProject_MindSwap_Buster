@@ -1,22 +1,21 @@
 package org.mindswap.service;
 
-import org.mindswap.dtosUser.RoleUpdateDto;
-import org.mindswap.dtosUser.UserManagerDto;
-import org.mindswap.dtosUser.UserManagerUpdateDto;
-import org.mindswap.model.User;
+
+
+import org.mindswap.dto.UserDto;
+import org.mindswap.dto.UserUpdateDto;
 
 import java.util.List;
 
 public interface ManagerService {
 
-    public UserManagerDto getInfo();
-    public UserManagerDto getInfoById(Long id);
+    public UserDto getInfoById(Long id);
 
-    public List<UserManagerDto> getAllManagers();
+    public List<UserDto> getAllManagers();
 
-    public UserManagerDto updateManager(Long id, UserManagerUpdateDto userManagerUpdateDto);
+    public UserDto updateManager(Long id, UserUpdateDto userUpdateDto);
 
-    void updateManagerRole(Long id, RoleUpdateDto roleUpdateDto);
+    //void updateManagerRole(Long id, UserUpdateDto userUpdateDto);
 
     public void deleteManager(Long id);
 

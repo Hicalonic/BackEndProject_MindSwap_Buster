@@ -24,10 +24,10 @@ public class Invoice {
     private double price;
 
     @OneToOne(mappedBy = "invoice")
-    @JoinColumn(name = "rental_id")
+    @JoinColumn(name = "rental_ID")
     private Rental rental;
 
-    @ManyToOne(targetEntity = Worker.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "worker_id")
-    private Worker worker;
+    @ManyToOne(targetEntity = User.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "worker_ID")
+    private User worker;
 }

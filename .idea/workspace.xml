@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="- Semi working - updated">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Invoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Invoice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Invoice.class" afterDir="false" />
+    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="changed token from email to user">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/TokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/TokenRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/auth/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/auth/AuthenticationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Token$TokenBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Token$TokenBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Token.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Token.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +61,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.SecurityApplication">
+  <component name="RunManager" selected="Application.MovieApplication">
     <configuration name="MovieApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.mindswap.MovieApplication" />
       <module name="backend_project" />
@@ -89,8 +90,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SecurityApplication" />
         <item itemvalue="Application.MovieApplication" />
+        <item itemvalue="Application.SecurityApplication" />
         <item itemvalue="Application.SecurityApplication" />
         <item itemvalue="Application.MovieApplication" />
         <item itemvalue="Application.SecurityApplication" />
@@ -162,7 +163,49 @@
       <option name="project" value="LOCAL" />
       <updated>1679615555113</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Deleted extra Dtos, added user Dto">
+      <created>1679658097159</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679658097159</updated>
+    </task>
+    <task id="LOCAL-00010" summary="deleted worker and client classes and repos">
+      <created>1679658232161</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679658232161</updated>
+    </task>
+    <task id="LOCAL-00011" summary="deleted security app">
+      <created>1679658368745</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679658368745</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixed manager Service and impl">
+      <created>1679658820981</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1679658820981</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fixed controllers, deleted stuff that wasnt needed">
+      <created>1679660456488</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1679660456488</updated>
+    </task>
+    <task id="LOCAL-00014" summary="changed token from email to user">
+      <created>1679840894153</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1679840894153</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,6 +228,13 @@
     <MESSAGE value="- ClientController updated" />
     <MESSAGE value="- WorkerController updated" />
     <MESSAGE value="- Controllers updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Controllers updated" />
+    <MESSAGE value="Deleted extra Dtos, added user Dto" />
+    <MESSAGE value="deleted worker and client classes" />
+    <MESSAGE value="deleted worker and client classes and repos" />
+    <MESSAGE value="deleted security app" />
+    <MESSAGE value="fixed manager Service and impl" />
+    <MESSAGE value="fixed controllers, deleted stuff that wasnt needed" />
+    <MESSAGE value="changed token from email to user" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed token from email to user" />
   </component>
 </project>

@@ -1,11 +1,10 @@
 package org.mindswap.service;
 
-import org.mindswap.dtosUser.UserWorkerCreateDto;
-import org.mindswap.dtosUser.UserWorkerDto;
-import org.mindswap.dtosUser.UserWorkerUpdateDto;
-import org.mindswap.dtosUser.RoleUpdateDto;
+import org.mindswap.dto.UserCreateDto;
+import org.mindswap.dto.UserDto;
+import org.mindswap.dto.UserUpdateDto;
 import org.mindswap.exceptions.WorkerNotFoundException;
-import org.mindswap.mappersUser.UserWorkerMapper;
+import org.mindswap.mapper.UserMapper;
 import org.mindswap.model.User;
 import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,61 +14,60 @@ import java.util.List;
 
 @Service
 public class WorkerServiceImpl implements WorkerService {
-    private UserWorkerMapper userWorkerMapper;
+    private UserMapper userMapper;
     private UserRepository userRepository;
 
     @Autowired
-    public WorkerServiceImpl(UserWorkerMapper userWorkerMapper,UserRepository userRepository) {
-        this.userWorkerMapper = userWorkerMapper;
+    public WorkerServiceImpl(UserMapper userMapper, UserRepository userRepository) {
+        this.userMapper = userMapper;
         this.userRepository = userRepository;
     }
 
     @Override
-    public UserWorkerDto createWorker(UserWorkerCreateDto userWorkercreateDto) {
-        User user = userWorkerMapper.fromCreateDtoToEntity(userWorkercreateDto);
+    public UserDto createWorker(UserCreateDto userCreateDto) {
+        User user = userMapper.fromCreateDtoToEntity(userCreateDto);
         userRepository.save(user);
-        return userWorkerMapper.fromEntityToDto(user);
+        return userMapper.fromEntityToDto(user);
     }
 
     @Override
-    public UserWorkerDto getWorkerById(Long workerId) {
+    public UserDto getWorkerById(Long workerId) {
         User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
-        return userWorkerMapper.fromEntityToDto(user);
+        return userMapper.fromEntityToDto(user);
     }
 
     @Override
-    public List<UserWorkerDto> getAllWorkers() {
-        return userRepository.findAll().stream().map(w -> userWorkerMapper.fromEntityToDto(w)).toList();
+    public List<UserDto> getAllWorkers() {
+        return userRepository.findAll().stream().map(w -> userMapper.fromEntityToDto(w)).toList();
 
     }
 
-
     @Override
-    public UserWorkerDto updateWorker(Long workerId, UserWorkerUpdateDto userWorkerUpdateDto) {
+    public UserDto updateWorker(Long workerId, UserUpdateDto userUpdateDto) {
         User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
-        if (userWorkerUpdateDto.getFirstName() != null) {
-            user.setFirstName(userWorkerUpdateDto.getFirstName());
+        if (userUpdateDto.getFirstName() != null) {
+            user.setFirstName(userUpdateDto.getFirstName());
         }
-        if (userWorkerUpdateDto.getLastName() != null) {
-            user.setLastName(userWorkerUpdateDto.getLastName());
+        if (userUpdateDto.getLastName() != null) {
+            user.setLastName(userUpdateDto.getLastName());
         }
-        if (userWorkerUpdateDto.getEmail() != null) {
-            user.setEmail(userWorkerUpdateDto.getEmail());
+        if (userUpdateDto.getEmail() != null) {
+            user.setEmail(userUpdateDto.getEmail());
         }
 
         userRepository.save(user);
-        return userWorkerMapper.fromEntityToDto(user);
+        return userMapper.fromEntityToDto(user);
     }
 
     @Override
-    public void updateWorkerRole(Long workerId, RoleUpdateDto roleUpdateDto) {
+    public void updateWorkerRole(Long workerId, UserUpdateDto userUpdateDto) {
         User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
-        if(roleUpdateDto.getRole() != null) {
-            user.setRole(roleUpdateDto.getRole());
+        User userToUpdate = userMapper.fromUpdateDtoToEntity(userUpdateDto);
+        if (userToUpdate.getRole() != null) {
+            user.setRole(userToUpdate.getRole());
         }
         userRepository.save(user);
     }
-
 
     @Override
     public void deleteWorker(Long workerID) {
