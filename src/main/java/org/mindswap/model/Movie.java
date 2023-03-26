@@ -6,6 +6,8 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -31,9 +33,10 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private MovieGenre movieGenre;
 
-    @ManyToOne
-    @JoinColumn(name = "rental")
-    private Rental rental;
+    @ManyToMany(targetEntity = Rental.class)
+    @JoinColumn(name = "rental_id")
+    private List<Rental> rentals;
+
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
 

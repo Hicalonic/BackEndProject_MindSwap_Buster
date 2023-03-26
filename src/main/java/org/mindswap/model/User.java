@@ -46,9 +46,14 @@ public class User implements UserDetails {
     @OneToMany
     private List<Rental> rentalList;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Token> tokens;
+
+    @ManyToMany(targetEntity = Store.class)
+    private List<Store> stores;
+
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -34,8 +34,8 @@ public class Rental {
     @Column(nullable = false)
     private LocalDate endDate;
 
-    @OneToMany(targetEntity = Movie.class)
-    @JoinColumn(name = "movies_rented")
+    @ManyToMany(targetEntity = Rental.class)
+    @JoinColumn(name = "movies_id")
     private List<Movie> moviesRented;
 
     @OneToOne
