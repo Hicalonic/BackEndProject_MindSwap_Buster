@@ -18,7 +18,7 @@ public interface InvoiceService {
     List<InvoiceDto> getAllClientInvoices(Long clientId);
     InvoiceDto createInvoice(InvoiceCreateDto invoiceCreateDto);
 
-    public List<InvoiceDto> getSpecificClientInvoices (Long clientId);
+
 
     //return html page with invoice details
 
