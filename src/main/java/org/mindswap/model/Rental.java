@@ -26,14 +26,18 @@ public class Rental {
 
     @JoinColumn(name = "user_id")
     @ManyToOne(targetEntity = User.class)
-    private User user ;
+    private User user;
+
     @Column(nullable = false)
     private LocalDate startDate;
+
     @Column(nullable = false)
     private LocalDate endDate;
+
     @OneToMany(targetEntity = Movie.class)
     @JoinColumn(name = "movies_rented")
     private List<Movie> moviesRented;
+
     @OneToOne
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;

@@ -24,6 +24,6 @@ public class Token {
     public boolean revoked;
     public boolean expired;
 
-    @Column(name = "user_email")
-    public String email;
+    @Column(name = "user_id")
+    public User user;
 }
