@@ -1,10 +1,13 @@
 package org.mindswap.service;
 
+import org.mindswap.dto.InvoiceCreateDto;
 import org.mindswap.dto.InvoiceDto;
+import org.mindswap.dto.RentalDto;
 import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.exceptions.InvoiceNotFoundException;
 import org.mindswap.mapper.InvoiceMapper;
 import org.mindswap.model.Invoice;
+import org.mindswap.model.Rental;
 import org.mindswap.model.User;
 import org.mindswap.repository.InvoiceRepository;
 import org.mindswap.repository.UserRepository;
@@ -22,27 +25,65 @@ public class InvoiceServiceImpl implements InvoiceService{
 
     private UserRepository userRepository;
 
+    private RentalService rentalService;
+
     @Autowired
-    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, InvoiceMapper invoiceMapper, UserRepository userRepository) {
+    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, InvoiceMapper invoiceMapper,
+                              UserRepository userRepository, RentalService rentalService) {
         this.invoiceRepository = invoiceRepository;
         this.invoiceMapper = invoiceMapper;
         this.userRepository = userRepository;
+        this.rentalService = rentalService;
+
     }
 
 
 
 
     @Override
-    public InvoiceDto getSpecificInvoice(Long invoiceID)  {
-      Invoice invoice = invoiceRepository.findById(invoiceID).orElseThrow(InvoiceNotFoundException::new);
+    public RentalDto getSpecificInvoice(Long invoiceId, Long clientId)  {
+        Invoice invoice = invoiceRepository.findById(invoiceId).orElseThrow(InvoiceNotFoundException::new);
+        Rental rental =  rentalService.getRentalByInvoiceId(invoiceId);
+        return rentalService.getRentalById(rental.getId());
+
+    }
+
+    @Override
+    public InvoiceDto getInvoiceById(Long id) {
+        Invoice invoice = invoiceRepository.findById(id).orElseThrow(InvoiceNotFoundException::new);
         return invoiceMapper.fromEntityToDto(invoice);
     }
 
     @Override
-    public List<InvoiceDto> getSpecificClientInvoices(Long clientId) {
-            User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
-            List<Invoice> invoiceList = new ArrayList<>();
-            user.getRentalList().forEach(r -> invoiceList.add(r.getInvoice()));
-            return invoiceList.stream().map(i-> invoiceMapper.fromEntityToDto(i)).toList();
+    public void deleteInvoiceById(Long id) {
+        Invoice invoice = invoiceRepository.findById(id).orElseThrow(InvoiceNotFoundException::new);
+        invoiceRepository.delete(invoice);
     }
+
+
+    @Override
+    public List<InvoiceDto> getAllClientInvoices(Long clientId) {
+        User client = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+        List<Invoice> invoiceList = new ArrayList<>();
+        client.getRentalList().forEach(r -> invoiceList.add(r.getInvoice()));
+        return invoiceList.stream().map(i-> invoiceMapper.fromEntityToDto(i)).toList();
+    }
+
+    @Override
+    public InvoiceDto createInvoice(InvoiceCreateDto invoiceCreateDto) {
+        Invoice invoice = invoiceRepository.save(invoiceMapper.fromCreateDtoToEntity(invoiceCreateDto));
+        return invoiceMapper.fromEntityToDto(invoice);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }

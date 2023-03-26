@@ -1,6 +1,8 @@
 package org.mindswap.service;
 
+import org.mindswap.dto.InvoiceCreateDto;
 import org.mindswap.dto.InvoiceDto;
+import org.mindswap.dto.RentalDto;
 import org.mindswap.repository.InvoiceRepository;
 
 import java.util.List;
@@ -8,7 +10,14 @@ import java.util.List;
 public interface InvoiceService {
 
 
-    public InvoiceDto getSpecificInvoice (Long invoiceID);
+    RentalDto getSpecificInvoice(Long invoiceId, Long clientId);
+
+    InvoiceDto getInvoiceById(Long id);
+
+    void deleteInvoiceById(Long id);
+    List<InvoiceDto> getAllClientInvoices(Long clientId);
+    InvoiceDto createInvoice(InvoiceCreateDto invoiceCreateDto);
+
     public List<InvoiceDto> getSpecificClientInvoices (Long clientId);
 
     //return html page with invoice details
