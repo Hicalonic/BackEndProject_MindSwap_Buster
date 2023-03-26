@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="rental controller finished(maybe? hopefully?)">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/RentalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/RentalRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/InvoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/InvoiceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/InvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/InvoiceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/RentalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/RentalService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/RentalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/RentalServiceImpl.java" afterDir="false" />
-    </list>
+    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,8 +92,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SecurityApplication" />
         <item itemvalue="Application.MovieApplication" />
+        <item itemvalue="Application.SecurityApplication" />
         <item itemvalue="Application.MovieApplication" />
         <item itemvalue="Application.SecurityApplication" />
         <item itemvalue="Application.SecurityApplication" />
@@ -241,7 +235,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679847639822</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="invoice controller and service">
+      <created>1679859273540</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1679859273540</updated>
+    </task>
+    <task id="LOCAL-00020" summary="rental controller finished(maybe? hopefully?).">
+      <created>1679859402365</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1679859402365</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -274,6 +282,8 @@
     <MESSAGE value="user store  relations working;&#10;Movies Rental relations WIP" />
     <MESSAGE value="database structure FULLY implemented" />
     <MESSAGE value="rental controller finished(maybe? hopefully?)" />
-    <option name="LAST_COMMIT_MESSAGE" value="rental controller finished(maybe? hopefully?)" />
+    <MESSAGE value="invoice controller and service" />
+    <MESSAGE value="rental controller finished(maybe? hopefully?)." />
+    <option name="LAST_COMMIT_MESSAGE" value="rental controller finished(maybe? hopefully?)." />
   </component>
 </project>
