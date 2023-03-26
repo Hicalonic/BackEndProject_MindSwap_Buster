@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="rental controller finished(maybe? hopefully?)" />
+    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="- WorkerController updated">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserClientCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserClientCreateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/MovieApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/MovieApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/auth/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/auth/AuthenticationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/controller/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/controller/MovieController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental$RentalBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental$RentalBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/SecurityConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/SecurityConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/InvoiceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/InvoiceServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/RentalServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/RentalServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/StoreServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/StoreServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerServiceImpl.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -150,84 +170,7 @@
       <option name="project" value="LOCAL" />
       <updated>1679605038800</updated>
     </task>
-    <task id="LOCAL-00008" summary="- Controllers updated">
-      <created>1679615555113</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1679615555113</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Deleted extra Dtos, added user Dto">
-      <created>1679658097159</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1679658097159</updated>
-    </task>
-    <task id="LOCAL-00010" summary="deleted worker and client classes and repos">
-      <created>1679658232161</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1679658232161</updated>
-    </task>
-    <task id="LOCAL-00011" summary="deleted security app">
-      <created>1679658368745</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1679658368745</updated>
-    </task>
-    <task id="LOCAL-00012" summary="fixed manager Service and impl">
-      <created>1679658820981</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1679658820981</updated>
-    </task>
-    <task id="LOCAL-00013" summary="fixed controllers, deleted stuff that wasnt needed">
-      <created>1679660456488</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1679660456488</updated>
-    </task>
-    <task id="LOCAL-00014" summary="changed token from email to user">
-      <created>1679840894153</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1679840894153</updated>
-    </task>
-    <task id="LOCAL-00015" summary="changed token from email to user">
-      <created>1679841278432</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1679841278432</updated>
-    </task>
-    <task id="LOCAL-00016" summary="user store  relations working;&#10;Movies Rental relations WIP">
-      <created>1679843691119</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1679843691119</updated>
-    </task>
-    <task id="LOCAL-00017" summary="database structure FULLY implemented">
-      <created>1679844360612</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1679844360612</updated>
-    </task>
-    <task id="LOCAL-00018" summary="rental controller finished(maybe? hopefully?)">
-      <created>1679847639822</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1679847639822</updated>
-    </task>
-    <option name="localTasksCounter" value="19" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -249,17 +192,6 @@
     <MESSAGE value="- ClientController updateded" />
     <MESSAGE value="- ClientController updated" />
     <MESSAGE value="- WorkerController updated" />
-    <MESSAGE value="- Controllers updated" />
-    <MESSAGE value="Deleted extra Dtos, added user Dto" />
-    <MESSAGE value="deleted worker and client classes" />
-    <MESSAGE value="deleted worker and client classes and repos" />
-    <MESSAGE value="deleted security app" />
-    <MESSAGE value="fixed manager Service and impl" />
-    <MESSAGE value="fixed controllers, deleted stuff that wasnt needed" />
-    <MESSAGE value="changed token from email to user" />
-    <MESSAGE value="user store  relations working;&#10;Movies Rental relations WIP" />
-    <MESSAGE value="database structure FULLY implemented" />
-    <MESSAGE value="rental controller finished(maybe? hopefully?)" />
-    <option name="LAST_COMMIT_MESSAGE" value="rental controller finished(maybe? hopefully?)" />
+    <option name="LAST_COMMIT_MESSAGE" value="- WorkerController updated" />
   </component>
 </project>
