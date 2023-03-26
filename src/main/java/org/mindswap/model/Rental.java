@@ -6,7 +6,9 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,9 +36,11 @@ public class Rental {
     @Column(nullable = false)
     private LocalDate endDate;
 
-    @OneToMany(targetEntity = Movie.class)
-    @JoinColumn(name = "movies_rented")
-    private List<Movie> moviesRented;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "rental_movies",
+            joinColumns = @JoinColumn(name = "rental_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+    private Set<Movie> movies = new HashSet<>();
 
     @OneToOne
     @JoinColumn(name = "invoice_id")

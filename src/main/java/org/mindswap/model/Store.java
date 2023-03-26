@@ -34,6 +34,10 @@ public class Store {
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
 
+    @OneToMany(targetEntity = User.class)
+    @JoinColumn(name = "worker_id")
+    private List<User> workers;
+
 /*    @Column(nullable = false)
     @OneToMany(mappedBy = "store")
     private List<User> employeesList;*/
