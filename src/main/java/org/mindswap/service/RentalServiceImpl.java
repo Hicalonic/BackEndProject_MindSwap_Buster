@@ -68,9 +68,9 @@ public class RentalServiceImpl implements RentalService {
         if(rentalUpdateDto.getEndDate() != null) {
             rental.setEndDate(rentalUpdateDto.getEndDate());
         }
-        if(rentalUpdateDto.getMovieList() != null) {
+        /*if(rentalUpdateDto.getMovieList() != null) {
             rental.setMoviesRented(rentalUpdateDto.getMovieList());
-        }
+        }*/
         rentalRepository.save(rental);
         return rentalMapper.fromEntityToDto(rental);
 

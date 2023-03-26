@@ -6,7 +6,9 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -33,9 +35,8 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private MovieGenre movieGenre;
 
-    @ManyToMany(targetEntity = Rental.class)
-    @JoinColumn(name = "rental_id")
-    private List<Rental> rentals;
+    @ManyToMany(mappedBy = "movies")
+    private Set<Rental> rentals = new HashSet<>();
 
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
