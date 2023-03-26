@@ -1,4 +1,4 @@
-package org.mindswap.controller.UserControllers;
+package org.mindswap.controller;
 
 import org.mindswap.dto.InvoiceCreateDto;
 import org.mindswap.dto.InvoiceDto;
