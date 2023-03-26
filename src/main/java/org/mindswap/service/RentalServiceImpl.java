@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @Service
 public class RentalServiceImpl implements RentalService {
 
@@ -80,5 +83,29 @@ public class RentalServiceImpl implements RentalService {
     public void deleteRental(Long rentalId) {
         Rental rental = rentalRepository.findById(rentalId).orElseThrow(RentalNotFoundException::new);
         rentalRepository.delete(rental);
+    }
+
+    @Override
+    public List<RentalDto> getAllRentalsByClientId(Long clientId) {
+        List<Rental> allUserRental = rentalRepository.findAll();
+        List<RentalDto> allUserRentalDto =new ArrayList<>();
+        for (Rental rental :
+                allUserRental) {
+            allUserRentalDto.add(rentalMapper.fromEntityToDto(rental));
+            }
+
+        allUserRentalDto.removeIf(rentalDto -> !Objects.equals(rentalDto.getUser().getId(), clientId));
+        return allUserRentalDto;
+    }
+
+    @Override
+    public List<RentalDto> getAllRentalsByClientIdJpa(Long clientId) {
+        List<Rental> rentals = rentalRepository.findByUser(userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new));
+        List<RentalDto> rentalDtos = new ArrayList<>();
+        for (Rental rental :
+                rentals) {
+            rentalDtos.add(rentalMapper.fromEntityToDto(rental));
+        }
+        return rentalDtos;
     }
 }

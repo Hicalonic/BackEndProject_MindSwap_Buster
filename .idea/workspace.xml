@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="user store  relations working;&#10;Movies Rental relations WIP">
+    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="database structure FULLY implemented">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/RentalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/MovieApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/MovieApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Rental.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/model/Rental.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/RentalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/repository/RentalRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/RentalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/RentalService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/RentalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/RentalServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Movie$MovieBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Movie$MovieBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Movie.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental$RentalBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental$RentalBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Store$StoreBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Store$StoreBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Store.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Store.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/RentalServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/RentalServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679843691119</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="database structure FULLY implemented">
+      <created>1679844360612</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1679844360612</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -257,6 +259,7 @@
     <MESSAGE value="fixed controllers, deleted stuff that wasnt needed" />
     <MESSAGE value="changed token from email to user" />
     <MESSAGE value="user store  relations working;&#10;Movies Rental relations WIP" />
-    <option name="LAST_COMMIT_MESSAGE" value="user store  relations working;&#10;Movies Rental relations WIP" />
+    <MESSAGE value="database structure FULLY implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="database structure FULLY implemented" />
   </component>
 </project>

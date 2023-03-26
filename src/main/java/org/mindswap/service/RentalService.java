@@ -15,6 +15,8 @@ public interface RentalService {
     List<RentalDto> getAllRentals();
     RentalDto updateRental(Long rentalId, RentalUpdateDto rentalUpdateDto);
     void deleteRental(Long rentalId);
+    List<RentalDto> getAllRentalsByClientId(Long clientId);
+    List<RentalDto> getAllRentalsByClientIdJpa(Long clientId);
 
 
 }

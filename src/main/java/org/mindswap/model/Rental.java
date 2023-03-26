@@ -45,6 +45,4 @@ public class Rental {
     @OneToOne
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
-
-
 }
