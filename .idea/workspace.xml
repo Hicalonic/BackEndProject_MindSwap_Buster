@@ -5,25 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="- WorkerController updated">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/utils/QRCodeGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserClientCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/dtosUser/UserClientCreateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/MovieApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/MovieApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/auth/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/auth/AuthenticationService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/controller/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/controller/MovieController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental$RentalBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental$RentalBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/model/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/JwtAuthenticationFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/SecurityConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/security/config/SecurityConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/ClientServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/InvoiceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/InvoiceServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/MovieServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/RentalServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/RentalServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/StoreServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/StoreServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/service/WorkerServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +21,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/dev_branch_miguel" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
