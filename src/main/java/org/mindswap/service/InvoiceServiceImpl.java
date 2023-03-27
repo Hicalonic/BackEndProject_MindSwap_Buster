@@ -75,15 +75,10 @@ public class InvoiceServiceImpl implements InvoiceService{
         return invoiceMapper.fromEntityToDto(invoice);
     }
 
-
-
-
-
-
-
-
-
-
+    @Override
+    public List<InvoiceDto> getAllInvoices() {
+        return invoiceRepository.findAll().stream().map(i -> invoiceMapper.fromEntityToDto(i)).toList();
+    }
 
 
 }

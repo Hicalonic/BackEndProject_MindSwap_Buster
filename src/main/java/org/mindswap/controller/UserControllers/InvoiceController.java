@@ -5,6 +5,7 @@ import org.mindswap.dto.InvoiceDto;
 import org.mindswap.dto.RentalDto;
 import org.mindswap.model.Role;
 import org.mindswap.service.InvoiceService;
+import org.mindswap.utils.QRCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,11 @@ import static org.mindswap.security.config.JwtAuthenticationFilter.getAuthentica
 public class InvoiceController {
 
     private InvoiceService invoiceService;
+    private QRCodeGenerator qrCodeGenerator;
     @Autowired
-    public InvoiceController(InvoiceService invoiceService) {
+    public InvoiceController(InvoiceService invoiceService, QRCodeGenerator qrCodeGenerator) {
         this.invoiceService = invoiceService;
+        this.qrCodeGenerator = qrCodeGenerator;
     }
     @GetMapping(path = "/{invoice_id}")
     public ResponseEntity<InvoiceDto> getSpecificInvoice(@PathVariable("invoice_id") Long invoiceId) {
@@ -43,8 +46,21 @@ public class InvoiceController {
 //        return new ResponseEntity<>(invoiceService.getInvoiceById(id),HttpStatus.OK);
 //    }
 
+    @GetMapping(path = "/all")
+    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    public ResponseEntity<List<InvoiceDto>> getAllInvoices(){
+        List<InvoiceDto> invoiceDtos = invoiceService.getAllInvoices();
+        if(invoiceDtos.size() != 0){
+            for (InvoiceDto invoiceDto :
+                 invoiceDtos) {
+                qrCodeGenerator.generateQRCode(invoiceDto);
+            }
+        }
+        return new ResponseEntity<>(invoiceDtos, HttpStatus.OK);
+    }
+
     @GetMapping(path = "all/client/{id}")
-    public ResponseEntity <List<InvoiceDto>> getAllInvoice(@PathVariable("{id}") Long clientId) {
+    public ResponseEntity <List<InvoiceDto>> getAllInvoicesPerClient(@PathVariable("{id}") Long clientId) {
         return new ResponseEntity<>(invoiceService.getAllClientInvoices(clientId), HttpStatus.OK);
     }
 
