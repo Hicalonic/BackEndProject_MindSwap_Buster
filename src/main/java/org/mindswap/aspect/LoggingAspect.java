@@ -32,7 +32,7 @@ public class LoggingAspect {
         logger.error("Exception: " + exception);
     }
 
-    @Before("execution(* org.mindswap.service.LogoutService.*(..))")
+    @Before("execution(* org.mindswap.security.config.LogoutService.*(..))")
     public void logBeforeLogout(JoinPoint joinPoint){
         logger.info("Before " + joinPoint.getSignature().getName() + " method call");
     }

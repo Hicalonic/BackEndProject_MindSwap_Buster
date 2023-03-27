@@ -46,9 +46,4 @@ public class Movie {
 
 
 
-
-    //avg rating
-
-    //total number of votes
-
 }

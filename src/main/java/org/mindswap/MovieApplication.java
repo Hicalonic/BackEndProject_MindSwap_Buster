@@ -13,9 +13,3 @@ public class MovieApplication {
     }
 }
 
-//todo @data nas anotacoes lombok
-//todo controllers
-//todo meter email e role no token
-//todo swagger
-
-//todo junçao com a outra API
