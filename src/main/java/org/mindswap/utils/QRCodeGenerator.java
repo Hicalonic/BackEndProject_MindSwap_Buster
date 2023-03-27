@@ -10,11 +10,14 @@ import org.mindswap.dto.InvoiceDto;
 import org.mindswap.mapper.InvoiceMapper;
 import org.mindswap.model.Invoice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
+@Component
 public class QRCodeGenerator {
 
     InvoiceMapper invoiceMapper;

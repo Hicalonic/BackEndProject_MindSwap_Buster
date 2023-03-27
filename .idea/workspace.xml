@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/mapper/InvoiceMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/mapper/InvoiceMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/InvoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/InvoiceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/service/InvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/service/InvoiceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/utils/QRCodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/utils/QRCodeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev_Reina" />
+        <entry key="$PROJECT_DIR$" value="draftBranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -65,14 +60,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.MovieApplication">
     <configuration name="MovieApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.mindswap.MovieApplication" />
@@ -106,7 +104,7 @@
         <item itemvalue="Application.SecurityApplication" />
         <item itemvalue="Application.MovieApplication" />
         <item itemvalue="Application.SecurityApplication" />
-        <item itemvalue="Application.SecurityApplication" />
+        <item itemvalue="Application.MovieApplication" />
       </list>
     </recent_temporary>
   </component>
