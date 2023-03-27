@@ -1,4 +1,4 @@
-package org.mindswap.controller.UserControllers;
+package org.mindswap.controller;
 
 import org.mindswap.dto.InvoiceCreateDto;
 import org.mindswap.dto.InvoiceDto;
@@ -24,11 +24,13 @@ public class InvoiceController {
 
     private InvoiceService invoiceService;
     private QRCodeGenerator qrCodeGenerator;
+
     @Autowired
     public InvoiceController(InvoiceService invoiceService, QRCodeGenerator qrCodeGenerator) {
         this.invoiceService = invoiceService;
         this.qrCodeGenerator = qrCodeGenerator;
     }
+
     @GetMapping(path = "/{invoice_id}")
     public ResponseEntity<InvoiceDto> getSpecificInvoice(@PathVariable("invoice_id") Long invoiceId) {
         Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
@@ -74,11 +76,12 @@ public class InvoiceController {
     public ResponseEntity<Object> getQrCode(@PathVariable("id") Long invoiceId) {
         return null;
     }
+
     @GetMapping(path = "{id}/pdf")
     public ResponseEntity<Object> getPdf(@PathVariable("id")Long invoiceId) {
         return null;
-
     }
+
     @GetMapping(path = "{id}/email")
     public ResponseEntity<Object> getEmail(@PathVariable("id")Long invoiceId) {
         return null;
@@ -89,12 +92,5 @@ public class InvoiceController {
 
         invoiceService.deleteInvoiceById(invoiceId);
         return new ResponseEntity<>("Invoice has been deleted",HttpStatus.OK);
-
     }
-
-
-
-
-
-
 }
