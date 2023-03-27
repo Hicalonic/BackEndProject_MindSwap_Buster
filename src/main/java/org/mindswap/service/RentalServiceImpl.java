@@ -108,4 +108,9 @@ public class RentalServiceImpl implements RentalService {
         }
         return rentalDtos;
     }
+
+    @Override
+    public Rental getRentalByInvoiceId(Long invoiceId) {
+      return  rentalRepository.findByInvoiceId(invoiceId);
+    }
 }

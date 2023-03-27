@@ -54,6 +54,8 @@ public class AuthenticationService {
 
   private void saveUserToken(User user, String jwtToken) {
     Token token = Token.builder()
+            .role(user.getRole())
+            .email(user.getUsername())
             .user(user)
         .token(jwtToken)
         .tokenType(TokenType.BEARER)
