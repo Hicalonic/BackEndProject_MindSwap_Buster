@@ -19,7 +19,7 @@ import static org.mindswap.security.config.JwtAuthenticationFilter.getAuthentica
 
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/admin")
 public class AdminController {
 
     AdminService adminService;
@@ -30,7 +30,7 @@ public class AdminController {
     }
 
     @PutMapping(path = "/{id}/make_admin")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDto> makeAdmin(@PathVariable("{id}") Long id) {
         Long userId = id;
         UserDto updatedUser = adminService.makeAdmin(userId);
@@ -39,7 +39,7 @@ public class AdminController {
     }
 
     @PutMapping(path = "/{id}/make_manager")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDto> makeManager(@PathVariable("{id}") Long id) {
         Long userId = id;
         UserDto updatedUser = adminService.makeAdmin(userId);
@@ -47,7 +47,7 @@ public class AdminController {
     }
 
     @PutMapping(path = "/{id}/make_worker")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDto> makeWorker(@PathVariable("{id}") Long id) {
         Long userId = id;
         UserDto updatedUser = adminService.makeAdmin(userId);

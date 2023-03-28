@@ -25,6 +25,7 @@ public class RentalController {
     @PreAuthorize("hasAnyRole('WORKER', 'MANAGER','ADMIN')")
     public ResponseEntity<RentalDto> createRental(@RequestBody RentalCreateDto rentalCreateDto) {
         return new ResponseEntity<>(rentalService.createRental(rentalCreateDto), HttpStatus.CREATED);
+
     }
 
     @GetMapping(path = "/{id}")
@@ -51,4 +52,5 @@ public class RentalController {
         Long clientId = id;
         return new ResponseEntity<>(rentalService.getAllRentalsByClientIdJpa(clientId), HttpStatus.OK);
     }
+
 }

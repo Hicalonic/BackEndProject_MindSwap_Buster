@@ -25,34 +25,36 @@ public class MovieController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
     public ResponseEntity<MovieDto> createMovie(@RequestBody MovieCreateDto movieCreateDto) {
         return new ResponseEntity<>(movieService.createMovie(movieCreateDto), HttpStatus.CREATED);
     }
 
     @GetMapping(path = "{id}")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<MovieDto> getMovieById(@PathVariable("{id}")Long id) {
         return new ResponseEntity<>(movieService.getMovieById(id),HttpStatus.OK);
     }
 
     @GetMapping(path ="/available")
+    @PreAuthorize("hasAnyAuthority('CLIENT','WORKER','MANAGER','ADMIN')")
     public ResponseEntity<List<MovieDto>> getAvailableMovies() {
         return new ResponseEntity<List<MovieDto>>(movieService.getAvailableMovies(),HttpStatus.OK);
     }
     @GetMapping(path ="/all")
+    @PreAuthorize("hasAnyAuthority('CLIENT','WORKER','MANAGER','ADMIN')")
     public ResponseEntity<List<MovieDto>> getAllMovies() {
         return new ResponseEntity<>(movieService.getAllMovies(), HttpStatus.OK);
     }
 
     @PutMapping(path = "{id}")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
     public ResponseEntity<MovieDto>  updateMovie(@PathVariable("{id}")Long id, @RequestBody MovieUpdateDto movieUpdateDto) {
         return new ResponseEntity<>(movieService.updateMovie(id,movieUpdateDto), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "{id}")
-    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
     public ResponseEntity<String> deleteMovie(@PathVariable("{id}")Long id){
         movieService.deleteMovie(id);
         return new ResponseEntity<>("Movie has been Deleted",HttpStatus.OK);

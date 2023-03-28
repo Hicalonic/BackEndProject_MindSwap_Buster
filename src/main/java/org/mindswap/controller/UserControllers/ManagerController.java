@@ -29,13 +29,13 @@ public class ManagerController {
     }
 
     @GetMapping(path = "")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('MANAGER')")
     public ResponseEntity<String> welcomeManager() {
         return new ResponseEntity<>("Welcome to Blockbuster, dear manager.", HttpStatus.OK);
     }
 
     @GetMapping(path = "/info")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('MANAGER')")
     public ResponseEntity<UserDto> myInfo() {
         Long authenticatedManagerId = Long.valueOf(getAuthenticatedUserId());
         UserDto myInfoDto = managerService.getInfoById(authenticatedManagerId);
@@ -43,7 +43,7 @@ public class ManagerController {
     }
 
     @PutMapping(path = "/info")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('MANAGER')")
     public ResponseEntity<String> updateMyInfo(@Valid @RequestBody UserUpdateDto userUpdateDto) {
         Long authenticatedWManagerId = Long.valueOf(getAuthenticatedUserId());
         managerService.updateManager(authenticatedWManagerId,userUpdateDto);
@@ -51,7 +51,7 @@ public class ManagerController {
     }
 
     @DeleteMapping(path = "/info")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAuthority('MANAGER')")
     public ResponseEntity<String> deleteMyInfo() {
         Long authenticatedManagerId = Long.valueOf(getAuthenticatedUserId());
         managerService.deleteManager(authenticatedManagerId);
@@ -59,28 +59,28 @@ public class ManagerController {
     }
 
     @GetMapping(path = "/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDto> getManagerInfo(@PathVariable("id") Long managerId) {
         UserDto manager = managerService.getInfoById(managerId);
         return new ResponseEntity<>(manager, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> updateManagerInfo(@PathVariable("id") Long managerId, @Valid @RequestBody UserUpdateDto userUpdateDto) {
         managerService.updateManager(managerId, userUpdateDto);
         return new ResponseEntity<>("Updated successfully.", HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> deleteManager(@PathVariable("id") Long managerId) {
         managerService.deleteManager(managerId);
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
     }
 
     @GetMapping(path = "/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<UserDto>> getAllManagers() {
         List<UserDto> managersList = managerService.getAllManagers();
         return new ResponseEntity<>(managersList, HttpStatus.OK);

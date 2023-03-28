@@ -32,12 +32,15 @@ public class InvoiceController {
     }
 
     @GetMapping(path = "/{invoice_id}")
+    @PreAuthorize("hasAnyAuthority('CLIENT','WORKER','MANAGER','ADMIN')")
     public ResponseEntity<InvoiceDto> getSpecificInvoice(@PathVariable("invoice_id") Long invoiceId) {
-        Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
+        Long authenticatedUserId = Long.valueOf(getAuthenticatedUserId());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().iterator().next().getAuthority();
-        RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedClientId);
-        if(rentalDto.getUser().getId() != authenticatedClientId && role.equals(Role.CLIENT)) {
+        RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
+
+        //IF THE CLIENT TRIES TO ACCESS OTHER CLIENTS PDF
+        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(invoiceService.getInvoiceById(invoiceId), HttpStatus.OK);
@@ -49,7 +52,7 @@ public class InvoiceController {
 //    }
 
     @GetMapping(path = "/all")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<List<InvoiceDto>> getAllInvoices(){
         List<InvoiceDto> invoiceDtos = invoiceService.getAllInvoices();
         if(invoiceDtos.size() != 0){
@@ -62,32 +65,72 @@ public class InvoiceController {
     }
 
     @GetMapping(path = "all/client/{id}")
+    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
     public ResponseEntity <List<InvoiceDto>> getAllInvoicesPerClient(@PathVariable("{id}") Long clientId) {
         return new ResponseEntity<>(invoiceService.getAllClientInvoices(clientId), HttpStatus.OK);
     }
 
+
+    //TODO: DELETE THIS METHOD. TO IMPLEMENT IN THE createRental() method
     @PostMapping()
-    @PreAuthorize("hasAnyRole('WORKER,'MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<InvoiceDto> createInvoice(@RequestBody InvoiceCreateDto invoiceCreateDto) {
         return new ResponseEntity<>(invoiceService.createInvoice(invoiceCreateDto), HttpStatus.OK);
     }
 
-    @GetMapping(path = "{id}/qrcode")
-    public ResponseEntity<Object> getQrCode(@PathVariable("id") Long invoiceId) {
-        return null;
+    @GetMapping(path = "{invoice_id}/qrcode")
+    @PreAuthorize("hasAnyAuthority('CLIENT','WORKER','MANAGER','ADMIN')")
+    public ResponseEntity<Object> getQrCode(@PathVariable("invoice_id") Long invoiceId) {
+        Long authenticatedUserId = Long.valueOf(getAuthenticatedUserId());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String role = auth.getAuthorities().iterator().next().getAuthority();
+        RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
+
+        //IF THE CLIENT TRIES TO ACCESS OTHER CLIENTS INVOICE
+        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
+        //TODO: QRCODESERVICE....
+        return new ResponseEntity<>("TODO", HttpStatus.OK);
     }
 
-    @GetMapping(path = "{id}/pdf")
-    public ResponseEntity<Object> getPdf(@PathVariable("id")Long invoiceId) {
-        return null;
+    @GetMapping(path = "{invoice_id}/pdf")
+    @PreAuthorize("hasAnyAuthority('CLIENT','WORKER','MANAGER','ADMIN')")
+    public ResponseEntity<Object> getPdf(@PathVariable("invoice_id")Long invoiceId) {
+        Long authenticatedUserId = Long.valueOf(getAuthenticatedUserId());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String role = auth.getAuthorities().iterator().next().getAuthority();
+        RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
+
+        //IF THE CLIENT TRIES TO ACCESS OTHER CLIENTS PDF
+        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
+        //TODO: PDFSERVICE....
+        return new ResponseEntity<>("TODO", HttpStatus.OK);
     }
 
-    @GetMapping(path = "{id}/email")
-    public ResponseEntity<Object> getEmail(@PathVariable("id")Long invoiceId) {
-        return null;
+    @GetMapping(path = "{invoice_id}/email")
+    @PreAuthorize("hasAnyAuthority('CLIENT','WORKER','MANAGER','ADMIN')")
+    public ResponseEntity<Object> getEmail(@PathVariable("invoice_id")Long invoiceId) {
+        Long authenticatedUserId = Long.valueOf(getAuthenticatedUserId());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String role = auth.getAuthorities().iterator().next().getAuthority();
+        RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
+
+        //IF THE CLIENT TRIES TO ACCESS OTHER CLIENTS PDF
+        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
+        //TODO: EMAILSERVICE....
+        return new ResponseEntity<>("TODO", HttpStatus.OK);
+
     }
     @DeleteMapping(path = "{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> deleteInvoice(@PathVariable("id")Long invoiceId) {
 
         invoiceService.deleteInvoiceById(invoiceId);

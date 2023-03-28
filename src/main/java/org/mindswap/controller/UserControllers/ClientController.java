@@ -50,7 +50,7 @@ public class ClientController {
     @GetMapping(path = "")
     @Cacheable(value = "welcomeClient")
     @ResponseStatus(HttpStatus.OK)
-//    @PreAuthorize("hasRole('CLIENT')")
+    @PreAuthorize("hasAuthority('CLIENT')")
     public String welcomeClient() throws InterruptedException {
         Thread.sleep(6000);
         return "Welcome to Blockbuster, dear client.";
@@ -59,7 +59,7 @@ public class ClientController {
 
 
     @GetMapping(path = "/info")
-    @PreAuthorize("hasRole('CLIENT')")
+    @PreAuthorize("hasAuthority('CLIENT')")
     //TODO TRY THIS CACHEABLE ANNOTATION
     //@Cacheable(value = "userInfo", key = "#authenticatedClientId")
     public ResponseEntity<UserDto> getMyInfo() {
@@ -69,7 +69,7 @@ public class ClientController {
     }
 
     @PutMapping(path = "/info")
-    @PreAuthorize("hasRole('CLIENT')")
+    @PreAuthorize("hasAuthority('CLIENT')")
     public ResponseEntity<String> updateMyInfo(@Valid @RequestBody UserUpdateDto userUpdateDto) {
         Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
         clientService.updateClient(authenticatedClientId,userUpdateDto);
@@ -77,7 +77,7 @@ public class ClientController {
     }
 
     @DeleteMapping(path = "/info")
-    @PreAuthorize("hasRole('CLIENT')")
+    @PreAuthorize("hasAuthority('CLIENT')")
     public ResponseEntity<String> deleteMyInfo() {
         Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
         clientService.deleteClient(authenticatedClientId);
@@ -87,28 +87,28 @@ public class ClientController {
 
 
     @GetMapping(path = "/{id}")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<UserDto> getClientInfo(@PathVariable("id") Long clientId) {
         UserDto client = clientService.getClientById(clientId);
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<String> updateClientInfo(@PathVariable("id") Long clientId, @Valid @RequestBody UserUpdateDto userUpdateDto) {
         clientService.updateClient(clientId, userUpdateDto);
         return new ResponseEntity<>("Updated successfully.", HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<String> deleteClient(@PathVariable("id") Long clientId) {
         clientService.deleteClient(clientId);
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
     }
 
     @GetMapping(path = "/all")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<List<UserDto>> getAllClients() {
         List<UserDto> clientList = clientService.getAllClients();
         return new ResponseEntity<>(clientList, HttpStatus.OK);

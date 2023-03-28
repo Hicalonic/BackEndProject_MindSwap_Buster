@@ -29,7 +29,7 @@ public class WorkerController {
     }
 
     @GetMapping(path = "")
-    @PreAuthorize("hasRole('WORKER')")
+    @PreAuthorize("hasAuthority('WORKER')")
     public ResponseEntity<String> welcomeWorker() {
         return new ResponseEntity<>("Welcome to Blockbuster, dear worker.", HttpStatus.OK);
     }
@@ -43,7 +43,7 @@ public class WorkerController {
 //    }
 
     @GetMapping(path = "/info")
-    @PreAuthorize("hasRole('WORKER')")
+    @PreAuthorize("hasAuthority('WORKER')")
     public ResponseEntity<UserDto> getMyInfo() {
         Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
         UserDto myInfoDto = workerService.getWorkerById(authenticatedWorkerId);
@@ -51,7 +51,7 @@ public class WorkerController {
     }
 
     @PutMapping(path = "/info")
-    @PreAuthorize("hasRole('WORKER')")
+    @PreAuthorize("hasAuthority('WORKER')")
     public ResponseEntity<String> updateMyInfo(@Valid @RequestBody UserUpdateDto userUpdateDto) {
         Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
         workerService.updateWorker(authenticatedWorkerId,userUpdateDto);
@@ -59,7 +59,7 @@ public class WorkerController {
     }
 
     @DeleteMapping(path = "/info")
-    @PreAuthorize("hasRole('WORKER')")
+    @PreAuthorize("hasAuthority('WORKER')")
     public ResponseEntity<String> deleteMyInfo() {
         Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
         workerService.deleteWorker(authenticatedWorkerId);
@@ -68,28 +68,28 @@ public class WorkerController {
 
 
     @GetMapping(path = "/{id}")
-    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
     public ResponseEntity<UserDto> getWorkerInfo(@PathVariable("id") Long workerId) {
         UserDto worker = workerService.getWorkerById(workerId);
         return new ResponseEntity<>(worker, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
-    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<String> updateWorkerInfo(@PathVariable("id") Long workerId, @Valid @RequestBody UserUpdateDto userUpdateDto) {
         workerService.updateWorker(workerId, userUpdateDto);
         return new ResponseEntity<>("Updated successfully.", HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
-    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
     public ResponseEntity<String> deleteWorker(@PathVariable("id") Long workerId) {
         workerService.deleteWorker(workerId);
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
     }
 
     @GetMapping(path = "/all")
-    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
     public ResponseEntity<List<UserDto>> getAllWorkers() {
         List<UserDto> workersList = workerService.getAllWorkers();
         return new ResponseEntity<>(workersList, HttpStatus.OK);
