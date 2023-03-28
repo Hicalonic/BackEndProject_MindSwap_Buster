@@ -7,6 +7,7 @@ import org.mindswap.dto.UserUpdateDto;
 import org.mindswap.model.Role;
 import org.mindswap.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,13 +48,20 @@ public class ClientController {
 
 
     @GetMapping(path = "")
-    @PreAuthorize("hasRole('CLIENT')")
-    public ResponseEntity<String> welcomeClient() {
-        return new ResponseEntity<>("Welcome to Blockbuster, dear client.", HttpStatus.OK);
+    @Cacheable(value = "welcomeClient")
+    @ResponseStatus(HttpStatus.OK)
+//    @PreAuthorize("hasRole('CLIENT')")
+    public String welcomeClient() throws InterruptedException {
+        Thread.sleep(6000);
+        return "Welcome to Blockbuster, dear client.";
     }
+
+
 
     @GetMapping(path = "/info")
     @PreAuthorize("hasRole('CLIENT')")
+    //TODO TRY THIS CACHEABLE ANNOTATION
+    //@Cacheable(value = "userInfo", key = "#authenticatedClientId")
     public ResponseEntity<UserDto> getMyInfo() {
         Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
         UserDto myInfoDto = clientService.getClientById(authenticatedClientId);

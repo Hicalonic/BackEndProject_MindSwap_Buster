@@ -24,6 +24,12 @@ public class Token {
     public boolean revoked;
     public boolean expired;
 
+
+    public String email;
+
+    @Enumerated(EnumType.STRING)
+    public Role role;
+
     @ManyToOne( fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public User user;

@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="">
+    <list default="true" id="26b4a8d3-575a-4090-949f-dd37a34adc15" name="Changes" comment="logging aspect done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/WorkerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/controller/UserControllers/WorkerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/credentials.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Movie$MovieBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Movie.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental$RentalBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Rental.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Store$StoreBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Store.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/model/Token.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/repository/TokenRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/service/RentalServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/auth/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/auth/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/mindswap/security/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/mindswap/security/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/mindswap/auth/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/mindswap/auth/AuthenticationService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,10 +23,13 @@
       </list>
     </option>
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="loggingAspect_Miguel" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="developer_branch" />
+        <entry key="$PROJECT_DIR$" value="loggingAspect_Miguel" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,6 +47,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/mindswap/controller/RentalController.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -71,14 +66,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.MovieApplication">
     <configuration name="MovieApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.mindswap.MovieApplication" />
@@ -106,13 +104,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MovieApplication" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Application.SecurityApplication" />
         <item itemvalue="Application.MovieApplication" />
-        <item itemvalue="Application.SecurityApplication" />
-        <item itemvalue="Application.SecurityApplication" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -265,7 +275,28 @@
       <option name="project" value="LOCAL" />
       <updated>1679859402365</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="qrCode fixed and program is working now">
+      <created>1679916576264</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1679916576264</updated>
+    </task>
+    <task id="LOCAL-00022" summary="deleted useless dto class">
+      <created>1679934663741</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1679934663741</updated>
+    </task>
+    <task id="LOCAL-00023" summary="logging aspect done">
+      <created>1679935502980</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1679935502980</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -300,6 +331,9 @@
     <MESSAGE value="rental controller finished(maybe? hopefully?)" />
     <MESSAGE value="invoice controller and service" />
     <MESSAGE value="rental controller finished(maybe? hopefully?)." />
-    <option name="LAST_COMMIT_MESSAGE" value="rental controller finished(maybe? hopefully?)." />
+    <MESSAGE value="qrCode fixed and program is working now" />
+    <MESSAGE value="deleted useless dto class" />
+    <MESSAGE value="logging aspect done" />
+    <option name="LAST_COMMIT_MESSAGE" value="logging aspect done" />
   </component>
 </project>

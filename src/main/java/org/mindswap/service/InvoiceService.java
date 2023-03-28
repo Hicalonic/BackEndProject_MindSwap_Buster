@@ -9,15 +9,17 @@ import java.util.List;
 
 public interface InvoiceService {
 
-
     RentalDto getSpecificInvoice(Long invoiceId, Long clientId);
 
     InvoiceDto getInvoiceById(Long id);
 
     void deleteInvoiceById(Long id);
+
     List<InvoiceDto> getAllClientInvoices(Long clientId);
+
     InvoiceDto createInvoice(InvoiceCreateDto invoiceCreateDto);
 
+    List<InvoiceDto> getAllInvoices();
 
 
     //return html page with invoice details
