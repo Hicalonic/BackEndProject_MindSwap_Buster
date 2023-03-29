@@ -2,16 +2,21 @@ package org.mindswap.controller.UserControllers;
 
 
 import jakarta.validation.Valid;
+import org.mindswap.aspect.LoggingAspect;
 import org.mindswap.dto.UserDto;
 import org.mindswap.dto.UserUpdateDto;
 import org.mindswap.model.Role;
+import org.mindswap.model.User;
 import org.mindswap.service.ClientService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,11 +53,24 @@ public class ClientController {
 
 
     @GetMapping(path = "")
-    @Cacheable(value = "welcomeClient")
+    //@Cacheable(value = "welcomeClient")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasAuthority('CLIENT')")
-    public String welcomeClient() throws InterruptedException {
-        Thread.sleep(6000);
+    public String welcomeClient(@AuthenticationPrincipal User activeUser) throws InterruptedException {
+        System.out.println(activeUser.getId() +" " + activeUser.getEmail() +" " +  activeUser.getFirstName() +" " +  activeUser.getLastName());
+//
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//
+//        System.out.println("name :+" + auth.getName());
+//        System.out.println("details :+" + auth.getDetails());
+//        System.out.println("authorities :+" + auth.getAuthorities());
+//        System.out.println("principal :+" + auth.getPrincipal().toString());
+//        System.out.println("Teste");
+//
+//        Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
+//        logger.info("name :+" + auth.getName());
+
+        //Thread.sleep(6000);
         return "Welcome to Blockbuster, dear client.";
     }
 

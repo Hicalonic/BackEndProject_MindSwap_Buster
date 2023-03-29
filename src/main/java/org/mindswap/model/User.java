@@ -19,8 +19,8 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-@SQLDelete(sql = "UPDATE clients SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
+@Where(clause = "deleted_user=false")
 public class User implements UserDetails {
 
     @Id
@@ -42,17 +42,17 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Rental> rentalList;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Token> tokens;
 
-    @ManyToMany(targetEntity = Store.class)
-    private List<Store> stores;
+    @ManyToOne(targetEntity = Store.class, fetch = FetchType.EAGER)
+    private Store store;
 
     @Column(nullable = false)
-    private boolean deleted = Boolean.FALSE;
+    private boolean deletedUser = Boolean.FALSE;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

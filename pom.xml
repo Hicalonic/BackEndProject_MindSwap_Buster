@@ -145,6 +145,14 @@
             <artifactId>unirest-java</artifactId>
             <version>1.4.9</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-gmail</artifactId>
+            <version>v1-rev20230206-2.0.0</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>

@@ -19,7 +19,7 @@ import java.util.Set;
 @Entity
 @Table(name = "movies")
 @SQLDelete(sql = "UPDATE movies SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+@Where(clause = "deleted_movie=false")
 public class Movie {
 
     @Id
@@ -39,7 +39,7 @@ public class Movie {
     private Set<Rental> rentals = new HashSet<>();
 
     @Column(nullable = false)
-    private boolean deleted = Boolean.FALSE;
+    private boolean deletedMovie = Boolean.FALSE;
 
     @Column(nullable = false)
     private boolean available = Boolean.TRUE;

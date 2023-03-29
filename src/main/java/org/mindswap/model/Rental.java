@@ -19,7 +19,7 @@ import java.util.Set;
 @Entity
 @Table(name = "rentals")
 @SQLDelete(sql = "UPDATE rentals SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+@Where(clause = "deleted_rental=false")
 public class Rental {
 
     @Id
@@ -45,4 +45,7 @@ public class Rental {
     @OneToOne
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
+
+    @Column(nullable = false)
+    private boolean deletedRental = Boolean.FALSE;
 }

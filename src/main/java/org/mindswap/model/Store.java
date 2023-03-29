@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "stores")
 @SQLDelete(sql = "UPDATE stores SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+@Where(clause = "deleted_store=false")
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Store {
     private Long managerId;
 
     @Column(nullable = false)
-    private boolean deleted = Boolean.FALSE;
+    private boolean deletedStore = Boolean.FALSE;
 
     @OneToMany(targetEntity = User.class)
     @JoinColumn(name = "worker_id")
