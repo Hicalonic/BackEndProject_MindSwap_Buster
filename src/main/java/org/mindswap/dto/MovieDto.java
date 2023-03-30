@@ -12,6 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 public class MovieDto {
 
+    private Long id;
+
     @NotBlank(message = "Must  have a title")
     private String title;
 

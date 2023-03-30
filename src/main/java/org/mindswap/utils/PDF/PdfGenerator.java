@@ -123,6 +123,7 @@ public class PdfGenerator {
                 docWriter.close();
             }
         }
+        totalPrice = 0;
     }
 
     public void generateLayout(Document doc, PdfContentByte cb) {
