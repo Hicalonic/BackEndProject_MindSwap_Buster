@@ -1,6 +1,8 @@
 package org.mindswap.service;
 
+import jakarta.transaction.Transactional;
 import org.mindswap.dto.UserDto;
+import org.mindswap.dto.UserDtoJsonBody;
 import org.mindswap.exceptions.WorkerNotFoundException;
 import org.mindswap.mapper.StoreMapper;
 import org.mindswap.mapper.UserMapper;
@@ -27,19 +29,34 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public UserDto makeWorker(Long clientId) {
+    @Transactional
+    public UserDtoJsonBody makeWorker(Long clientId) {
         User worker = userRepository.findById(clientId).orElseThrow(WorkerNotFoundException::new);
         worker.setRole(Role.WORKER);
+        UserDtoJsonBody userInfo = UserDtoJsonBody.builder()
+                .firstname(worker.getFirstName())
+                .lastname(worker.getLastName())
+                .email(worker.getEmail())
+                .role(worker.getRole()).
+                build();
         userRepository.save(worker);
-        return userMapper.fromEntityToDto(worker);
+        return userInfo;
     }
 
     @Override
-    public UserDto makeManager(Long workerId) {
+    @Transactional
+    public UserDtoJsonBody makeManager(Long workerId) {
         User manager = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
-        manager.setRole(Role.MANAGER);
+        manager.setRole(Role.WORKER);
+
+        UserDtoJsonBody userInfo = UserDtoJsonBody.builder()
+                .firstname(manager.getFirstName())
+                .lastname(manager.getLastName())
+                .email(manager.getEmail())
+                .role(manager.getRole()).
+                build();
         userRepository.save(manager);
-        return userMapper.fromEntityToDto(manager);
+        return userInfo;
     }
 
     @Override

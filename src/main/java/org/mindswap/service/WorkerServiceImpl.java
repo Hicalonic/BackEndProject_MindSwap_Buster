@@ -1,15 +1,20 @@
 package org.mindswap.service;
 
+import jakarta.transaction.Transactional;
 import org.mindswap.dto.UserCreateDto;
 import org.mindswap.dto.UserDto;
+import org.mindswap.dto.UserDtoJsonBody;
 import org.mindswap.dto.UserUpdateDto;
+import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.exceptions.WorkerNotFoundException;
 import org.mindswap.mapper.UserMapper;
+import org.mindswap.model.Role;
 import org.mindswap.model.User;
 import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,15 +36,33 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public UserDto getWorkerById(Long workerId) {
+    @Transactional
+    public UserDtoJsonBody getWorkerById(Long workerId) {
         User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
-        return userMapper.fromEntityToDto(user);
+        UserDtoJsonBody userInfo = UserDtoJsonBody.builder()
+                .firstname(user.getFirstName())
+                .lastname(user.getLastName())
+                .email(user.getEmail())
+                .role(user.getRole()).
+                build();
+        return userInfo;
     }
 
     @Override
-    public List<UserDto> getAllWorkers() {
-        return userRepository.findAll().stream().map(w -> userMapper.fromEntityToDto(w)).toList();
+    @Transactional
+    public List<UserDtoJsonBody> getAllWorkers() {
+        List<User> onlyWorkersList = userRepository.findAll().stream().filter(user -> user.getRole().equals(Role.WORKER)).toList();
+        List<UserDtoJsonBody> onlyWorkersListDtos = new ArrayList<>();
 
+        for (User user : onlyWorkersList) {
+            onlyWorkersListDtos.add(UserDtoJsonBody.builder()
+                    .firstname(user.getFirstName())
+                    .lastname(user.getLastName())
+                    .email(user.getEmail())
+                    .role(user.getRole())
+                    .build());
+        }
+    return onlyWorkersListDtos;
     }
 
     @Override

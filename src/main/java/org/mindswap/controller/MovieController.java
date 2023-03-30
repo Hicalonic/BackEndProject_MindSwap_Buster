@@ -1,6 +1,5 @@
 package org.mindswap.controller;
 import org.mindswap.dto.MovieDto;
-import org.mindswap.dto.MovieUpdateDto;
 import org.mindswap.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,11 +50,7 @@ public class MovieController {
         return new ResponseEntity<>(movieService.getAllMovies(), HttpStatus.OK);
     }
 
-    @PutMapping(path = "{id}")
-    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
-    public ResponseEntity<MovieDto>  updateMovie(@PathVariable("{id}")Long id, @RequestBody MovieUpdateDto movieUpdateDto) {
-        return new ResponseEntity<>(movieService.updateMovie(id,movieUpdateDto), HttpStatus.OK);
-    }
+
 
     @DeleteMapping(path = "{id}")
     @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")

@@ -1,8 +1,6 @@
 package org.mindswap.service;
 
 import org.mindswap.dto.MovieDto;
-import org.mindswap.dto.MovieUpdateDto;
-import org.mindswap.exceptions.ImdbMovieModelNotFoundException;
 import org.mindswap.exceptions.MovieNotFoundException;
 import org.mindswap.mapper.MovieMapper;
 import org.mindswap.model.Movie;
@@ -12,10 +10,7 @@ import org.mindswap.utils.IMDBAPI.ImdbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.net.UnknownServiceException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -78,22 +73,7 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.findAll().stream().map(movie -> movieMapper.fromEntityToDto(movie)).toList();
     }
 
-    @Override
-    public MovieDto updateMovie(Long movieId, MovieUpdateDto movieUpdateDto) {
-        Movie movie = movieRepository.findById(movieId).orElseThrow(MovieNotFoundException::new);
-        if(movieUpdateDto.getTitle() != null) {
-            movie.setTitle(movieUpdateDto.getTitle());
-        }
-        if(!Double.isNaN(movieUpdateDto.getPrice())){
-            movie.setPrice(movieUpdateDto.getPrice());
-        }
-        if(movieUpdateDto.getMovieGenre() != null) {
-            movie.setMovieGenre(movieUpdateDto.getMovieGenre());
-        }
 
-        movieRepository.save(movie);
-        return movieMapper.fromEntityToDto(movie);
-    }
 
     @Override
     public void deleteMovie(Long movieId) {

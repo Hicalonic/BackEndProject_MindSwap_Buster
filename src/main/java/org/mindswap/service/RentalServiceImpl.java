@@ -3,7 +3,6 @@ package org.mindswap.service;
 import jakarta.transaction.Transactional;
 import org.mindswap.dto.CreateRentalJsonBody;
 import org.mindswap.dto.RentalDto;
-import org.mindswap.dto.RentalUpdateDto;
 import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.exceptions.MovieNotFoundException;
 import org.mindswap.exceptions.RentalNotFoundException;
@@ -99,22 +98,6 @@ public class RentalServiceImpl implements RentalService {
         return rentalRepository.findAll().stream().map(r -> rentalMapper.fromEntityToDto(r)).toList();
     }
 
-    @Override
-    public RentalDto updateRental(Long rentalId, RentalUpdateDto rentalUpdateDto) {
-        Rental rental = rentalRepository.findById(rentalId).orElseThrow(RentalNotFoundException::new);
-        if (rentalUpdateDto.getStartDate() != null) {
-            rental.setStartDate(rentalUpdateDto.getStartDate());
-        }
-        if (rentalUpdateDto.getEndDate() != null) {
-            rental.setEndDate(rentalUpdateDto.getEndDate());
-        }
-        /*if(rentalUpdateDto.getMovieList() != null) {
-            rental.setMoviesRented(rentalUpdateDto.getMovieList());
-        }*/
-        rentalRepository.save(rental);
-        return rentalMapper.fromEntityToDto(rental);
-
-    }
 
     @Override
     public void deleteRental(Long rentalId) {

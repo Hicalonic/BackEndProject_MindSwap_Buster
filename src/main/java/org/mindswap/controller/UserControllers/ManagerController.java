@@ -3,6 +3,7 @@ package org.mindswap.controller.UserControllers;
 
 import jakarta.validation.Valid;
 import org.mindswap.dto.UserDto;
+import org.mindswap.dto.UserDtoJsonBody;
 import org.mindswap.dto.UserUpdateDto;
 import org.mindswap.model.Role;
 import org.mindswap.service.ManagerService;
@@ -36,9 +37,9 @@ public class ManagerController {
 
     @GetMapping(path = "/info")
     @PreAuthorize("hasAuthority('MANAGER')")
-    public ResponseEntity<UserDto> myInfo() {
+    public ResponseEntity<UserDtoJsonBody> myInfo() {
         Long authenticatedManagerId = Long.valueOf(getAuthenticatedUserId());
-        UserDto myInfoDto = managerService.getInfoById(authenticatedManagerId);
+        UserDtoJsonBody myInfoDto = managerService.getInfoById(authenticatedManagerId);
         return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
     }
 
@@ -60,8 +61,8 @@ public class ManagerController {
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<UserDto> getManagerInfo(@PathVariable("id") Long managerId) {
-        UserDto manager = managerService.getInfoById(managerId);
+    public ResponseEntity<UserDtoJsonBody> getManagerInfo(@PathVariable("id") Long managerId) {
+        UserDtoJsonBody manager = managerService.getInfoById(managerId);
         return new ResponseEntity<>(manager, HttpStatus.OK);
     }
 
@@ -81,8 +82,8 @@ public class ManagerController {
 
     @GetMapping(path = "/all")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<List<UserDto>> getAllManagers() {
-        List<UserDto> managersList = managerService.getAllManagers();
+    public ResponseEntity<List<UserDtoJsonBody>> getAllManagers() {
+        List<UserDtoJsonBody> managersList = managerService.getAllManagers();
         return new ResponseEntity<>(managersList, HttpStatus.OK);
     }
 }

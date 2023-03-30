@@ -1,6 +1,8 @@
 package org.mindswap.service;
 
+import jakarta.transaction.Transactional;
 import org.mindswap.dto.UserDto;
+import org.mindswap.dto.UserDtoJsonBody;
 import org.mindswap.dto.UserUpdateDto;
 import org.mindswap.exceptions.WorkerNotFoundException;
 import org.mindswap.mapper.UserMapper;
@@ -10,6 +12,7 @@ import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,15 +27,33 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public UserDto getInfoById(Long id) {
-        User manager = userRepository.findById(id).orElseThrow(WorkerNotFoundException::new);
-        return userMapper.fromEntityToDto(manager);
+    @Transactional
+    public UserDtoJsonBody getInfoById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(WorkerNotFoundException::new);
+        UserDtoJsonBody userInfo = UserDtoJsonBody.builder()
+                .firstname(user.getFirstName())
+                .lastname(user.getLastName())
+                .email(user.getEmail())
+                .role(user.getRole()).
+                build();
+        return userInfo;
     }
 
     @Override
-    public List<UserDto> getAllManagers() {
-        List<User> managers = userRepository.findAll().stream().filter(u -> u.getRole().equals(Role.MANAGER)).toList();
-        return managers.stream().map(m-> userMapper.fromEntityToDto(m)).toList();
+    @Transactional
+    public List<UserDtoJsonBody> getAllManagers() {
+        List<User> managersList = userRepository.findAll().stream().filter(user -> user.getRole().equals(Role.MANAGER)).toList();
+        List<UserDtoJsonBody> managerListDto = new ArrayList<>();
+
+        for (User user : managersList) {
+            managerListDto.add(UserDtoJsonBody.builder()
+                    .firstname(user.getFirstName())
+                    .lastname(user.getLastName())
+                    .email(user.getEmail())
+                    .role(user.getRole())
+                    .build());
+        }
+        return managerListDto;
     }
 
     @Override
