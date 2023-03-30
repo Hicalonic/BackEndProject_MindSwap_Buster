@@ -12,7 +12,9 @@ import org.mindswap.model.Movie;
 import org.mindswap.model.Rental;
 import org.mindswap.model.User;
 import org.mindswap.repository.InvoiceRepository;
+import org.mindswap.repository.StoreRepository;
 import org.mindswap.repository.UserRepository;
+import org.mindswap.utils.PDF.PdfGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +29,19 @@ public class InvoiceServiceImpl implements InvoiceService{
 
     private UserRepository userRepository;
 
+    private StoreRepository storeRepository;
+
+    private PdfGenerator pdfGenerator;
+
 
     @Autowired
     public InvoiceServiceImpl(InvoiceRepository invoiceRepository, InvoiceMapper invoiceMapper,
-                              UserRepository userRepository) {
+                              UserRepository userRepository, StoreRepository storeRepository, PdfGenerator pdfGenerator) {
         this.invoiceRepository = invoiceRepository;
         this.invoiceMapper = invoiceMapper;
         this.userRepository = userRepository;
+        this.storeRepository=storeRepository;
+        this.pdfGenerator = pdfGenerator;
 
     }
 
@@ -72,16 +80,20 @@ public class InvoiceServiceImpl implements InvoiceService{
 
     @Override
     @Transactional
-    public Invoice createInvoice(Rental rental) {
+    public Invoice createInvoice(Rental rental, Long storeId) {
         Invoice invoice = new Invoice();
         double rentalPrice = 0;
 
         for (Movie movie: rental.getMovies()) {
             rentalPrice += movie.getPrice();
         }
+
+
+        invoice.setStore(storeRepository.getReferenceById(storeId));
         invoice.setRental(rental);
         invoice.setPrice(rentalPrice);
         invoiceRepository.save(invoice);
+        pdfGenerator.createPDF("InvoicePDF".concat(invoice.getId().toString()).concat(".pdf"), invoice);
         return invoice;
     }
 

@@ -14,5 +14,4 @@ public class StoreUpdateDto {
 
     private String address;
 
-    private Long managerId;
 }

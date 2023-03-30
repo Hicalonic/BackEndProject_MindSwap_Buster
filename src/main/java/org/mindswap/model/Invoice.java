@@ -14,7 +14,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @Table(name = "invoices")
 @SQLDelete(sql = "UPDATE invoices SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+@Where(clause = "deleted_invoice=false")
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,13 @@ public class Invoice {
     @OneToOne(mappedBy = "invoice")
     @JoinColumn(name = "rental_ID")
     private Rental rental;
+
+    @JoinColumn(name = "store_id")
+    @ManyToOne(targetEntity = Store.class)
+    private Store store;
+
+    @Column(nullable = false)
+    private boolean deletedInvoice = Boolean.FALSE;
 
 
 }

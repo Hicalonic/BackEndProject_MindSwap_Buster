@@ -3,7 +3,6 @@ package org.mindswap.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.mindswap.model.MovieGenre;
 
 @Getter
 @Setter
@@ -19,6 +18,9 @@ public class MovieDto {
     @NotNull(message = "must have a price")
     private double price;
 
+    @NotNull(message = "must have a rating")
+    private double imdbRating;
+
     @NotNull(message = "Must have a genre")
-    private MovieGenre movieGenre;
+    private String movieGenre;
 }

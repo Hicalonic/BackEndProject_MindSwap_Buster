@@ -32,8 +32,8 @@ public class Movie {
     @Column(nullable = false)
     private double price;
 
-    @Enumerated(EnumType.STRING)
-    private MovieGenre movieGenre;
+    @Column
+    private String movieGenre;
 
     @ManyToMany(mappedBy = "movies")
     private Set<Rental> rentals = new HashSet<>();
@@ -43,5 +43,8 @@ public class Movie {
 
     @Column(nullable = false)
     private boolean available = Boolean.TRUE;
+
+    @Column
+    private double imdbRating;
 
 }

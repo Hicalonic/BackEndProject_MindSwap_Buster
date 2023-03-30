@@ -79,7 +79,7 @@ public class EmailService {
                 "The Movie Swap Buster team");
 
         // add the attachment
-        FileSystemResource file = new FileSystemResource(new File("src/main/resources/images/MovieSwapBuster.jpeg"));
+        FileSystemResource file = new FileSystemResource(new File("src/main/resources/images/movie.jpeg"));
 
         helper.addAttachment("Attachment.jpeg", file);
 

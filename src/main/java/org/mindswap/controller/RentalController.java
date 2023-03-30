@@ -29,7 +29,7 @@ public class RentalController {
     }
 
     @GetMapping(path = "/{id}")
-    @PreAuthorize("hasAnyRole('WORKER','MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
     public ResponseEntity<RentalDto> getRentalById(@PathVariable("{id}")Long id) {
         return new ResponseEntity<>(rentalService.getRentalById(id),HttpStatus.OK);
     }
@@ -40,14 +40,14 @@ public class RentalController {
     }
 
     @DeleteMapping(path = "/{id}")
-    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
     public ResponseEntity<String> deleteRental(@PathVariable("{id}")Long id){
         rentalService.deleteRental(id);
         return new ResponseEntity<>("Rental has been Deleted",HttpStatus.OK);
     }
 
     @GetMapping(path ="/all/client/{id}")
-    @PreAuthorize("hasAnyRole('WORKER', 'MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('WORKER', 'MANAGER','ADMIN')")
     public ResponseEntity<List<RentalDto>> getAllRentalsByClientId(@PathVariable("{id}")Long id){
         Long clientId = id;
         return new ResponseEntity<>(rentalService.getAllRentalsByClientIdJpa(clientId), HttpStatus.OK);

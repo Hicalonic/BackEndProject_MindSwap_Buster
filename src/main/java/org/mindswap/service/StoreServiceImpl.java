@@ -51,17 +51,17 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreDto updateStore(Long storeID, StoreUpdateDto storeUpdateDto) {
         Store store = storeRepository.findById(storeID).orElseThrow(StoreNotFoundException::new);
-        User user = userRepository.getReferenceById(storeUpdateDto.getManagerId());
+        //User user = userRepository.getReferenceById(storeUpdateDto.getManagerId());
         if (storeUpdateDto.getAddress() != null) {
             store.setAddress(storeUpdateDto.getAddress());
         }
         if (storeUpdateDto.getCity() != null) {
             store.setCity(storeUpdateDto.getCity());
         }
-        if (storeUpdateDto.getManagerId() != null && storeRepository.existsById(storeUpdateDto.getManagerId())
-                && user.getRole().equals(Role.MANAGER)){
-            store.setManagerId(storeUpdateDto.getManagerId());
-        }
+//        if (storeUpdateDto.getManagerId() != null && storeRepository.existsById(storeUpdateDto.getManagerId())
+//                && user.getRole().equals(Role.MANAGER)){
+//            store.setManagerId(storeUpdateDto.getManagerId());
+//        }
         storeRepository.save(store);
         return storeMapper.fromEntityToDto(store);
 

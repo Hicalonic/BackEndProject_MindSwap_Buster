@@ -29,17 +29,9 @@ public class Store {
     private String address;
 
     @Column(nullable = false)
-    private Long managerId;
-
-    @Column(nullable = false)
     private boolean deletedStore = Boolean.FALSE;
 
-    @OneToMany(targetEntity = User.class)
-    @JoinColumn(name = "worker_id")
-    private List<User> workers;
-
-/*    @Column(nullable = false)
-    @OneToMany(mappedBy = "store")
-    private List<User> employeesList;*/
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Invoice> invoiceList;
 
 }

@@ -66,7 +66,7 @@ public class RentalServiceImpl implements RentalService {
                 .endDate(endDate)
                 .build();
 
-        Invoice invoice = invoiceService.createInvoice(rental);
+        Invoice invoice = invoiceService.createInvoice(rental, createRentalJsonBody.getStoreId());
 
 
 

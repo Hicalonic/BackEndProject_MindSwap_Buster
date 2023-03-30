@@ -18,7 +18,7 @@ public interface InvoiceService {
 
     List<InvoiceDto> getAllClientInvoices(Long clientId);
 
-    public Invoice createInvoice(Rental rental);
+    public Invoice createInvoice(Rental rental, Long storeId);
 
     List<InvoiceDto> getAllInvoices();
 
