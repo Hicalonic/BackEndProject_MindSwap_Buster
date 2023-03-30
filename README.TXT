@@ -1,6 +1,6 @@
 # **MindSwapBuster **
 
-![](https://i.ibb.co/KbFvPvy/Screenshot-from-2023-02-19-23-05-22.png) 
+![](https://i.ibb.co/KbFvPvy/Screenshot-from-2023-02-19-23-05-22.png)
 
 **Rules:**
 MindSwapBuster is an application that was created using Spring Boot Restful API, and has this features:
