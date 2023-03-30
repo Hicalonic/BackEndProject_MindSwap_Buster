@@ -30,16 +30,19 @@ public class RentalServiceImpl implements RentalService {
     private RentalMapper rentalMapper;
     private UserRepository userRepository;
     private MovieRepository movieRepository;
-
     private InvoiceService invoiceService;
 
+    private ClientService clientService;
+
     @Autowired
-    public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository, MovieRepository movieRepository, InvoiceService invoiceService) {
+    public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository, MovieRepository movieRepository, InvoiceService invoiceService, ClientService clientService) {
         this.rentalRepository = rentalRepository;
         this.rentalMapper = rentalMapper;
         this.userRepository = userRepository;
         this.movieRepository = movieRepository;
         this.invoiceService = invoiceService;
+        this.clientService = clientService;
+
     }
 
 
@@ -66,9 +69,9 @@ public class RentalServiceImpl implements RentalService {
                 .endDate(endDate)
                 .build();
 
+        //clientService.saveRental(rental,user);
+
         Invoice invoice = invoiceService.createInvoice(rental, createRentalJsonBody.getStoreId());
-
-
 
         rental.setInvoice(invoice);
         //qrCodeGenerator.generateQRCode(invoice);

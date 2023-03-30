@@ -5,6 +5,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import jakarta.transaction.Transactional;
 import org.aspectj.apache.bcel.generic.InvokeInstruction;
 import org.mindswap.dto.InvoiceDto;
 import org.mindswap.mapper.InvoiceMapper;
@@ -26,20 +27,20 @@ public class QRCodeGenerator {
         this.invoiceMapper = invoiceMapper;
     }
 
-    public void generateQRCode(InvoiceDto invoiceDto){
+    @Transactional
+    public void generateQRCode(String qrcodeFileName, Invoice invoice){
 
-        Invoice invoice = invoiceMapper.fromDtoToEntity(invoiceDto);
-        String qrCodePath = "/Users/miguelaguiar/Documents/QRCodes";
-        String qrCodeName = qrCodePath + invoice.getId() + "QRCODE.png";
+        String qrCodePath = "/Users/ruirajao/Desktop/GroupProject_Backend/src/main/resources/QRCodes/".concat(qrcodeFileName);
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         try {
             BitMatrix bitMatrix = qrCodeWriter.encode("ID: " + invoice.getId() + "\n" +
                                                 "Price: " + invoice.getPrice() + "\n" +
-                                                "Items: " + invoice.getRental() + "\n",
+                                                "Items: " + invoice.getRental() + "\n" +
+                                                "NIF: " + "2616" + invoice.getRental().getUser().getId(),
                     BarcodeFormat.QR_CODE, 400, 400);
 
-            Path path = FileSystems.getDefault().getPath(qrCodeName);
+            Path path = FileSystems.getDefault().getPath(qrCodePath);
             MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
 
         } catch (WriterException | IOException e) {

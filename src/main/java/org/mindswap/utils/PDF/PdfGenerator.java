@@ -56,7 +56,7 @@ public class PdfGenerator {
         PdfWriter docWriter = null;
         initializeFonts();
 
-        this.clientName = invoice.getRental().getUser().getFirstName();
+        this.clientName = invoice.getRental().getUser().getFirstName() + " " + invoice.getRental().getUser().getLastName() ;
         this.invoiceId = invoice.getId().toString();
         this.startDate = invoice.getRental().getStartDate().toString();
         this.endDate = invoice.getRental().getEndDate().toString();
@@ -67,7 +67,7 @@ public class PdfGenerator {
 
 
         try {
-            String path = "/src/main/resources/invoices/" + pdfFilename;
+            String path = "/Users/ruirajao/Desktop/GroupProject_Backend/src/main/resources/invoices/".concat(pdfFilename);
             docWriter = PdfWriter.getInstance(doc, new FileOutputStream(path));
             doc.addAuthor("betterThanZero");
             doc.addCreationDate();
@@ -90,12 +90,13 @@ public class PdfGenerator {
                 double price = movie.getPrice();
 
                 totalPrice += price;
+                System.out.println(totalPrice);
 
 
                 if (beginPage) {
                     beginPage = false;
                     generateLayout(doc, cb);
-                    generateHeader(doc, cb);
+                    //generateHeader(doc, cb);
                     y = 615;
                 }
                 generateDetail(doc, cb, y, id,title,genre,price,rating);
@@ -106,6 +107,7 @@ public class PdfGenerator {
                     beginPage = true;
                 }
             }
+            generateHeader(doc, cb);
 
             printPageNumber(cb);
 
@@ -151,7 +153,7 @@ public class PdfGenerator {
             cb.stroke();
 
             // Invoice Header box Text Headings
-            createHeadings(cb, 402, 763, "Client Id");
+            createHeadings(cb, 402, 763, "Client Name");
             createHeadings(cb, 402, 743, "Invoice Id");
             createHeadings(cb, 402, 723, "Rental Start Date");
             createHeadings(cb, 402, 703, "Rental End Date");
@@ -187,8 +189,8 @@ public class PdfGenerator {
 
             //add qrCode
             //Image qrcode = Image.getInstance("src/main/resources/images/QRCodes/" + invoiceId + "QRCODE.png");
-            Image qrcode = Image.getInstance("src/main/resources/images/movie.jpeg");
-            qrcode.setAbsolutePosition(250, 690);
+            Image qrcode = Image.getInstance("src/main/resources/QRCodes/".concat("InvoiceQRCODE").concat(invoiceId).concat(".png"));
+            qrcode.setAbsolutePosition(260, 670);
             qrcode.scalePercent(25);
             doc.add(qrcode);
         } catch (DocumentException dex) {

@@ -1,8 +1,10 @@
 package org.mindswap.service;
 
+import jakarta.transaction.Transactional;
 import org.mindswap.dto.*;
 import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.mapper.UserMapper;
+import org.mindswap.model.Rental;
 import org.mindswap.model.User;
 import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,5 +84,12 @@ public class ClientServiceImpl implements ClientService {
     public void deleteClient(Long clientId) {
         User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
         userRepository.delete(user);
+    }
+
+    @Override
+    @Transactional
+    public void saveRental(Rental rental, User user){
+        user.getRentalList().add(rental);
+        userRepository.save(user);
     }
 }

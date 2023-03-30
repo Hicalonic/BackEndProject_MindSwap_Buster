@@ -8,7 +8,7 @@ import org.hibernate.annotations.Where;
 @Getter
 @Setter
 @Builder
-@ToString
+//@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

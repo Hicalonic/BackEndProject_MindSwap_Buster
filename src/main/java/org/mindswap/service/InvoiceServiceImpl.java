@@ -6,15 +6,14 @@ import org.mindswap.dto.InvoiceDto;
 import org.mindswap.dto.RentalDto;
 import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.exceptions.InvoiceNotFoundException;
+import org.mindswap.exceptions.StoreNotFoundException;
 import org.mindswap.mapper.InvoiceMapper;
-import org.mindswap.model.Invoice;
-import org.mindswap.model.Movie;
-import org.mindswap.model.Rental;
-import org.mindswap.model.User;
+import org.mindswap.model.*;
 import org.mindswap.repository.InvoiceRepository;
 import org.mindswap.repository.StoreRepository;
 import org.mindswap.repository.UserRepository;
 import org.mindswap.utils.PDF.PdfGenerator;
+import org.mindswap.utils.QRCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,15 +32,19 @@ public class InvoiceServiceImpl implements InvoiceService{
 
     private PdfGenerator pdfGenerator;
 
+    private QRCodeGenerator qrCodeGenerator;
+
+
 
     @Autowired
     public InvoiceServiceImpl(InvoiceRepository invoiceRepository, InvoiceMapper invoiceMapper,
-                              UserRepository userRepository, StoreRepository storeRepository, PdfGenerator pdfGenerator) {
+                              UserRepository userRepository, StoreRepository storeRepository, PdfGenerator pdfGenerator, QRCodeGenerator qrCodeGenerator) {
         this.invoiceRepository = invoiceRepository;
         this.invoiceMapper = invoiceMapper;
         this.userRepository = userRepository;
         this.storeRepository=storeRepository;
         this.pdfGenerator = pdfGenerator;
+        this.qrCodeGenerator = qrCodeGenerator;
 
     }
 
@@ -88,11 +91,19 @@ public class InvoiceServiceImpl implements InvoiceService{
             rentalPrice += movie.getPrice();
         }
 
+        Store store = storeRepository.findById(storeId).orElseThrow(StoreNotFoundException::new);
+        store.getInvoiceList().add(invoice);
+        storeRepository.save(store);
 
-        invoice.setStore(storeRepository.getReferenceById(storeId));
+        invoice.setStore(store);
         invoice.setRental(rental);
         invoice.setPrice(rentalPrice);
         invoiceRepository.save(invoice);
+
+        String invoiceId = invoice.getId().toString();
+        System.out.println(invoiceId);
+
+        qrCodeGenerator.generateQRCode("InvoiceQRCODE"+ invoiceId.concat(".png"), invoice);
         pdfGenerator.createPDF("InvoicePDF".concat(invoice.getId().toString()).concat(".pdf"), invoice);
         return invoice;
     }

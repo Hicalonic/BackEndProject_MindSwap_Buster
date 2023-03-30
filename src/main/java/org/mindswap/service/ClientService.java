@@ -1,6 +1,8 @@
 package org.mindswap.service;
 
 import org.mindswap.dto.*;
+import org.mindswap.model.Rental;
+import org.mindswap.model.User;
 
 import java.util.List;
 
@@ -21,6 +23,8 @@ public interface ClientService {
     //void updateClientRole(Long clientId, RoleUpdateDto roleUpdateDto);
 
     void deleteClient(Long clientId);
+
+    public void saveRental(Rental rental, User user);
 
 
 

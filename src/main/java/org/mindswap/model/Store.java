@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@ToString
+//@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -31,7 +31,7 @@ public class Store {
     @Column(nullable = false)
     private boolean deletedStore = Boolean.FALSE;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "store")
     private List<Invoice> invoiceList;
 
 }

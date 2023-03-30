@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@ToString
+//@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -47,9 +47,6 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Token> tokens;
-
-    @ManyToOne(targetEntity = Store.class, fetch = FetchType.EAGER)
-    private Store store;
 
     @Column(nullable = false)
     private boolean deletedUser = Boolean.FALSE;

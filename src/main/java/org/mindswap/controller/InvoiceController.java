@@ -58,7 +58,7 @@ public class InvoiceController {
         if(invoiceDtos.size() != 0){
             for (InvoiceDto invoiceDto :
                  invoiceDtos) {
-                qrCodeGenerator.generateQRCode(invoiceDto);
+                //qrCodeGenerator.generateQRCode(invoce);
             }
         }
         return new ResponseEntity<>(invoiceDtos, HttpStatus.OK);
