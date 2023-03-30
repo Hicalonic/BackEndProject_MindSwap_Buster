@@ -49,7 +49,7 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     @Transactional
-    public String createRental(CreateRentalJsonBody createRentalJsonBody) {
+    public void createRental(CreateRentalJsonBody createRentalJsonBody) {
         Long clientId = createRentalJsonBody.getClientId();
         User user = userRepository.getReferenceById(clientId);
 
@@ -76,10 +76,7 @@ public class RentalServiceImpl implements RentalService {
         Invoice invoice = invoiceService.createInvoice(rental, createRentalJsonBody.getStoreId());
         rental.setInvoice(invoice);
 
-
-
         rentalRepository.save(rental);
-        return "String from createRental Rental Service Imp";
     }
 
     @Override

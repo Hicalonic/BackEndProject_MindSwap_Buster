@@ -20,17 +20,17 @@ public class RentalController {
         this.rentalService = rentalService;
     }
 
-    @GetMapping(path = "/CREATEMYRENTAL")
+    @GetMapping(path = "/create-rental")
     @PreAuthorize("hasAnyAuthority('WORKER', 'MANAGER','ADMIN')")
     public ResponseEntity<String> createRental(@RequestBody CreateRentalJsonBody createRentalJsonBody) {
         rentalService.createRental(createRentalJsonBody);
-        return new ResponseEntity<>("Rental created.", HttpStatus.CREATED);
+        return new ResponseEntity<>("Rental created. Check your e-mail for more information.", HttpStatus.CREATED);
 
     }
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
-    public ResponseEntity<RentalDto> getRentalById(@PathVariable("{id}")Long id) {
+    public ResponseEntity<RentalDto> getRentalById(@PathVariable("id")Long id) {
         return new ResponseEntity<>(rentalService.getRentalById(id),HttpStatus.OK);
     }
 
