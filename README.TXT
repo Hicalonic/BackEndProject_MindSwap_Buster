@@ -1,4 +1,4 @@
-# **Connect 4**
+# **MindSwapBuster **
 
 ![](https://i.ibb.co/KbFvPvy/Screenshot-from-2023-02-19-23-05-22.png) 
 
