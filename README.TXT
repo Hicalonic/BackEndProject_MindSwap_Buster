@@ -23,7 +23,20 @@ However, Mind Swap Buster offers a unique concept that could bring back the comm
 Mind Swap Buster has the potential to revive a Blockbuster-style service for a new generation.
 
 **Project overview:**
-This two-week Project was completed within 14 weeks of bootcamp, mixing the learned concepts of API REST
+This two-week Project was completed within 14 weeks of bootcamp. Our software development project was created using a mix of essential tools and technologies, including:
+--> Git for version control and collaboration;
+--> README files to provide clear project instructions.
+--> Model relationships for defining entity relationships.
+--> Spring Security for authentication and authorization.
+--> IMDB API for retrieving movie information.
+--> SpringBootMail for email sending using SMTP.
+--> Docker for container creation.
+--> Swagger for designing and documenting RESTful APIs.
+--> Postman for API testing.
+--> Docker Compose for container orchestration.
+--> In-memory caching for performance optimization.
+--> JUNIT tests for application functionality.
+--> With these tools and technologies, we can create a high-quality, efficient software application that meets user needs and exceeds expectations.
 
 **Authors:**
 - João Pedro Rodrigues - [@johnDoCodigo](https://github.com/johnDoCodigo)
