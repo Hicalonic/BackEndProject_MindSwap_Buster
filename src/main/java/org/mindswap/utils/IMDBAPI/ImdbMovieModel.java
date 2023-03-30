@@ -14,7 +14,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @Table(name = "moviesimdb")
 @SQLDelete(sql = "UPDATE movies SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+@Where(clause = "deleted_moviemodel=false")
 public class ImdbMovieModel {
 
     @Id
@@ -28,12 +28,15 @@ public class ImdbMovieModel {
     private String title;
 
     @Column(nullable = false)
-    private double rating;
+    private double imdbRating;
 
     @Column
     private String movieGenre;
 
     @Column
     private String imageCoverUrl;
+
+    @Column(nullable = false)
+    private boolean deletedMoviemodel = Boolean.FALSE;
 
 }

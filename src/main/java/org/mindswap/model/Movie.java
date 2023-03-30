@@ -42,7 +42,7 @@ public class Movie {
     private boolean deletedMovie = Boolean.FALSE;
 
     @Column(nullable = false)
-    private boolean available = Boolean.TRUE;
+    private boolean available;
 
     @Column
     private double imdbRating;

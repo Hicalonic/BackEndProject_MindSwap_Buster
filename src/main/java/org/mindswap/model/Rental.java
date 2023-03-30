@@ -6,10 +6,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -27,9 +24,14 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    @ManyToOne(targetEntity = User.class)
-    private User user;
+    public User user;
+
+//    @ManyToOne(targetEntity = User.class)
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
     @Column(nullable = false)
     private LocalDate startDate;

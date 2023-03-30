@@ -6,6 +6,7 @@ import org.mindswap.dto.MovieCreateDto;
 import org.mindswap.dto.MovieDto;
 import org.mindswap.dto.MovieUpdateDto;
 import org.mindswap.model.Movie;
+import org.mindswap.utils.IMDBAPI.ImdbMovieModel;
 
 @Mapper(componentModel = "spring")
 public interface MovieMapper {
@@ -21,6 +22,8 @@ public interface MovieMapper {
     Movie fromUpdateDtoToEntity(MovieUpdateDto movieUpdateDto);
     @InheritInverseConfiguration
     MovieUpdateDto fromEntityToUpdateDto(Movie movie);
+
+    Movie fromImdbMovieModelToMovie(ImdbMovieModel imdbMovieModel);
 
 
 }

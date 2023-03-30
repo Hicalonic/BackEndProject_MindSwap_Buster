@@ -56,7 +56,10 @@ public class RentalServiceImpl implements RentalService {
         List<Movie> movieList = new ArrayList<>();
 
         for (Long movieId: movieIdList) {
-            movieList.add(movieRepository.findById(movieId).orElseThrow(MovieNotFoundException::new));
+            Movie movie = movieRepository.findById(movieId).orElseThrow(MovieNotFoundException::new);
+            movieList.add(movie);
+            movie.setAvailable(false);
+            movieRepository.save(movie);
         }
 
         LocalDate startDate = createRentalJsonBody.getStartDate();

@@ -6,7 +6,7 @@ public interface AdminService {
 
     UserDto makeManager(Long workerId);
 
-    UserDto makeClient(Long workerId);
+    UserDto makeWorker(Long clientId);
 
     UserDto makeAdmin(Long workerId);
 

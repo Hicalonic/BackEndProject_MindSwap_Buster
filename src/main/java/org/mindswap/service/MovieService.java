@@ -8,8 +8,8 @@ import org.mindswap.model.Movie;
 import java.util.List;
 
 public interface MovieService {
-    public MovieDto createMovie(MovieCreateDto movieCreateDto);
-    public List<MovieDto> createMovies(List<MovieCreateDto> movieCreateDtoList);
+    void createMovie(Long id);
+    void createMovies(List<Long> imdbIds);
 
     public MovieDto getMovieById(Long movieId);
 
@@ -18,6 +18,8 @@ public interface MovieService {
     List<MovieDto> getAllMovies();
     public MovieDto updateMovie(Long movieId, MovieUpdateDto movieUpdateDto);
     public void deleteMovie(Long movieId);
+
+    double generatePrice(double rating);
 
 
 
