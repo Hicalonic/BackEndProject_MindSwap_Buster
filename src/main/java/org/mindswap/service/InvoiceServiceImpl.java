@@ -1,5 +1,6 @@
 package org.mindswap.service;
 
+import jakarta.transaction.Transactional;
 import org.mindswap.dto.InvoiceCreateDto;
 import org.mindswap.dto.InvoiceDto;
 import org.mindswap.dto.RentalDto;
@@ -7,6 +8,7 @@ import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.exceptions.InvoiceNotFoundException;
 import org.mindswap.mapper.InvoiceMapper;
 import org.mindswap.model.Invoice;
+import org.mindswap.model.Movie;
 import org.mindswap.model.Rental;
 import org.mindswap.model.User;
 import org.mindswap.repository.InvoiceRepository;
@@ -25,28 +27,26 @@ public class InvoiceServiceImpl implements InvoiceService{
 
     private UserRepository userRepository;
 
-    private RentalService rentalService;
 
     @Autowired
     public InvoiceServiceImpl(InvoiceRepository invoiceRepository, InvoiceMapper invoiceMapper,
-                              UserRepository userRepository, RentalService rentalService) {
+                              UserRepository userRepository) {
         this.invoiceRepository = invoiceRepository;
         this.invoiceMapper = invoiceMapper;
         this.userRepository = userRepository;
-        this.rentalService = rentalService;
 
     }
 
 
 
 
-    @Override
-    public RentalDto getSpecificInvoice(Long invoiceId, Long clientId)  {
-        Invoice invoice = invoiceRepository.findById(invoiceId).orElseThrow(InvoiceNotFoundException::new);
-        Rental rental =  rentalService.getRentalByInvoiceId(invoiceId);
-        return rentalService.getRentalById(rental.getId());
-
-    }
+//    @Override
+//    public RentalDto getSpecificInvoice(Long invoiceId, Long clientId)  {
+//        Invoice invoice = invoiceRepository.findById(invoiceId).orElseThrow(InvoiceNotFoundException::new);
+//        Rental rental =  rentalService.getRentalByInvoiceId(invoiceId);
+//        return rentalService.getRentalById(rental.getId());
+//
+//    }
 
     @Override
     public InvoiceDto getInvoiceById(Long id) {
@@ -69,10 +69,20 @@ public class InvoiceServiceImpl implements InvoiceService{
         return invoiceList.stream().map(i-> invoiceMapper.fromEntityToDto(i)).toList();
     }
 
+
     @Override
-    public InvoiceDto createInvoice(InvoiceCreateDto invoiceCreateDto) {
-        Invoice invoice = invoiceRepository.save(invoiceMapper.fromCreateDtoToEntity(invoiceCreateDto));
-        return invoiceMapper.fromEntityToDto(invoice);
+    @Transactional
+    public Invoice createInvoice(Rental rental) {
+        Invoice invoice = new Invoice();
+        double rentalPrice = 0;
+
+        for (Movie movie: rental.getMovies()) {
+            rentalPrice += movie.getPrice();
+        }
+        invoice.setRental(rental);
+        invoice.setPrice(rentalPrice);
+        invoiceRepository.save(invoice);
+        return invoice;
     }
 
     @Override

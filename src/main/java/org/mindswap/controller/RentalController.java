@@ -1,7 +1,6 @@
 package org.mindswap.controller;
 
 import org.mindswap.dto.*;
-import org.mindswap.service.MovieService;
 import org.mindswap.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,8 +22,8 @@ public class RentalController {
 
     @GetMapping(path = "/CREATEMYRENTAL")
     @PreAuthorize("hasAnyAuthority('WORKER', 'MANAGER','ADMIN')")
-    public ResponseEntity<String> createRental(@RequestBody CreateRentalDto createRentalDto) {
-        rentalService.createRental(createRentalDto);
+    public ResponseEntity<String> createRental(@RequestBody CreateRentalJsonBody createRentalJsonBody) {
+        rentalService.createRental(createRentalJsonBody);
         return new ResponseEntity<>("Rental created.", HttpStatus.CREATED);
 
     }

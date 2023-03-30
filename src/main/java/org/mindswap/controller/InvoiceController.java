@@ -37,12 +37,12 @@ public class InvoiceController {
         Long authenticatedUserId = Long.valueOf(getAuthenticatedUserId());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().iterator().next().getAuthority();
-        RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
+        //RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
 
         //IF THE CLIENT TRIES TO ACCESS OTHER CLIENTS PDF
-        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
+//        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
+//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//        }
         return new ResponseEntity<>(invoiceService.getInvoiceById(invoiceId), HttpStatus.OK);
     }
 
@@ -70,26 +70,18 @@ public class InvoiceController {
         return new ResponseEntity<>(invoiceService.getAllClientInvoices(clientId), HttpStatus.OK);
     }
 
-
-    //TODO: DELETE THIS METHOD. TO IMPLEMENT IN THE createRental() method
-    @PostMapping()
-    @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
-    public ResponseEntity<InvoiceDto> createInvoice(@RequestBody InvoiceCreateDto invoiceCreateDto) {
-        return new ResponseEntity<>(invoiceService.createInvoice(invoiceCreateDto), HttpStatus.OK);
-    }
-
     @GetMapping(path = "{invoice_id}/qrcode")
     @PreAuthorize("hasAnyAuthority('CLIENT','WORKER','MANAGER','ADMIN')")
     public ResponseEntity<Object> getQrCode(@PathVariable("invoice_id") Long invoiceId) {
         Long authenticatedUserId = Long.valueOf(getAuthenticatedUserId());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().iterator().next().getAuthority();
-        RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
+        //RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
 
         //IF THE CLIENT TRIES TO ACCESS OTHER CLIENTS INVOICE
-        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
+//        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
+//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//        }
 
         //TODO: QRCODESERVICE....
         return new ResponseEntity<>("TODO", HttpStatus.OK);
@@ -101,12 +93,12 @@ public class InvoiceController {
         Long authenticatedUserId = Long.valueOf(getAuthenticatedUserId());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().iterator().next().getAuthority();
-        RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
+        //RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
 
         //IF THE CLIENT TRIES TO ACCESS OTHER CLIENTS PDF
-        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
+//        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
+//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//        }
 
         //TODO: PDFSERVICE....
         return new ResponseEntity<>("TODO", HttpStatus.OK);
@@ -118,12 +110,12 @@ public class InvoiceController {
         Long authenticatedUserId = Long.valueOf(getAuthenticatedUserId());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().iterator().next().getAuthority();
-        RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
+        //RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
 
         //IF THE CLIENT TRIES TO ACCESS OTHER CLIENTS PDF
-        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
+//        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
+//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//        }
 
         //TODO: EMAILSERVICE....
         return new ResponseEntity<>("TODO", HttpStatus.OK);

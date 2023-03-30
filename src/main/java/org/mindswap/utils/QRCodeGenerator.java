@@ -36,8 +36,7 @@ public class QRCodeGenerator {
         try {
             BitMatrix bitMatrix = qrCodeWriter.encode("ID: " + invoice.getId() + "\n" +
                                                 "Price: " + invoice.getPrice() + "\n" +
-                                                "Items: " + invoice.getRental() + "\n" +
-                                                "Worker: " + invoice.getWorker(),
+                                                "Items: " + invoice.getRental() + "\n",
                     BarcodeFormat.QR_CODE, 400, 400);
 
             Path path = FileSystems.getDefault().getPath(qrCodeName);

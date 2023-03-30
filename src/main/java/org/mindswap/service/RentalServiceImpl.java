@@ -1,14 +1,14 @@
 package org.mindswap.service;
 
-import jakarta.validation.constraints.NotBlank;
-import org.mindswap.controller.CreateRentalDto;
-import org.mindswap.dto.RentalCreateDto;
+import jakarta.transaction.Transactional;
+import org.mindswap.controller.CreateRentalJsonBody;
 import org.mindswap.dto.RentalDto;
 import org.mindswap.dto.RentalUpdateDto;
 import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.exceptions.MovieNotFoundException;
 import org.mindswap.exceptions.RentalNotFoundException;
 import org.mindswap.mapper.RentalMapper;
+import org.mindswap.model.Invoice;
 import org.mindswap.model.Movie;
 import org.mindswap.model.Rental;
 import org.mindswap.model.User;
@@ -18,10 +18,8 @@ import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,39 +31,48 @@ public class RentalServiceImpl implements RentalService {
     private UserRepository userRepository;
     private MovieRepository movieRepository;
 
+    private InvoiceService invoiceService;
+
     @Autowired
-    public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository, MovieRepository movieRepository) {
+    public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository, MovieRepository movieRepository, InvoiceService invoiceService) {
         this.rentalRepository = rentalRepository;
         this.rentalMapper = rentalMapper;
         this.userRepository = userRepository;
         this.movieRepository = movieRepository;
+        this.invoiceService = invoiceService;
     }
 
 
     @Override
-    public String createRental(CreateRentalDto createRentalDto) {
-        Long clientId = createRentalDto.getClientId();
+    @Transactional
+    public String createRental(CreateRentalJsonBody createRentalJsonBody) {
+        Long clientId = createRentalJsonBody.getClientId();
         User user = userRepository.getReferenceById(clientId);
 
-        List<Long> movieIdList = createRentalDto.getMovieIdList();
+        List<Long> movieIdList = createRentalJsonBody.getMovieIdList();
         List<Movie> movieList = new ArrayList<>();
 
         for (Long movieId: movieIdList) {
             movieList.add(movieRepository.findById(movieId).orElseThrow(MovieNotFoundException::new));
         }
 
-        LocalDate startDate = createRentalDto.getStartDate();
-        LocalDate endDate = createRentalDto.getEndDate();
+        LocalDate startDate = createRentalJsonBody.getStartDate();
+        LocalDate endDate = createRentalJsonBody.getEndDate();
 
-        Rental rental = new Rental();
-        rental = Rental.builder()
+        Rental rental = Rental.builder()
                 .user(user)
                 .movies(movieList)
                 .startDate(startDate)
                 .endDate(endDate)
                 .build();
 
+        Invoice invoice = invoiceService.createInvoice(rental);
 
+
+
+        rental.setInvoice(invoice);
+        //qrCodeGenerator.generateQRCode(invoice);
+        //pdfService.createPDF("InvoicePDF".concat(invoice.getId().toString()).concat(".pdf"), invoice);
 
         rentalRepository.save(rental);
         return "String from createRental Rental Service Imo";
