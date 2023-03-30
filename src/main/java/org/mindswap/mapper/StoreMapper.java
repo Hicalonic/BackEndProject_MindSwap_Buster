@@ -5,7 +5,6 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mindswap.dto.StoreCreateDto;
 import org.mindswap.dto.StoreDto;
-import org.mindswap.dto.StoreUpdateDto;
 import org.mindswap.model.Store;
 
 @Mapper(componentModel = "spring")
@@ -19,8 +18,6 @@ public interface StoreMapper {
     @InheritInverseConfiguration
     StoreCreateDto fromEntityToStoreCreateDto(Store store);
 
-    Store fromUpdateDtoToEntity(StoreUpdateDto storeUpdateDto);
-    @InheritInverseConfiguration
-    StoreUpdateDto fromEntityToUpdateDto(Store store);
+
 
 }

@@ -2,7 +2,6 @@ package org.mindswap.controller;
 
 import org.mindswap.dto.StoreCreateDto;
 import org.mindswap.dto.StoreDto;
-import org.mindswap.dto.StoreUpdateDto;
 import org.mindswap.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,16 +42,11 @@ public class StoreController {
         return new ResponseEntity<>(storeDto, HttpStatus.CREATED);
     }
 
-    @PutMapping("{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<StoreDto> updatedStore(@PathVariable("{id}") Long id, @RequestBody StoreUpdateDto storeUpdateDto) {
-        StoreDto storeDto = storeService.updateStore(id, storeUpdateDto);
-        return new ResponseEntity<>(storeDto, HttpStatus.ACCEPTED);
-    }
+
 
     @DeleteMapping("{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> deleteStore(@PathVariable("{id}") Long id, @RequestBody StoreUpdateDto storeUpdateDto) {
+    public ResponseEntity<String> deleteStore(@PathVariable("{id}") Long id) {
         storeService.deleteStore(id);
         return new ResponseEntity<>("Store has been deleted", HttpStatus.OK);
     }

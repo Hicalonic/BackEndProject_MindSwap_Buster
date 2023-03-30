@@ -2,9 +2,7 @@ package org.mindswap.service;
 
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
-import org.mindswap.dto.InvoiceCreateDto;
 import org.mindswap.dto.InvoiceDto;
-import org.mindswap.dto.RentalDto;
 import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.exceptions.InvoiceNotFoundException;
 import org.mindswap.exceptions.StoreNotFoundException;

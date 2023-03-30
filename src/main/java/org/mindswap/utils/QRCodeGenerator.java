@@ -6,12 +6,8 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import jakarta.transaction.Transactional;
-import org.aspectj.apache.bcel.generic.InvokeInstruction;
-import org.mindswap.dto.InvoiceDto;
 import org.mindswap.mapper.InvoiceMapper;
 import org.mindswap.model.Invoice;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

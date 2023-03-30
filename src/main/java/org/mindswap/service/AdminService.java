@@ -9,6 +9,5 @@ public interface AdminService {
 
     UserDtoJsonBody makeWorker(Long clientId);
 
-    UserDto makeAdmin(Long workerId);
 
 }

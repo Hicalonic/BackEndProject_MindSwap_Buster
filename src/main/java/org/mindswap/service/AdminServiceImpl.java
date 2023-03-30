@@ -59,10 +59,5 @@ public class AdminServiceImpl implements AdminService{
         return userInfo;
     }
 
-    @Override
-    public UserDto makeAdmin(Long workerId) {
-        User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
-        user.setRole(Role.ADMIN);
-        return userMapper.fromEntityToDto(user);
-    }
+
 }

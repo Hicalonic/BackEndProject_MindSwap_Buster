@@ -30,19 +30,17 @@ public class RentalServiceImpl implements RentalService {
     private UserRepository userRepository;
     private MovieRepository movieRepository;
     private InvoiceService invoiceService;
-    private ClientService clientService;
 
 
 
     @Autowired
     public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository,
-                             MovieRepository movieRepository, InvoiceService invoiceService, ClientService clientService) {
+                             MovieRepository movieRepository, InvoiceService invoiceService) {
         this.rentalRepository = rentalRepository;
         this.rentalMapper = rentalMapper;
         this.userRepository = userRepository;
         this.movieRepository = movieRepository;
         this.invoiceService = invoiceService;
-        this.clientService = clientService;
     }
 
 

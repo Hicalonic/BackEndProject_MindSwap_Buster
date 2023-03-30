@@ -5,7 +5,6 @@ import org.mindswap.dto.UserCreateDto;
 import org.mindswap.dto.UserDto;
 import org.mindswap.dto.UserDtoJsonBody;
 import org.mindswap.dto.UserUpdateDto;
-import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.exceptions.WorkerNotFoundException;
 import org.mindswap.mapper.UserMapper;
 import org.mindswap.model.Role;

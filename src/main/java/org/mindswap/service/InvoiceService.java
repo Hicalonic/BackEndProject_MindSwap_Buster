@@ -1,11 +1,8 @@
 package org.mindswap.service;
 
-import org.mindswap.dto.InvoiceCreateDto;
 import org.mindswap.dto.InvoiceDto;
-import org.mindswap.dto.RentalDto;
 import org.mindswap.model.Invoice;
 import org.mindswap.model.Rental;
-import org.mindswap.repository.InvoiceRepository;
 
 import java.util.List;
 
