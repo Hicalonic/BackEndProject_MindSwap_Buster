@@ -1,12 +1,12 @@
 package org.mindswap.controller.UserControllers;
 
-
 import jakarta.validation.Valid;
 import org.mindswap.dto.UserDtoJsonBody;
 import org.mindswap.dto.UserUpdateDto;
 import org.mindswap.model.User;
 import org.mindswap.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,12 +26,13 @@ public class ClientController {
     }
 
     @GetMapping(path = "")
-    //@Cacheable(value = "welcomeClient")
+    @Cacheable(value = "welcomeClient")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasAuthority('CLIENT')")
     public String welcomeClient(@AuthenticationPrincipal User activeUser) throws InterruptedException {
-        //Thread.sleep(6000);
-        return "Welcome to MindSwapBuster, dear client.";
+        //Test redis cache.
+        Thread.sleep(6000);
+        return "Welcome to MindSwapBuster, dear user.";
     }
 
 

@@ -60,7 +60,7 @@ public class ImdbController {
 
         System.out.println("response body: " + responseArray);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 5; i++) {
             JSONObject obj = responseArray.getJSONObject(i);
             String id = obj.getString("id");
             String titleId = id.replace("title", "").replace("/","");
