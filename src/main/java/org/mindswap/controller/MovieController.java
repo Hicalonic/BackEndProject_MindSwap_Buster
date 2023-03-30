@@ -42,7 +42,6 @@ public class MovieController {
     @GetMapping(path ="/available")
     public ResponseEntity<List<MovieDto>> getAvailableMovies() {
         List<MovieDto> list = movieService.getAvailableMovies();
-        System.out.println("Do controller"  + list);
         return new ResponseEntity<List<MovieDto>>(list,HttpStatus.OK);
     }
     @GetMapping(path ="/all")

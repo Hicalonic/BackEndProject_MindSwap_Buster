@@ -39,9 +39,9 @@ public class RentalController {
         return new ResponseEntity<>(rentalService.getAllRentals(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "deliver/{id}")
+    @GetMapping(path = "{id}/deliver")
     @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
-    public ResponseEntity<String> deliverRentalById(@PathVariable("{id}")Long id) {
+    public ResponseEntity<String> deliverRentalById(@PathVariable("id") Long id) {
         rentalService.deliver(id);
         return new ResponseEntity<>("Rental delivered",HttpStatus.OK);
     }
