@@ -5,15 +5,12 @@ import jakarta.mail.internet.MimeMessage;
 import org.mindswap.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.InputStream;
 
 @Service
 public class EmailService {
@@ -82,7 +79,7 @@ public class EmailService {
                 "The Movie Swap Buster team");
 
         // add the attachment
-        FileSystemResource file = new FileSystemResource(new File("src/main/resources/Images/MovieSwapBuster.jpeg"));
+        FileSystemResource file = new FileSystemResource(new File("src/main/resources/images/MovieSwapBuster.jpeg"));
 
         helper.addAttachment("Attachment.jpeg", file);
 

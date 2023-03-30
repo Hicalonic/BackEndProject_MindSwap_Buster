@@ -21,10 +21,11 @@ public class RentalController {
         this.rentalService = rentalService;
     }
 
-    @PostMapping
-    @PreAuthorize("hasAnyRole('WORKER', 'MANAGER','ADMIN')")
-    public ResponseEntity<RentalDto> createRental(@RequestBody RentalCreateDto rentalCreateDto) {
-        return new ResponseEntity<>(rentalService.createRental(rentalCreateDto), HttpStatus.CREATED);
+    @GetMapping(path = "/CREATEMYRENTAL")
+    @PreAuthorize("hasAnyAuthority('WORKER', 'MANAGER','ADMIN')")
+    public ResponseEntity<String> createRental(@RequestBody CreateRentalDto createRentalDto) {
+        rentalService.createRental(createRentalDto);
+        return new ResponseEntity<>("Rental created.", HttpStatus.CREATED);
 
     }
 

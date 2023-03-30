@@ -1,20 +1,27 @@
 package org.mindswap.service;
 
+import jakarta.validation.constraints.NotBlank;
+import org.mindswap.controller.CreateRentalDto;
 import org.mindswap.dto.RentalCreateDto;
 import org.mindswap.dto.RentalDto;
 import org.mindswap.dto.RentalUpdateDto;
 import org.mindswap.exceptions.ClientNotFoundException;
+import org.mindswap.exceptions.MovieNotFoundException;
 import org.mindswap.exceptions.RentalNotFoundException;
 import org.mindswap.mapper.RentalMapper;
+import org.mindswap.model.Movie;
 import org.mindswap.model.Rental;
 import org.mindswap.model.User;
+import org.mindswap.repository.MovieRepository;
 import org.mindswap.repository.RentalRepository;
 import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,30 +31,52 @@ public class RentalServiceImpl implements RentalService {
     private RentalRepository rentalRepository;
     private RentalMapper rentalMapper;
     private UserRepository userRepository;
+    private MovieRepository movieRepository;
 
     @Autowired
-    public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository) {
+    public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository, MovieRepository movieRepository) {
         this.rentalRepository = rentalRepository;
         this.rentalMapper = rentalMapper;
         this.userRepository = userRepository;
+        this.movieRepository = movieRepository;
     }
 
 
-
-
     @Override
-    public RentalDto createRental(RentalCreateDto rentalCreateDto) {
-        Rental rental = rentalMapper.fromCreateDtoToEntity(rentalCreateDto);
+    public String createRental(CreateRentalDto createRentalDto) {
+        Long clientId = createRentalDto.getClientId();
+        User user = userRepository.getReferenceById(clientId);
+
+        List<Long> movieIdList = createRentalDto.getMovieIdList();
+        List<Movie> movieList = new ArrayList<>();
+
+        for (Long movieId: movieIdList) {
+            movieList.add(movieRepository.findById(movieId).orElseThrow(MovieNotFoundException::new));
+        }
+
+        LocalDate startDate = createRentalDto.getStartDate();
+        LocalDate endDate = createRentalDto.getEndDate();
+
+        Rental rental = new Rental();
+        rental = Rental.builder()
+                .user(user)
+                .movies(movieList)
+                .startDate(startDate)
+                .endDate(endDate)
+                .build();
+
+
+
         rentalRepository.save(rental);
-        return rentalMapper.fromEntityToDto(rental);
+        return "String from createRental Rental Service Imo";
     }
 
     @Override
     public List<RentalDto> getClientCurrentRentals(Long clientID) {
-       User user = userRepository.findById(clientID).orElseThrow(ClientNotFoundException::new);
+        User user = userRepository.findById(clientID).orElseThrow(ClientNotFoundException::new);
         List<Rental> currentRentalList = user.getRentalList().stream()
                 .filter(rental -> rental.getEndDate().isAfter(LocalDate.now())).toList();
-        return currentRentalList.stream().map(r-> rentalMapper.fromEntityToDto(r)).toList();
+        return currentRentalList.stream().map(r -> rentalMapper.fromEntityToDto(r)).toList();
     }
 
     @Override
@@ -59,16 +88,16 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public List<RentalDto> getAllRentals() {
-        return rentalRepository.findAll().stream().map(r->rentalMapper.fromEntityToDto(r)).toList();
+        return rentalRepository.findAll().stream().map(r -> rentalMapper.fromEntityToDto(r)).toList();
     }
 
     @Override
     public RentalDto updateRental(Long rentalId, RentalUpdateDto rentalUpdateDto) {
         Rental rental = rentalRepository.findById(rentalId).orElseThrow(RentalNotFoundException::new);
-        if(rentalUpdateDto.getStartDate() != null) {
+        if (rentalUpdateDto.getStartDate() != null) {
             rental.setStartDate(rentalUpdateDto.getStartDate());
         }
-        if(rentalUpdateDto.getEndDate() != null) {
+        if (rentalUpdateDto.getEndDate() != null) {
             rental.setEndDate(rentalUpdateDto.getEndDate());
         }
         /*if(rentalUpdateDto.getMovieList() != null) {
@@ -88,11 +117,11 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public List<RentalDto> getAllRentalsByClientId(Long clientId) {
         List<Rental> allUserRental = rentalRepository.findAll();
-        List<RentalDto> allUserRentalDto =new ArrayList<>();
+        List<RentalDto> allUserRentalDto = new ArrayList<>();
         for (Rental rental :
                 allUserRental) {
             allUserRentalDto.add(rentalMapper.fromEntityToDto(rental));
-            }
+        }
 
         allUserRentalDto.removeIf(rentalDto -> !Objects.equals(rentalDto.getUser().getId(), clientId));
         return allUserRentalDto;
@@ -111,6 +140,6 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public Rental getRentalByInvoiceId(Long invoiceId) {
-      return  rentalRepository.findByInvoiceId(invoiceId);
+        return rentalRepository.findByInvoiceId(invoiceId);
     }
 }

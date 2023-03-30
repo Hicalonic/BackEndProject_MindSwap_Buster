@@ -34,6 +34,7 @@ public class SecurityConfiguration {
         .disable()
         .authorizeHttpRequests()
             .requestMatchers("/swagger-ui/**").permitAll()
+            .requestMatchers("/client/**").permitAll()
             .requestMatchers("/v3/**").permitAll()
             .requestMatchers("/imdb/**").permitAll()
             .requestMatchers("/email/**").permitAll()

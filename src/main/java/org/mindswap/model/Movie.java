@@ -44,6 +44,4 @@ public class Movie {
     @Column(nullable = false)
     private boolean available = Boolean.TRUE;
 
-
-
 }

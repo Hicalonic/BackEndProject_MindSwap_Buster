@@ -6,6 +6,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +41,7 @@ public class Rental {
     @JoinTable(name = "rental_movies",
             joinColumns = @JoinColumn(name = "rental_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private Set<Movie> movies = new HashSet<>();
+    private List<Movie> movies;
 
     @OneToOne
     @JoinColumn(name = "invoice_id")

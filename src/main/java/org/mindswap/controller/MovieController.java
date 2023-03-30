@@ -1,15 +1,13 @@
 package org.mindswap.controller;
-import jakarta.annotation.security.RolesAllowed;
 import org.mindswap.dto.MovieCreateDto;
 import org.mindswap.dto.MovieDto;
 import org.mindswap.dto.MovieUpdateDto;
-import org.mindswap.model.Movie;
-import org.mindswap.model.Role;
 import org.mindswap.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +39,7 @@ public class MovieController {
     public ResponseEntity<List<MovieDto>> getAvailableMovies() {
         return new ResponseEntity<List<MovieDto>>(movieService.getAvailableMovies(),HttpStatus.OK);
     }
+
     @GetMapping(path ="/all")
     @PreAuthorize("hasAnyAuthority('CLIENT','WORKER','MANAGER','ADMIN')")
     public ResponseEntity<List<MovieDto>> getAllMovies() {
