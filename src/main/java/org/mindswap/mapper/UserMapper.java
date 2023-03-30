@@ -8,6 +8,7 @@ import org.mindswap.model.User;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
+
     User fromDtoToEntity(UserDto userDto);
     @InheritInverseConfiguration
     UserDto fromEntityToDto(User user);

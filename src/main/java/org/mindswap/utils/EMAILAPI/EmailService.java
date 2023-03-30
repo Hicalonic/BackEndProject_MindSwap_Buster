@@ -2,6 +2,8 @@ package org.mindswap.utils.EMAILAPI;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.transaction.Transactional;
+import org.mindswap.model.Invoice;
 import org.mindswap.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -64,24 +66,22 @@ public class EmailService {
         );
         javaMailSender.send(mail);
     }
-
-    public void sendEmailWithAttachment(String email) throws MessagingException {
+    @Transactional
+    public void sendEmailWithAttachment(String email, Invoice invoice) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
+        message.setFrom("mindswap5backenproject@gmail.com");
         helper.setTo(email);
         helper.setSubject("MOVIE SWAP BUSTER | Rental details");
-        helper.setText("Hi " + "Rui" + ",\n\n" +
-                "Here are the details for your movie rental:\n" +
-                "- Rental ID: " + "Uno Duos Tres Cuarago" + "\n\n" +
+        helper.setText("Hi, " + invoice.getRental().getUser().getFirstName()  + ",\n\n" +
+                "We've sent you the invoice as an attachment.\n" +
                 "We hope you enjoy your movie!\n\n" +
                 "Best regards,\n" +
                 "The Movie Swap Buster team");
 
-        // add the attachment
-        FileSystemResource file = new FileSystemResource(new File("src/main/resources/images/movie.jpeg"));
-
-        helper.addAttachment("Attachment.jpeg", file);
+        FileSystemResource file = new FileSystemResource(new File("src/main/resources/invoices/invoicePDF".concat(invoice.getId().toString()).concat(".pdf")));
+        helper.addAttachment("invoicePDF".concat(invoice.getId().toString()).concat(".pdf"), file);
 
         javaMailSender.send(message);
     }

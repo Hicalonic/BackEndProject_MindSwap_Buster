@@ -2,26 +2,17 @@ package org.mindswap.controller.UserControllers;
 
 
 import jakarta.validation.Valid;
-import org.mindswap.aspect.LoggingAspect;
-import org.mindswap.dto.UserDto;
+import org.mindswap.dto.UserDtoJsonBody;
 import org.mindswap.dto.UserUpdateDto;
-import org.mindswap.model.Role;
 import org.mindswap.model.User;
 import org.mindswap.service.ClientService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 import static org.mindswap.security.config.JwtAuthenticationFilter.getAuthenticatedUserId;
 
 @RestController
@@ -34,55 +25,21 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    /*
-    --------------------------INFORMATION ABOUT WHO'S ASKING------------------
-    ------EMAIL------
-    String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-    -------ID-------
-    Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
-    -----ROLE-----
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    String role = auth.getAuthorities().iterator().next().getAuthority();
-
-
-    -------
-    if (role.equals(Role.CLIENT) && !authenticatedClientId.equals(clientId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-     */
-
-
     @GetMapping(path = "")
     //@Cacheable(value = "welcomeClient")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasAuthority('CLIENT')")
     public String welcomeClient(@AuthenticationPrincipal User activeUser) throws InterruptedException {
-        System.out.println(activeUser.getId() +" " + activeUser.getEmail() +" " +  activeUser.getFirstName() +" " +  activeUser.getLastName());
-//
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//
-//        System.out.println("name :+" + auth.getName());
-//        System.out.println("details :+" + auth.getDetails());
-//        System.out.println("authorities :+" + auth.getAuthorities());
-//        System.out.println("principal :+" + auth.getPrincipal().toString());
-//        System.out.println("Teste");
-//
-//        Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
-//        logger.info("name :+" + auth.getName());
-
         //Thread.sleep(6000);
-        return "Welcome to Blockbuster, dear client.";
+        return "Welcome to MindSwapBuster, dear client.";
     }
 
 
-
     @GetMapping(path = "/info")
-    @PreAuthorize("hasAuthority('CLIENT')")
-    //TODO TRY THIS CACHEABLE ANNOTATION
+    @PreAuthorize("hasAnyAuthority('CLIENT','ADMIN')")
     //@Cacheable(value = "userInfo", key = "#authenticatedClientId")
-    public ResponseEntity<UserDto> getMyInfo() {
-        Long authenticatedClientId = Long.valueOf(getAuthenticatedUserId());
-        UserDto myInfoDto = clientService.getClientById(authenticatedClientId);
+    public ResponseEntity<UserDtoJsonBody> getMyInfo(@AuthenticationPrincipal User activeUser) {
+        UserDtoJsonBody myInfoDto = clientService.getClientById(activeUser.getId());
         return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
     }
 
@@ -102,12 +59,10 @@ public class ClientController {
         return new ResponseEntity<>("Your account have been deleted.", HttpStatus.OK);
     }
 
-
-
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
-    public ResponseEntity<UserDto> getClientInfo(@PathVariable("id") Long clientId) {
-        UserDto client = clientService.getClientById(clientId);
+    public ResponseEntity<UserDtoJsonBody> getClientInfo(@PathVariable("id") Long clientId) {
+        UserDtoJsonBody client = clientService.getClientById(clientId);
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
@@ -127,8 +82,8 @@ public class ClientController {
 
     @GetMapping(path = "/all")
     @PreAuthorize("hasAnyAuthority('WORKER','MANAGER','ADMIN')")
-    public ResponseEntity<List<UserDto>> getAllClients() {
-        List<UserDto> clientList = clientService.getAllClients();
+    public ResponseEntity<List<UserDtoJsonBody>> getAllClients() {
+        List<UserDtoJsonBody> clientList = clientService.getAllClients();
         return new ResponseEntity<>(clientList, HttpStatus.OK);
     }
 }

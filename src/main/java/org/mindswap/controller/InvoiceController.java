@@ -23,12 +23,10 @@ import static org.mindswap.security.config.JwtAuthenticationFilter.getAuthentica
 public class InvoiceController {
 
     private InvoiceService invoiceService;
-    private QRCodeGenerator qrCodeGenerator;
 
     @Autowired
-    public InvoiceController(InvoiceService invoiceService, QRCodeGenerator qrCodeGenerator) {
+    public InvoiceController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
-        this.qrCodeGenerator = qrCodeGenerator;
     }
 
     @GetMapping(path = "/{invoice_id}")
@@ -78,12 +76,11 @@ public class InvoiceController {
         String role = auth.getAuthorities().iterator().next().getAuthority();
         //RentalDto rentalDto = invoiceService.getSpecificInvoice(invoiceId, authenticatedUserId);
 
-        //IF THE CLIENT TRIES TO ACCESS OTHER CLIENTS INVOICE
+//        IF THE CLIENT TRIES TO ACCESS OTHER CLIENTS INVOICE
 //        if(rentalDto.getUser().getId() != authenticatedUserId && role.equals(Role.CLIENT)) {
 //            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 //        }
 
-        //TODO: QRCODESERVICE....
         return new ResponseEntity<>("TODO", HttpStatus.OK);
     }
 

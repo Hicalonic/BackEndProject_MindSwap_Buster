@@ -69,7 +69,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<MovieDto> getAvailableMovies() {
-        List<Movie> moviesAvailable = movieRepository.findAll().stream().filter(movie -> !movie.isAvailable()).toList();
+        List<Movie> moviesAvailable = movieRepository.findAll().stream().filter(movie -> movie.isAvailable()).toList();
         return moviesAvailable.stream().map(movie -> movieMapper.fromEntityToDto(movie)).toList();
     }
 

@@ -1,7 +1,7 @@
 package org.mindswap.service;
 
 import jakarta.transaction.Transactional;
-import org.mindswap.controller.CreateRentalJsonBody;
+import org.mindswap.dto.CreateRentalJsonBody;
 import org.mindswap.dto.RentalDto;
 import org.mindswap.dto.RentalUpdateDto;
 import org.mindswap.exceptions.ClientNotFoundException;
@@ -31,18 +31,19 @@ public class RentalServiceImpl implements RentalService {
     private UserRepository userRepository;
     private MovieRepository movieRepository;
     private InvoiceService invoiceService;
-
     private ClientService clientService;
 
+
+
     @Autowired
-    public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository, MovieRepository movieRepository, InvoiceService invoiceService, ClientService clientService) {
+    public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository,
+                             MovieRepository movieRepository, InvoiceService invoiceService, ClientService clientService) {
         this.rentalRepository = rentalRepository;
         this.rentalMapper = rentalMapper;
         this.userRepository = userRepository;
         this.movieRepository = movieRepository;
         this.invoiceService = invoiceService;
         this.clientService = clientService;
-
     }
 
 
@@ -72,16 +73,13 @@ public class RentalServiceImpl implements RentalService {
                 .endDate(endDate)
                 .build();
 
-        //clientService.saveRental(rental,user);
-
         Invoice invoice = invoiceService.createInvoice(rental, createRentalJsonBody.getStoreId());
-
         rental.setInvoice(invoice);
-        //qrCodeGenerator.generateQRCode(invoice);
-        //pdfService.createPDF("InvoicePDF".concat(invoice.getId().toString()).concat(".pdf"), invoice);
+
+
 
         rentalRepository.save(rental);
-        return "String from createRental Rental Service Imo";
+        return "String from createRental Rental Service Imp";
     }
 
     @Override
@@ -154,5 +152,13 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public Rental getRentalByInvoiceId(Long invoiceId) {
         return rentalRepository.findByInvoiceId(invoiceId);
+    }
+
+    @Override
+    public void deliver(Long id) {
+        Rental rental = rentalRepository.findById(id).orElseThrow(RentalNotFoundException::new);
+        List<Movie> movies = rental.getMovies();
+        movies.forEach(movie -> movie.setAvailable(true));
+        movies.forEach(movie->movieRepository.save(movie));
     }
 }

@@ -1,4 +1,4 @@
-package org.mindswap.controller;
+package org.mindswap.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

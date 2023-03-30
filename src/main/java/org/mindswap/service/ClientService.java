@@ -1,5 +1,6 @@
 package org.mindswap.service;
 
+import org.mindswap.dto.UserDtoJsonBody;
 import org.mindswap.dto.*;
 import org.mindswap.model.Rental;
 import org.mindswap.model.User;
@@ -12,9 +13,9 @@ public interface ClientService {
 
     List<UserDto> createClients(List<UserCreateDto> userCreateDtos);
 
-    UserDto getClientById(Long clientId);
+    UserDtoJsonBody getClientById(Long clientId);
 
-    List<UserDto> getAllClients();
+    List<UserDtoJsonBody> getAllClients();
 
     UserDto updateClient(Long clientId, UserUpdateDto userUpdateDto);
 

@@ -1,5 +1,6 @@
 package org.mindswap.service;
 
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.mindswap.dto.InvoiceCreateDto;
 import org.mindswap.dto.InvoiceDto;
@@ -12,6 +13,7 @@ import org.mindswap.model.*;
 import org.mindswap.repository.InvoiceRepository;
 import org.mindswap.repository.StoreRepository;
 import org.mindswap.repository.UserRepository;
+import org.mindswap.utils.EMAILAPI.EmailService;
 import org.mindswap.utils.PDF.PdfGenerator;
 import org.mindswap.utils.QRCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,17 +36,21 @@ public class InvoiceServiceImpl implements InvoiceService{
 
     private QRCodeGenerator qrCodeGenerator;
 
+    private EmailService emailService;
+
 
 
     @Autowired
     public InvoiceServiceImpl(InvoiceRepository invoiceRepository, InvoiceMapper invoiceMapper,
-                              UserRepository userRepository, StoreRepository storeRepository, PdfGenerator pdfGenerator, QRCodeGenerator qrCodeGenerator) {
+                              UserRepository userRepository, StoreRepository storeRepository,
+                              PdfGenerator pdfGenerator, QRCodeGenerator qrCodeGenerator, EmailService emailService) {
         this.invoiceRepository = invoiceRepository;
         this.invoiceMapper = invoiceMapper;
         this.userRepository = userRepository;
         this.storeRepository=storeRepository;
         this.pdfGenerator = pdfGenerator;
         this.qrCodeGenerator = qrCodeGenerator;
+        this.emailService = emailService;
 
     }
 
@@ -105,6 +111,12 @@ public class InvoiceServiceImpl implements InvoiceService{
 
         qrCodeGenerator.generateQRCode("InvoiceQRCODE"+ invoiceId.concat(".png"), invoice);
         pdfGenerator.createPDF("InvoicePDF".concat(invoice.getId().toString()).concat(".pdf"), invoice);
+
+        try {
+            emailService.sendEmailWithAttachment(rental.getUser().getEmail(),invoice);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
         return invoice;
     }
 

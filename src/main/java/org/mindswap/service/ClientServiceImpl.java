@@ -1,15 +1,18 @@
 package org.mindswap.service;
 
 import jakarta.transaction.Transactional;
+import org.mindswap.dto.UserDtoJsonBody;
 import org.mindswap.dto.*;
 import org.mindswap.exceptions.ClientNotFoundException;
 import org.mindswap.mapper.UserMapper;
 import org.mindswap.model.Rental;
+import org.mindswap.model.Role;
 import org.mindswap.model.User;
 import org.mindswap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,21 +37,41 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<UserDto> createClients(List<UserCreateDto> clientCreateDtoList) {
-        List<User> clientList = clientCreateDtoList.stream().map(c->userMapper.fromCreateDtoToEntity(c)).toList();
+        List<User> clientList = clientCreateDtoList.stream().map(c -> userMapper.fromCreateDtoToEntity(c)).toList();
         clientList.forEach(c -> userRepository.save(c));
-        return clientList.stream().map(c->userMapper.fromEntityToDto(c)).toList();
+        return clientList.stream().map(c -> userMapper.fromEntityToDto(c)).toList();
 
     }
 
     @Override
-    public UserDto getClientById(Long clientId) {
-       User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
-        return userMapper.fromEntityToDto(user);
+    @Transactional
+    public UserDtoJsonBody getClientById(Long clientId) {
+        User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
+        UserDtoJsonBody userInfo = UserDtoJsonBody.builder()
+                .firstname(user.getFirstName())
+                .lastname(user.getLastName())
+                .email(user.getEmail())
+                .role(user.getRole()).
+                build();
+
+        return userInfo;
     }
 
+    @Transactional
     @Override
-    public List<UserDto> getAllClients() {
-        return userRepository.findAll().stream().map(c->userMapper.fromEntityToDto(c)).toList();
+    public List<UserDtoJsonBody> getAllClients() {
+        List<User> onlyClientsList = userRepository.findAll().stream().filter(user -> user.getRole().equals(Role.CLIENT)).toList();
+        List<UserDtoJsonBody> onlyClientsListDtos = new ArrayList<>();
+
+        for (User user : onlyClientsList) {
+            onlyClientsListDtos.add(UserDtoJsonBody.builder()
+                    .firstname(user.getFirstName())
+                    .lastname(user.getLastName())
+                    .email(user.getEmail())
+                    .role(user.getRole())
+                    .build());
+        }
+        return onlyClientsListDtos;
     }
 
 
@@ -56,24 +79,24 @@ public class ClientServiceImpl implements ClientService {
     public UserDto updateClient(Long clientId, UserUpdateDto userUpdateDto) {
         User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
 
-       if(userUpdateDto.getFirstName() != null) {
-           user.setFirstName(userUpdateDto.getFirstName());
-       }
-       if(userUpdateDto.getLastName() != null) {
-           user.setLastName(userUpdateDto.getLastName());
-       }
-       if(userUpdateDto.getEmail() != null) {
-           user.setEmail(userUpdateDto.getEmail());
-       }
+        if (userUpdateDto.getFirstName() != null) {
+            user.setFirstName(userUpdateDto.getFirstName());
+        }
+        if (userUpdateDto.getLastName() != null) {
+            user.setLastName(userUpdateDto.getLastName());
+        }
+        if (userUpdateDto.getEmail() != null) {
+            user.setEmail(userUpdateDto.getEmail());
+        }
 
-       userRepository.save(user);
-       return userMapper.fromEntityToDto(user);
+        userRepository.save(user);
+        return userMapper.fromEntityToDto(user);
     }
 
     @Override
     public UserDto updatePassword(Long clientId, UpdatePasswordDto updatePasswordDto) {
         User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
-        if(updatePasswordDto.getPassword().equals(user.getPassword())) {
+        if (updatePasswordDto.getPassword().equals(user.getPassword())) {
             user.setPassword(updatePasswordDto.getNewPassword());
         }
         userRepository.save(user);
@@ -88,7 +111,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Transactional
-    public void saveRental(Rental rental, User user){
+    public void saveRental(Rental rental, User user) {
         user.getRentalList().add(rental);
         userRepository.save(user);
     }

@@ -1,6 +1,6 @@
 package org.mindswap.service;
 
-import org.mindswap.controller.CreateRentalJsonBody;
+import org.mindswap.dto.CreateRentalJsonBody;
 import org.mindswap.dto.RentalDto;
 import org.mindswap.dto.RentalUpdateDto;
 import org.mindswap.model.Rental;
@@ -19,4 +19,6 @@ public interface RentalService {
     List<RentalDto> getAllRentalsByClientIdJpa(Long clientId);
 
     Rental getRentalByInvoiceId(Long invoiceId);
+
+    public void deliver(Long id);
 }

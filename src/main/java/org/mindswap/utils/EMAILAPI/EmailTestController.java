@@ -28,7 +28,7 @@ public class EmailTestController {
     @GetMapping("/sendEmailTestAttachment")
     public ResponseEntity<String> sendEmailTestAttachment() throws MessagingException {
 
-        emailService.sendEmailWithAttachment("rui.rajao@hotmail.com");
+        //emailService.sendEmailWithAttachment("rui.rajao@hotmail.com");
 
         return ResponseEntity.ok("Email Sent");
     }

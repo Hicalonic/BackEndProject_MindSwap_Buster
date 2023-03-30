@@ -33,15 +33,7 @@ public class WorkerController {
     public ResponseEntity<String> welcomeWorker() {
         return new ResponseEntity<>("Welcome to Blockbuster, dear worker.", HttpStatus.OK);
     }
-
-//    @GetMapping(path = "/info")
-//    @PreAuthorize("hasRole('WORKER')")
-//    public ResponseEntity<UserDto> myInfo() {
-//        Long authenticatedWorkerId = Long.valueOf(getAuthenticatedUserId());
-//        UserDto myInfoDto = workerService.getWorkerById(authenticatedWorkerId);
-//        return new ResponseEntity<>(myInfoDto, HttpStatus.OK);
-//    }
-
+    
     @GetMapping(path = "/info")
     @PreAuthorize("hasAuthority('WORKER')")
     public ResponseEntity<UserDto> getMyInfo() {
