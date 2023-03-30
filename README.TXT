@@ -2,8 +2,8 @@
 
 ![](https://i.ibb.co/KbFvPvy/Screenshot-from-2023-02-19-23-05-22.png)
 
-**Rules:**
-MindSwapBuster is an application that was created using Spring Boot Restful API, and has this features:
+**Project overview:**
+This two-week Project was completed within 14 weeks of bootcamp. We were told to design and create one software development project using the features describe above. MindSwapBuster is an application that was created using Spring Boot Restful API, and has this features:
 -> Git
 -> README
 -> Model Relationships
@@ -22,21 +22,17 @@ Blockbuster, once a leader in entertainment, filed for bankruptcy in 2010 due to
 However, Mind Swap Buster offers a unique concept that could bring back the communal spirit of Blockbuster by allowing users to swap minds and connect with others who share their interests.
 Mind Swap Buster has the potential to revive a Blockbuster-style service for a new generation.
 
-**Project overview:**
-This two-week Project was completed within 14 weeks of bootcamp. Our software development project was created using a mix of essential tools and technologies, including:
---> Git for version control and collaboration;
---> README files to provide clear project instructions.
---> Model relationships for defining entity relationships.
---> Spring Security for authentication and authorization.
---> IMDB API for retrieving movie information.
---> SpringBootMail for email sending using SMTP.
---> Docker for container creation.
---> Swagger for designing and documenting RESTful APIs.
---> Postman for API testing.
---> Docker Compose for container orchestration.
---> In-memory caching for performance optimization.
---> JUNIT tests for application functionality.
---> With these tools and technologies, we can create a high-quality, efficient software application that meets user needs and exceeds expectations.
+**Tutorial:**
+Before running our project, install the following softwares:
+-> Java 11 or Higher
+-> Docker
+-> DBeaver or MYSQL 8.0 or higher
+
+1.Clone our Repository to your computer.
+2. Open our project in your computer.
+3. Go to DockerCompose.Yml file.
+4. Use Postman or Swagger to make API calls to manage your DataBase entries.
+
 
 **Authors:**
 - João Pedro Rodrigues - [@johnDoCodigo](https://github.com/johnDoCodigo)
