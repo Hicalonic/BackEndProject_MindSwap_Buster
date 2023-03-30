@@ -1,4 +1,4 @@
-# **MindSwapBuster 4**
+# **Connect 4**
 
 ![](https://i.ibb.co/KbFvPvy/Screenshot-from-2023-02-19-23-05-22.png) 
 
@@ -22,7 +22,6 @@ Blockbuster, once a leader in entertainment, filed for bankruptcy in 2010 due to
 However, Mind Swap Buster offers a unique concept that could bring back the communal spirit of Blockbuster by allowing users to swap minds and connect with others who share their interests.
 Mind Swap Buster has the potential to revive a Blockbuster-style service for a new generation.
 
-
 **Project overview:**
 This two-week Project was completed within 14 weeks of bootcamp, mixing the learned concepts of API REST
 
@@ -31,12 +30,3 @@ This two-week Project was completed within 14 weeks of bootcamp, mixing the lear
 - Miguel Alves - [@aguiar425](https://github.com/Aguiar425)
 - Reinaldo Marques - [@hicalonic] (https://github.com/Hicalonic)
 - Rui Rajão - [@ruirajao](https://github.com/ruirajao)
-
-
-docker build -t blockbuster-mysql:latest -f Dockerfile-mysql.Dockerfile  .
- docker compose up
- -t blockbuster-redis:latest -f Dockerfile-redis.Dockerfile  .
-
-// BUILD REDIS IMAGE-->   docker build -t blockbuster-redis:latest -f Dockerfile-redis.Dockerfile
-//BUILD MYSQL IMAGE --->   docker build -t blockbuster-mysql:latest -f Dockerfile-mysql.Dockerfile  .
-RUN COMMAND FOR DOCKER COMPOSE --->    docker compose up
