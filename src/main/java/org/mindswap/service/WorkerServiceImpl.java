@@ -38,13 +38,12 @@ public class WorkerServiceImpl implements WorkerService {
     @Transactional
     public UserDtoJsonBody getWorkerById(Long workerId) {
         User user = userRepository.findById(workerId).orElseThrow(WorkerNotFoundException::new);
-        UserDtoJsonBody userInfo = UserDtoJsonBody.builder()
+        return UserDtoJsonBody.builder()
                 .firstname(user.getFirstName())
                 .lastname(user.getLastName())
                 .email(user.getEmail())
                 .role(user.getRole()).
                 build();
-        return userInfo;
     }
 
     @Override

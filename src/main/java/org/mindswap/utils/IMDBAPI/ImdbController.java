@@ -5,6 +5,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.mindswap.exceptions.MovieNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,41 +24,54 @@ import java.util.List;
 public class ImdbController {
 
     private ImdbService imdbService;
+    public static final String api = "X-RapidAPI-Key";
+    public static final String apiHost = "X-RapidAPI-Host";
+    public static final String apiKey = "010d3e5bc7msha728d029490fd2cp118d80jsnc074a334fa3a";
+
 
     @Autowired
     public ImdbController(ImdbService imdbService) {
         this.imdbService = imdbService;
+
     }
 
     @GetMapping("/manager/get-movie-details/{titleId}")
     @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
-    public String requestMovieDetails(@PathVariable String titleId) throws Exception {
-        String apiKey = "010d3e5bc7msha728d029490fd2cp118d80jsnc074a334fa3a"; // Replace with your RapidAPI API key
+    public String requestMovieDetails(@PathVariable String titleId) {
 
-
-        HttpResponse<String> response = Unirest.get("https://online-movie-database.p.rapidapi.com/title/get-overview-details?tconst="+titleId+"&currentCountry=US")
-                .header("X-RapidAPI-Key", "010d3e5bc7msha728d029490fd2cp118d80jsnc074a334fa3a")
-                .header("X-RapidAPI-Host", "online-movie-database.p.rapidapi.com")
-                .asString();
+        HttpResponse<String> response = null;
+        try {
+            response = Unirest.get("https://online-movie-database.p.rapidapi.com/title/get-overview-details?tconst=" + titleId + "&currentCountry=US")
+                    .header(api, apiKey)
+                    .header(apiHost, "online-movie-database.p.rapidapi.com")
+                    .asString();
+        } catch (UnirestException e) {
+            throw new MovieNotFoundException();
+        }
 
         imdbService.saveToDatabase(response);
 
-        return response.getBody();
-    }
+            return response.getBody();
+
+        }
+
 
 
     @GetMapping("/manager/get-top-rated")
     @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
-    public String requestTopRatedMovies() throws Exception {
-        String apiKey = "010d3e5bc7msha728d029490fd2cp118d80jsnc074a334fa3a";
-        HttpResponse<String> response = Unirest.get("https://imdb8.p.rapidapi.com/title/get-top-rated-movies")
-                .header("X-RapidAPI-Key", apiKey)
-                .header("X-RapidAPI-Host", "imdb8.p.rapidapi.com")
-                .asString();
+    public String requestTopRatedMovies() {
+        HttpResponse<String> response = null;
+        try {
+            response = Unirest.get("https://imdb8.p.rapidapi.com/title/get-top-rated-movies")
+                    .header(api, apiKey)
+                    .header(apiHost, "imdb8.p.rapidapi.com")
+                    .asString();
+        } catch (UnirestException e) {
+            throw new MovieNotFoundException();
+        }
         List<String> listOfIds = new ArrayList<>();
         JSONArray responseArray = new JSONArray(response.getBody());
 
-        System.out.println("response body: " + responseArray);
 
         for (int i = 0; i < 5; i++) {
             JSONObject obj = responseArray.getJSONObject(i);
@@ -70,17 +84,14 @@ public class ImdbController {
             try {
                 responseList.add(Unirest.get("https://online-movie-database.p.rapidapi.com/title/get-overview-details?tconst="
                                 .concat(title).concat("&currentCountry=US"))
-                        .header("X-RapidAPI-Key", "010d3e5bc7msha728d029490fd2cp118d80jsnc074a334fa3a")
-                        .header("X-RapidAPI-Host", "online-movie-database.p.rapidapi.com")
+                        .header(api, apiKey)
+                        .header(apiHost, "online-movie-database.p.rapidapi.com")
                         .asString());
-                System.out.println("For each iteration: " + responseList);
             } catch (UnirestException e) {
-                throw new RuntimeException(e);
+                throw new MovieNotFoundException();
             }
         });
-        System.out.println(listOfIds);
-        System.out.println("-".repeat(50));
-        System.out.println(responseList);
+
         imdbService.saveTopRatedMovies(responseList);
         return "Top Rated Movies have been Added";
     }

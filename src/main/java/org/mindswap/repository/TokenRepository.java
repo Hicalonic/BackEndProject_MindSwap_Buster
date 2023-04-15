@@ -11,19 +11,7 @@ import java.util.Optional;
 @Repository
 public interface TokenRepository extends JpaRepository<Token, Long> {
 
-//    @Query(value = """
-//    select t from Token t inner join Client c\s
-//    on t.client.id = c.id\s
-//    where c.id = :id and (t.expired = false or t.revoked = false)\s
-//""")
-//    List<Token> findAllValidTokenByEmail(String email);
 
-//    @Query("""
-//    select t from Token t inner join Client c
-//    on t.client.id = c.id
-//    where c.email = :email and (t.expired = false or t.revoked = false)
-//""")
-//    List<Token> findAllValidTokenByEmail(String email);
 
     @Query(value = """
       select t from Token t inner join User u\s

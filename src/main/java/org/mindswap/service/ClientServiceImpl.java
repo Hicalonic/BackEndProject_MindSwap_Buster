@@ -47,14 +47,13 @@ public class ClientServiceImpl implements ClientService {
     @Transactional
     public UserDtoJsonBody getClientById(Long clientId) {
         User user = userRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
-        UserDtoJsonBody userInfo = UserDtoJsonBody.builder()
+        return  UserDtoJsonBody.builder()
                 .firstname(user.getFirstName())
                 .lastname(user.getLastName())
                 .email(user.getEmail())
                 .role(user.getRole()).
                 build();
 
-        return userInfo;
     }
 
     @Transactional

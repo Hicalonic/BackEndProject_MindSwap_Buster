@@ -16,7 +16,6 @@ public interface ManagerService {
 
     public UserDto updateManager(Long id, UserUpdateDto userUpdateDto);
 
-    //void updateManagerRole(Long id, UserUpdateDto userUpdateDto);
 
     public void deleteManager(Long id);
 

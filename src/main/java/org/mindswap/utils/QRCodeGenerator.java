@@ -6,6 +6,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import jakarta.transaction.Transactional;
+import org.mindswap.exceptions.InvoiceNotFoundException;
 import org.mindswap.mapper.InvoiceMapper;
 import org.mindswap.model.Invoice;
 import org.springframework.stereotype.Component;
@@ -40,7 +41,7 @@ public class QRCodeGenerator {
             MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
 
         } catch (WriterException | IOException e) {
-            throw new RuntimeException(e);
+            throw new InvoiceNotFoundException();
         }
     }
 

@@ -29,9 +29,7 @@ public class Rental {
     @JoinColumn(name = "user_id")
     public User user;
 
-//    @ManyToOne(targetEntity = User.class)
-//    @JoinColumn(name = "user_id")
-//    private User user;
+
 
     @Column(nullable = false)
     private LocalDate startDate;

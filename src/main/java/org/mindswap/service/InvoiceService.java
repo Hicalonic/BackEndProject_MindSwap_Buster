@@ -19,12 +19,7 @@ public interface InvoiceService {
 
     List<InvoiceDto> getAllInvoices();
 
-
-    //return html page with invoice details
-
-    //return qrcode with link for the page
-
-    //invoice is sent by email
+    String getEmailFromService(Long invoiceId, Long userId,String role);
 
 
 }

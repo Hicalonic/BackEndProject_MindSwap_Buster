@@ -21,11 +21,8 @@ public class ImdbService {
 
 
     public void saveToDatabase(HttpResponse<String> response) {
-        // Transform into a java object
         JSONObject responseBody = new JSONObject(response.getBody());
-        System.out.println(responseBody);
 
-        // Extract the relevant information
         String imdbId = responseBody.getString("id");
         String title = responseBody.getJSONObject("title").getString("title");
         double rating = responseBody.getJSONObject("ratings").getDouble("rating");
@@ -33,7 +30,6 @@ public class ImdbService {
         String imageUrl = responseBody.getJSONObject("title").getJSONObject("image").getString("url");
 
 
-        // Creates a new movie instance from the API to our Imdb model
         ImdbMovieModel movie = ImdbMovieModel.builder()
                 .imdbId(imdbId)
                 .title(title)
@@ -42,7 +38,6 @@ public class ImdbService {
                 .imageCoverUrl(imageUrl)
                 .build();
 
-        // Save into our repository and db
 
         imdbRepository.save(movie);
     }
@@ -50,7 +45,6 @@ public class ImdbService {
     public void saveTopRatedMovies(List<HttpResponse<String>> responseList) {
         for (HttpResponse<String> response : responseList) {
             JSONObject responseBody = new JSONObject(response.getBody());
-            System.out.println(responseBody);
 
             String imdbId = responseBody.getString("id");
             String title = responseBody.getJSONObject("title").getString("title");

@@ -1,6 +1,5 @@
-package org.mindswap.controller.UserControllers;
+package org.mindswap.controller.UserController;
 
-import org.mindswap.dto.*;
 import org.mindswap.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,14 +24,14 @@ public class AdminController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDtoJsonBody> makeManager(@PathVariable("{id}") Long id) {
         UserDtoJsonBody updatedUser = adminService.makeManager(id);
-        return new ResponseEntity<UserDtoJsonBody>(updatedUser, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
     }
 
     @GetMapping(path = "/{id}/make_worker")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserDtoJsonBody> makeWorker(@PathVariable("{id}") Long id) {
         UserDtoJsonBody updatedUser = adminService.makeWorker(id);
-        return new ResponseEntity<UserDtoJsonBody>(updatedUser, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
     }
 
 }

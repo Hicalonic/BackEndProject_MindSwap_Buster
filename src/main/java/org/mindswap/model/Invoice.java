@@ -8,7 +8,6 @@ import org.hibernate.annotations.Where;
 @Getter
 @Setter
 @Builder
-//@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,7 +17,7 @@ import org.hibernate.annotations.Where;
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false)
     private double price;

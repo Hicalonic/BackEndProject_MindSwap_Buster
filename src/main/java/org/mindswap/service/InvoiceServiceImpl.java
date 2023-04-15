@@ -4,6 +4,7 @@ import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.mindswap.dto.InvoiceDto;
 import org.mindswap.exceptions.ClientNotFoundException;
+import org.mindswap.exceptions.EmailNotFoundException;
 import org.mindswap.exceptions.InvoiceNotFoundException;
 import org.mindswap.exceptions.StoreNotFoundException;
 import org.mindswap.mapper.InvoiceMapper;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService{
@@ -55,13 +57,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 
 
 
-//    @Override
-//    public RentalDto getSpecificInvoice(Long invoiceId, Long clientId)  {
-//        Invoice invoice = invoiceRepository.findById(invoiceId).orElseThrow(InvoiceNotFoundException::new);
-//        Rental rental =  rentalService.getRentalByInvoiceId(invoiceId);
-//        return rentalService.getRentalById(rental.getId());
-//
-//    }
+
 
     @Override
     public InvoiceDto getInvoiceById(Long id) {
@@ -105,7 +101,6 @@ public class InvoiceServiceImpl implements InvoiceService{
         invoiceRepository.save(invoice);
 
         String invoiceId = invoice.getId().toString();
-        System.out.println(invoiceId);
 
         qrCodeGenerator.generateQRCode("InvoiceQRCODE"+ invoiceId.concat(".png"), invoice);
         pdfGenerator.createPDF("InvoicePDF".concat(invoice.getId().toString()).concat(".pdf"), invoice);
@@ -113,7 +108,7 @@ public class InvoiceServiceImpl implements InvoiceService{
         try {
             emailService.sendEmailWithAttachment(rental.getUser().getEmail(),invoice);
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            throw new EmailNotFoundException();
         }
         return invoice;
     }
@@ -121,6 +116,15 @@ public class InvoiceServiceImpl implements InvoiceService{
     @Override
     public List<InvoiceDto> getAllInvoices() {
         return invoiceRepository.findAll().stream().map(i -> invoiceMapper.fromEntityToDto(i)).toList();
+    }
+
+    @Override
+    public String getEmailFromService(Long invoiceId, Long userId,String role) {
+        Invoice invoice = invoiceRepository.findById(invoiceId).orElseThrow(InvoiceNotFoundException::new);
+        if(Objects.equals(invoice.getRental().getUser().getId(), userId) || Objects.equals(role, "ADMIN")) {
+            return invoice.getRental().getUser().getEmail();
+        }
+        return "This is user is not found or you have no permissions for this information.";
     }
 
 

@@ -5,7 +5,6 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-//@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -21,11 +20,11 @@ public class Token {
     @Enumerated(EnumType.STRING)
     public TokenType tokenType = TokenType.BEARER;
 
-    public boolean revoked;
-    public boolean expired;
+    private boolean revoked;
+    private boolean expired;
 
 
-    public String email;
+    private String email;
 
     @Enumerated(EnumType.STRING)
     public Role role;

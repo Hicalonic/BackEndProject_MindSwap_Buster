@@ -1,18 +1,14 @@
-package org.mindswap.controller.UserControllers;
+package org.mindswap.controller.UserController;
 
 
 import jakarta.validation.Valid;
-import org.mindswap.dto.UserDto;
 import org.mindswap.dto.UserDtoJsonBody;
 import org.mindswap.dto.UserUpdateDto;
-import org.mindswap.model.Role;
 import org.mindswap.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

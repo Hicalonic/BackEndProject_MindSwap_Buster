@@ -30,13 +30,12 @@ public class ManagerServiceImpl implements ManagerService {
     @Transactional
     public UserDtoJsonBody getInfoById(Long id) {
         User user = userRepository.findById(id).orElseThrow(WorkerNotFoundException::new);
-        UserDtoJsonBody userInfo = UserDtoJsonBody.builder()
+        return UserDtoJsonBody.builder()
                 .firstname(user.getFirstName())
                 .lastname(user.getLastName())
                 .email(user.getEmail())
                 .role(user.getRole()).
                 build();
-        return userInfo;
     }
 
     @Override
@@ -68,21 +67,12 @@ public class ManagerServiceImpl implements ManagerService {
         if(userUpdateDto.getEmail() != null) {
             manager.setEmail(userUpdateDto.getEmail());
         }
-        /*if(userUpdateDto.getRentalList() != null) {
-            manager.setRentalList(userUpdateDto.getRentalList());
-        }*/
+
         userRepository.save(manager);
         return userMapper.fromEntityToDto(manager);
     }
 
-/*    @Override
-    public void updateManagerRole(Long id, UserUpdateDto userUpdateDto) {
-        User manager = userRepository.findById(id).orElseThrow(WorkerNotFoundException::new);
-        if(userUpdateDto.getRole() != null) {
-            manager.setRole(userUpdateDto.getRole());
-        }
-        userRepository.save(manager);
-    }*/
+
     @Override
     public void deleteManager(Long id) {
         User manager = userRepository.findById(id).orElseThrow(WorkerNotFoundException::new);

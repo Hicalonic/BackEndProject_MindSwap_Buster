@@ -1,4 +1,4 @@
-package org.mindswap.controller.UserControllers;
+package org.mindswap.controller.UserController;
 
 import jakarta.validation.Valid;
 import org.mindswap.dto.UserDtoJsonBody;

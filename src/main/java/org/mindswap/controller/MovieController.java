@@ -42,7 +42,7 @@ public class MovieController {
     @GetMapping(path ="/available")
     public ResponseEntity<List<MovieDto>> getAvailableMovies() {
         List<MovieDto> list = movieService.getAvailableMovies();
-        return new ResponseEntity<List<MovieDto>>(list,HttpStatus.OK);
+        return new ResponseEntity<>(list,HttpStatus.OK);
     }
     @GetMapping(path ="/all")
     public ResponseEntity<List<MovieDto>> getAllMovies() {

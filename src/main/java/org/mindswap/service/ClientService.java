@@ -21,7 +21,6 @@ public interface ClientService {
 
     UserDto updatePassword(Long clientId, UpdatePasswordDto updatePasswordDto);
 
-    //void updateClientRole(Long clientId, RoleUpdateDto roleUpdateDto);
 
     void deleteClient(Long clientId);
 
