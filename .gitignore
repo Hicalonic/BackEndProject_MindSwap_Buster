@@ -26,7 +26,7 @@
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
-
+.src/main/resources/config.properties
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
@@ -159,5 +159,4 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-config.properties
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java,maven
